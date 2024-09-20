@@ -31,11 +31,7 @@ def fit_z_peak(ff, pp, peak_func, passband=(60000, 70000), p0=[2e9, 62500*2*np.p
     # amp, omega0, gamma
     return popt
 
-def get_susceptibility(omega, omega0, gamma):
-    chi = 1 / (omega0**2 - omega**2 - 1j*gamma*omega)
-    return chi
-
-def get_pulse_amp(dt, zz, passband_recon=(45000, 80000)):
+# def get_pulse_amp(dt, zz, passband_recon=(45000, 80000)):
     # First fit a Lorentzian to the peak
     # to crudely estimate frequency and damping
     # ff, pp = get_psd(dt, None, zz, nperseg=10000)
@@ -64,17 +60,17 @@ def get_pulse_amp(dt, zz, passband_recon=(45000, 80000)):
     #     # filter_output[i] = np.sum(np.abs(ffk[good_idx]))
     #     filter_output[i] = np.sum(np.real(ffk[good_idx]))
 
-    omega0 = 63000 * 2 * np.pi
-    gamma0 = 30
-
-    zzk = fft(zz)
-    ff = fftfreq(zz.size, dt)
-    omega = ff * 2 * np.pi
-    chi_omega = get_susceptibility(omega, omega0, gamma0)
-
-    good_idx = np.logical_or(np.logical_and(ff > passband_recon[0], ff < passband_recon[1]),
-                             np.logical_and(ff > -1*passband_recon[1], ff < -1*passband_recon[0]))
-    zzk[np.logical_not(good_idx)] = 0
-    filter_output = ifft(zzk / chi_omega)
-
-    return filter_output
+#    omega0 = 63000 * 2 * np.pi
+#    gamma0 = 30
+#
+#    zzk = fft(zz)
+#    ff = fftfreq(zz.size, dt)
+#    omega = ff * 2 * np.pi
+#    chi_omega = get_susceptibility(omega, omega0, gamma0)
+#
+#    good_idx = np.logical_or(np.logical_and(ff > passband_recon[0], ff < passband_recon[1]),
+#                             np.logical_and(ff > -1*passband_recon[1], ff < -1*passband_recon[0]))
+#    zzk[np.logical_not(good_idx)] = 0
+#    filter_output = ifft(zzk / chi_omega)
+#
+#    return filter_output
