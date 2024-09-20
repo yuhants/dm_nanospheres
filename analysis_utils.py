@@ -46,10 +46,10 @@ def get_pulse_idx(drive_sig, trigger_val=0.5, positive=True):
     else:
         return np.flatnonzero((drive_sig[:-1] > trigger_val) & (drive_sig[1:] < trigger_val))+1
 
-def get_drive_window(tt, pulse_idx):
+def get_drive_window(tt, pulse_idx, length_idx=14):
     window = np.full(tt.size, True)
     window[:pulse_idx-3] = False
-    window[pulse_idx+14:] = False
+    window[pulse_idx+length_idx:] = False
     
     return window
 
@@ -82,6 +82,9 @@ def highpass_filtered(tod, fs, f_hp=50000, order=3):
     return filtered
 
 #### Fitting
+def gauss(x, A, mu, sigma):
+    return A*np.exp(-(x-mu)**2/(2*sigma**2))
+
 from scipy.special import voigt_profile
 def log_voigt(x, amp, x0, sigma, gamma):
     return np.log(amp * voigt_profile(x-x0, sigma, gamma))
@@ -141,10 +144,19 @@ def load_plotting_setting():
 #### Pulse reconstruction
 def get_analysis_window(tt, pulse_idx, length):
     window = np.full(tt.size, True)
-    window[:pulse_idx-length] = False
-    window[pulse_idx+length:] = False
+    pulse_idx_in_window = length
+
+    if length < pulse_idx:
+        window[:pulse_idx-length] = False
+    else:
+        # Pulse happens at the beginning of the file
+        # so it's not in the middle of the window
+        pulse_idx_in_window = pulse_idx
+
+    if (pulse_idx + length) < (tt.size-1):
+        window[pulse_idx+length:] = False
     
-    return window
+    return window, pulse_idx_in_window
 
 def get_prepulse_window(tt, pulse_idx, length):
     window = np.full(tt.size, True)
@@ -201,36 +213,72 @@ def get_omega0(dt, zz_bp, omega_window, omega0_guess):
 
     return omegas[np.argmin(nn)]
 
-def recon_pulse(idx, dtt, tt, zz_bp, dd, plot=False, fname=None):
+def get_search_window(amp, pulse_idx_in_window, search_window_length, pulse_length=20):
+    # TODO
+    search_window = np.full(amp.size, False)
+    left  = pulse_idx_in_window + pulse_length
+    right = left + search_window_length
+
+    if right > amp.size:
+        print('Skipping pulse too close to the edge of search window')
+        return None
+
+    search_window[left:right] = True
+    return search_window
+
+def get_cal_window(amp, pulse_idx_in_window, cal_window_length=50):
+    cal_window = np.full(amp.size, False)
+    left  = pulse_idx_in_window - cal_window_length
+    right = pulse_idx_in_window
+    
+    cal_window[left:right] = True
+    return cal_window
+
+def recon_pulse(idx, dtt, tt, zz_bp, dd, plot=False, fname=None, 
+                analysis_window_length=100000,
+                prepulse_window_length=5000,
+                search_window_length=20,
+                pulse_length=20):
+
+    if idx < prepulse_window_length:
+        print('Skipping pulse too close to the beginning of the file')
+        return None, None, None, np.nan
+
     fs = int(np.ceil(1 / dtt))
 
-    window_length = 100000
-    window = get_analysis_window(tt, idx, window_length)
-    prepulse_window = get_prepulse_window(tt, idx, 5000)
-    omega_window = get_prepulse_window(tt, idx, 500)
-    
+    window, pulse_idx_in_window = get_analysis_window(tt, idx, analysis_window_length)
+    prepulse_window = get_prepulse_window(tt, idx, prepulse_window_length)
+
     zzk = rfft(zz_bp[prepulse_window])
     ff = rfftfreq(zz_bp[prepulse_window].size, dtt)
     pp = np.abs(zzk)**2 / (zz_bp[prepulse_window].size / dtt)
     
+    ##
+    ## Archived methods for frequency estimation
+    ##
     ## Method 1: fit with a Lorentzian
     # psd_fit_scale_factor = (zz_bp[prepulse_window].size / dtt)
     # amp_fit, omega0_fit, gamma_fit = fit_lorentzian(ff, pp*psd_fit_scale_factor, (45000, 120000))
-
+    #
     ## Method 2: minimize prepulse force noise
-    #omega0_fit = get_omega0(dtt, zz_bp, omega_window, omega0_guess) 
+    # omega_window = get_prepulse_window(tt, idx, 500)
+    # omega0_fit = get_omega0(dtt, zz_bp, omega_window, omega0_guess) 
+    ##
 
     # Now just take the fft frequency
     omega0_guess = ff[np.argmax(pp)] * 2 * np.pi
     omega0_fit = omega0_guess
 
-
-    # Use a fixed damping to reconstruct pulse amp
+    # Use a fixed damping (2 pi * 1 Hz) to reconstruct pulse amp
     # Actual damping doesn't matter as long as gamma << omega0
     amp = get_pulse_amp(dtt, zz_bp[window], omega0_fit, 1*2*np.pi)
     amp_lp = lowpass_filtered(amp, fs, 120000, 3)
-    # recon_amp = np.max(np.abs(amp_lp[50000:-49500])/1e9)
-    recon_amp = np.abs(np.min(amp_lp[window_length+20:-1*window_length+40])/1e9)
+
+
+    # cal_window = get_cal_window(amp, pulse_idx_in_window, cal_window_length=20000)
+    # recon_amp = np.abs(np.min(amp_lp[search_window])/np.var(amp_lp[cal_window]))
+    search_window = get_search_window(amp, pulse_idx_in_window, search_window_length, pulse_length)
+    recon_amp = np.abs(np.min(amp_lp[search_window])/1e9)
 
     if plot:
         fig, axes = plt.subplots(2, 1, figsize=(8, 6))
@@ -260,3 +308,32 @@ def recon_pulse(idx, dtt, tt, zz_bp, dd, plot=False, fname=None):
         if fname is not None:
             plt.savefig(fname, format='png', transparent=True, dpi=400)
     return window, amp, amp_lp, recon_amp
+
+def get_unnormalized_amps(data_files, noise=False):
+    amps = []
+    for file in data_files:
+        dtt, tt, nn = load_timestreams(file, ['D', 'G'])
+        fs = int(np.ceil(1/dtt))
+
+        zz, dd = nn[0], nn[1]
+        zz_bp = bandpass_filtered(zz, fs, 40000, 130000)
+        pulse_idx = get_pulse_idx(dd, -0.5, False)
+        
+        if noise:
+            pulse_idx = np.ceil(0.5 * (pulse_idx[:-1] + pulse_idx[1:])).astype(np.int64)
+
+        for i, idx in enumerate(pulse_idx):
+            if idx < 100000 or idx > tt.size-100000:
+                continue
+            window, f, f_lp, amp = recon_pulse(idx, dtt, tt, zz_bp, dd, False, None,
+                                               500000, 20000, 40, 30)
+            
+            if noise:
+                amps.append(np.abs(f_lp[np.ceil(f_lp.size/2+20).astype(np.int64)])/1e9)
+            else:
+                amps.append(amp)
+
+    amps = np.asarray(amps)
+    return amps
+
+
