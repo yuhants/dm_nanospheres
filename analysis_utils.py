@@ -19,6 +19,10 @@ yale_colors = ['#00356b', '#286dc0', '#63aaff', '#4a4a4a']
 c = 299792458    # m / s
 SI2ev = (1 / 1.6e-19) * c
 
+m = 2000 * (83.5e-9)**3 * 4 * np.pi / 3
+hbar = 6.626e-34
+kb = 1.380649e-23
+
 #### File processing
 def load_timestreams(file, channels=['C']):
     timestreams = []
@@ -95,6 +99,9 @@ def highpass_filtered(tod, fs, f_hp=50000, order=3):
     return filtered
 
 #### Fitting
+def log_gauss(x, A, mu, sigma):
+    return np.log(A*np.exp(-(x-mu)**2/(2*sigma**2)))
+
 def gauss(x, A, mu, sigma):
     return A*np.exp(-(x-mu)**2/(2*sigma**2))
 
@@ -250,6 +257,23 @@ def get_pulse_amp(dt, zz, omega0, gamma):
     filter_output = irfft(zzk / chi_omega)
 
     return filter_output
+
+def recon_force(dtt, zz_bp, c_mv):
+    fs = int(np.ceil(1 / dtt))
+
+    zzk = rfft(zz_bp)
+    ff = rfftfreq(zz_bp.size, dtt)
+    pp = np.abs(zzk)**2 / (zz_bp.size / dtt)
+
+    omega0_fit = ff[np.argmax(pp)] * 2 * np.pi
+    amp = get_pulse_amp(dtt, zz_bp, omega0_fit, (ff[1]-ff[0])*2*np.pi)    
+    amp_lp = lowpass_filtered(amp, fs, 100000, 3)
+
+    in_band = np.logical_and(ff>40000, ff<100000)
+    temp = m * omega0_fit**2 * np.trapz(pp[in_band], ff[in_band]) * c_mv**2 / kb
+
+    return amp/1e9, amp_lp/1e9, temp
+
 
 def recon_pulse(idx, dtt, zz_bp, dd, plot=False, fname=None, 
                 analysis_window_length=100000,
