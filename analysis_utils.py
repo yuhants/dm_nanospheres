@@ -7,7 +7,7 @@ import h5py
 import matplotlib.pyplot as plt
 from cycler import cycler
 
-from scipy.signal import welch, ShortTimeFFT
+from scipy.signal import welch
 from scipy.signal import butter, sosfilt
 from scipy.optimize import curve_fit, minimize
 from scipy.linalg import solve
@@ -35,13 +35,15 @@ def load_timestreams(file, channels=['C']):
             timestreams.append(data[c][:,0])
 
     if file[-5:] == '.hdf5':
-        data = h5py.File(file, 'r')
+        f = h5py.File(file, 'r')
         for c in channels:
             # Convert mv to V
-            timestreams.append(data[f'channel_{c.lower()}'][:] / 1000)
-            if delta_t is None:
-                delta_t = data[f'channel_{c.lower()}'].attrs['delta_t']
+            adc2mv = f['data'][f'channel_{c.lower()}'].attrs['adc2mv']
+            timestreams.append(f['data'][f'channel_{c.lower()}'][:] * adc2mv / 1000)
 
+        if delta_t is None:
+                delta_t = f['data'].attrs['delta_t']
+            
     return delta_t, timestreams
 
 def get_psd(dt=None, tt=None, zz=None, nperseg=None):
@@ -145,7 +147,7 @@ def fit_z_peak(ff, pp, peak_func=log_voigt, passband=(60000, 70000), p0=[2e9, 62
 #### Plotting
 def load_plotting_setting():
     # colors=['#fe9f6d', '#de4968', '#8c2981', '#3b0f70', '#000004']
-    colors = plt.colormaps.get_cmap('tab20b').resampled(6).colors
+    colors = plt.colormaps.get_cmap('tab20b').resampled(10).colors
     default_cycler = cycler(color=colors)
     
     params = {'figure.figsize': (7, 3),
@@ -269,7 +271,7 @@ def recon_force(dtt, zz_bp, c_mv):
     amp = get_pulse_amp(dtt, zz_bp, omega0_fit, (ff[1]-ff[0])*2*np.pi)    
     amp_lp = lowpass_filtered(amp, fs, 100000, 3)
 
-    in_band = np.logical_and(ff>40000, ff<100000)
+    in_band = np.logical_and(ff>30000, ff<100000)
     temp = m * omega0_fit**2 * np.trapz(pp[in_band], ff[in_band]) * c_mv**2 / kb
 
     return amp/1e9, amp_lp/1e9, temp
@@ -313,8 +315,11 @@ def recon_pulse(idx, dtt, zz_bp, dd, plot=False, fname=None,
     # Use a fixed damping (2 pi * 1 Hz) to reconstruct pulse amp
     # Actual damping doesn't matter as long as gamma << omega0
     # amp = get_pulse_amp(dtt, zz_bp[window], omega0_fit, 1*2*np.pi)
-    amp = get_pulse_amp(dtt, zz_bp[window], omega0_fit, (ff[1]-ff[0])*2*np.pi)    
-    amp_lp = lowpass_filtered(amp, fs, 100000, 3)
+    amp = get_pulse_amp(dtt, zz_bp[window], omega0_fit, (ff[1]-ff[0])*2*np.pi)
+
+    ## Modified 20241104
+    ## Change lowpass from 100 to 80 kHz
+    amp_lp = lowpass_filtered(amp, fs, 80000, 3)
 
 
     # cal_window = get_cal_window(amp, pulse_idx_in_window, cal_window_length=20000)
@@ -362,8 +367,11 @@ def get_unnormalized_amps(data_files, noise=False):
         dtt, nn = load_timestreams(file, ['D', 'G'])
         fs = int(np.ceil(1 / dtt))
 
+        ## Modified 20241104
+        ## Change bandpass filter upper bound from 100 to 80 kHz
         zz, dd = nn[0], nn[1]
-        zz_bp = bandpass_filtered(zz, fs, 40000, 100000)
+        # zz_bp = bandpass_filtered(zz, fs, 30000, 100000)
+        zz_bp = bandpass_filtered(zz, fs, 30000, 80000)
         pulse_idx = get_pulse_idx(dd, -0.5, False) 
         
         if noise:
@@ -375,7 +383,9 @@ def get_unnormalized_amps(data_files, noise=False):
                 continue
             # 20241009: use a much narrower window to be consistent with
             # DM analysis
-            window, f, f_lp, amp = recon_pulse(idx, dtt, zz_bp, dd, False, None, 40000, 40000, 50, 30)#500000, 40000, 40, 30)
+            window, f, f_lp, amp = recon_pulse(idx, dtt, zz_bp, dd, False, None, 40000, 40000, 50, 30)
+            #500000, 40000, 40, 30)
+
             if noise:
                 amps.append(np.abs(f_lp[np.ceil(f_lp.size/2).astype(np.int64)])/1e9)
             else:
@@ -389,7 +399,8 @@ def get_all_unnormalized_amps(folder, datasets, pulseamps, noise=False):
     for i, dataset in enumerate(datasets):
         print(dataset)
         # combined_path = os.path.join(folder, dataset, '**/*.mat')
-        combined_path = os.path.join(folder, dataset, '*.hdf5')
+        # combined_path = os.path.join(folder, dataset, '*.hdf5')
+        combined_path = os.path.join(folder, f'{dataset}*.hdf5')
         data_files = glob.glob(combined_path)
 
         unnormalized_amps.append(get_unnormalized_amps(data_files, noise))
@@ -505,3 +516,88 @@ def get_c_mv(data_files_ordered, vp2p, omegad, passband, charge=3, n_chunk=10):
         c_cals.append(c_cal)
     
     return np.sqrt(1 / np.asarray(c_cals))
+
+
+## After processing
+def load_histograms(data_dir, data_prefix, n_file):
+    bc = None
+    hhs, good_dets, temps = [], [], []
+
+    for i in range(n_file):
+        file = os.path.join(data_dir, f'{data_prefix}{i}_processed.hdf5')
+        f = h5py.File(file, 'r')
+
+        if bc is None:
+            bc = f['data_processed'].attrs['bin_center_kev']
+        
+        hhs.append(f['data_processed']['histogram'][:])
+        good_dets.append(f['data_processed']['good_detection'][:])
+        temps.append(f['data_processed']['temp'][:])
+
+        f.close()
+    
+    hhs = np.asarray(hhs)
+    temps = np.asarray(temps)
+    good_dets = np.array(good_dets)
+
+    return bc, hhs, good_dets, temps
+
+def plot_hist_events(data_files, file_idx, idx, window_length, bins, bc, c_mv, amp2kev):
+    file = data_files[file_idx]
+    print(file)
+
+    f = h5py.File(file, "r")
+    zz = f['data']['channel_d'][:] * f['data']['channel_d'].attrs['adc2mv'] / 1e3
+    ff = f['data']['channel_f'][:] * f['data']['channel_f'].attrs['adc2mv'] / 1e3
+
+    dtt = f['data'].attrs['delta_t']
+    fs = int(np.ceil(1 / dtt))
+
+    zz_bp = bandpass_filtered(zz, fs, 30000, 80000)
+    ff_lp = lowpass_filtered(ff, fs, 10000)
+
+    # Long window    
+    zz_long = np.reshape(zz, (int(zz.size / window_length), window_length))
+    zz_bp_long = np.reshape(zz_bp, (int(zz_bp.size / window_length), window_length))
+    ff_lp_long = np.reshape(ff_lp, (int(ff.size / window_length), window_length))
+    
+    idx_window = np.full(zz.size, True)
+    idx_window[0:window_length*idx] = False
+    idx_window[window_length*(idx+1):] = False
+
+    amp, amp_lp, temp = recon_force(dtt, zz_bp_long[idx], c_mv)
+
+    amp_search = np.abs(amp_lp[100:-50])
+    amp_reshaped = np.reshape(amp_search, (int(amp_search.size/50), 50))
+    amp_searched = np.max(amp_reshaped, axis=1)
+
+    hh = np.histogram(amp_searched*amp2kev, bins=bins)[0]
+    # hh = np.histogram(amp_lp[500:-500], bins=bins)[0]
+    
+    fig, ax = plt.subplots(1, 4, figsize=(12, 3))
+    ax[0].errorbar(bc, hh, np.sqrt(hh), fmt='o', markersize=2)
+    ax[0].set_yscale('log')
+    # ax[0].set_xlim(0, 5000)
+#     ax[0].set_ylim(1, 5e4)
+    ax[0].set_xlabel('Reconstructed amp. (keV/c)', fontsize=12)
+    ax[0].set_ylabel('Count', fontsize=12)
+
+    ax[1].plot(dtt*1e6*np.arange(0, amp_lp.size), amp_lp*amp2kev/1000, color='grey')
+    ax[1].set_ylim(-5, 5)
+    # ax[1].set_ylim(-3, 3)
+    ax[1].set_xlabel('Time ($\mu s$)', fontsize=12)
+    ax[1].set_ylabel('Amp. (MeV/c)', fontsize=12)
+    
+    ax[2].plot(dtt*1e6*np.arange(0, zz_bp_long[idx].size), zz_bp_long[idx])
+    ax[2].set_ylabel('Z homodyne (V)', fontsize=12)
+    ax[2].set_xlabel('Time ($\mu s$)', fontsize=12)
+
+    ax[3].plot(dtt*1e6*np.arange(0, ff_lp_long[idx].size), ff_lp_long[idx])
+    ax[3].set_ylabel('Accelerometer (V)', fontsize=12)
+    ax[3].set_xlabel('Time ($\mu s$)', fontsize=12)
+    
+    fig.suptitle(f'Event (file_{file_idx}, window_{idx})')
+    fig.tight_layout()
+    
+    f.close()
+    return amp_lp, hh, zz_long[idx], zz_bp_long[idx], fig, ax
