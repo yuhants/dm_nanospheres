@@ -3,16 +3,16 @@ import numpy as np
 import scipy.io as sio
 import os, glob
 import h5py
+from datetime import datetime
 
 import matplotlib.pyplot as plt
 from cycler import cycler
 
 from scipy.signal import welch
-from scipy.signal import butter, sosfilt
+from scipy.signal import butter, sosfilt, iirnotch, filtfilt
 from scipy.optimize import curve_fit, minimize
 from scipy.linalg import solve
 from scipy.fft import rfft, irfft, rfftfreq
-
 
 yale_colors = ['#00356b', '#286dc0', '#63aaff', '#4a4a4a']
 
@@ -83,8 +83,12 @@ def get_drive_amp(charge, tt, drive_sig, pulse_window):
     amp_kev = (charge*1.6e-19) * 120 * area * SI2ev / 1000
     return amp_kev
 
-
 #### Filtering
+def notch_filtered(data, fs, f0=93000, q=50):
+    b, a = iirnotch(f0, q, fs)
+    filtered = filtfilt(b, a, data)
+    return filtered
+
 def bandpass_filtered(data, fs, f_low=10000, f_high=100000, order=3): 
     sos_bp = butter(order, [f_low, f_high], 'bandpass', fs=fs, output='sos')
     filtered = sosfilt(sos_bp, data)
@@ -143,11 +147,10 @@ def fit_z_peak(ff, pp, peak_func=log_voigt, passband=(60000, 70000), p0=[2e9, 62
     # amp, omega0, (sigma,) gamma
     return popt
 
-
 #### Plotting
 def load_plotting_setting():
     # colors=['#fe9f6d', '#de4968', '#8c2981', '#3b0f70', '#000004']
-    colors = plt.colormaps.get_cmap('tab20b').resampled(10).colors
+    colors = plt.colormaps.get_cmap('tab20b').resampled(8).colors
     default_cycler = cycler(color=colors)
     
     params = {'figure.figsize': (7, 3),
@@ -260,7 +263,7 @@ def get_pulse_amp(dt, zz, omega0, gamma):
 
     return filter_output
 
-def recon_force(dtt, zz_bp, c_mv):
+def recon_force(dtt, zz_bp, c_mv=None):
     fs = int(np.ceil(1 / dtt))
 
     zzk = rfft(zz_bp)
@@ -269,13 +272,15 @@ def recon_force(dtt, zz_bp, c_mv):
 
     omega0_fit = ff[np.argmax(pp)] * 2 * np.pi
     amp = get_pulse_amp(dtt, zz_bp, omega0_fit, (ff[1]-ff[0])*2*np.pi)    
-    amp_lp = lowpass_filtered(amp, fs, 100000, 3)
+    amp_lp = lowpass_filtered(amp, fs, 80000, 3)
 
-    in_band = np.logical_and(ff>30000, ff<100000)
-    temp = m * omega0_fit**2 * np.trapz(pp[in_band], ff[in_band]) * c_mv**2 / kb
+    if c_mv is not None:
+        in_band = np.logical_and(ff>30000, ff<80000)
+        temp = m * omega0_fit**2 * np.trapz(pp[in_band], ff[in_band]) * c_mv**2 / kb
+    else:
+        temp = None
 
     return amp/1e9, amp_lp/1e9, temp
-
 
 def recon_pulse(idx, dtt, zz_bp, dd, plot=False, fname=None, 
                 analysis_window_length=100000,
@@ -320,7 +325,6 @@ def recon_pulse(idx, dtt, zz_bp, dd, plot=False, fname=None,
     ## Modified 20241104
     ## Change lowpass from 100 to 80 kHz
     amp_lp = lowpass_filtered(amp, fs, 80000, 3)
-
 
     # cal_window = get_cal_window(amp, pulse_idx_in_window, cal_window_length=20000)
     # recon_amp = np.abs(np.min(amp_lp[search_window])/np.var(amp_lp[cal_window]))
@@ -370,9 +374,9 @@ def get_unnormalized_amps(data_files, noise=False):
         ## Modified 20241104
         ## Change bandpass filter upper bound from 100 to 80 kHz
         zz, dd = nn[0], nn[1]
-        # zz_bp = bandpass_filtered(zz, fs, 30000, 100000)
         zz_bp = bandpass_filtered(zz, fs, 30000, 80000)
-        pulse_idx = get_pulse_idx(dd, -0.5, False) 
+        pulse_idx = get_pulse_idx(dd, 0.5, True)  # use this for positive pulses
+        # pulse_idx = get_pulse_idx(dd, -0.5, False) 
         
         if noise:
             # Fit noise away from the pulses
@@ -381,13 +385,18 @@ def get_unnormalized_amps(data_files, noise=False):
         for i, idx in enumerate(pulse_idx):
             if idx < 100000 or idx > zz.size-100000:
                 continue
-            # 20241009: use a much narrower window to be consistent with
-            # DM analysis
-            window, f, f_lp, amp = recon_pulse(idx, dtt, zz_bp, dd, False, None, 40000, 40000, 50, 30)
-            #500000, 40000, 40, 30)
+
+            # 20241205: use a much narrower search window (25 indices; 50 us)
+            # to be consistent with DM analysis
+            window, f, f_lp, amp = recon_pulse(idx, dtt, zz_bp, dd, False, None, 40000, 40000, 25, 80)
 
             if noise:
-                amps.append(np.abs(f_lp[np.ceil(f_lp.size/2).astype(np.int64)])/1e9)
+                # No search, just take th middle value
+                # amps.append(np.abs(f_lp[np.ceil(f_lp.size/2).astype(np.int64)])/1e9)
+                if np.isnan(amp):
+                    pass
+                else:
+                    amps.append(amp)
             else:
                 amps.append(amp)
 
@@ -407,11 +416,15 @@ def get_all_unnormalized_amps(folder, datasets, pulseamps, noise=False):
         
     return unnormalized_amps
 
-def fit_amps_gaus(normalized_amps, noise=False):
+def fit_amps_gaus(normalized_amps, bins=None, noise=False, return_bins=False):
     hhs, bcs, gps = [], [], []
+    bins_ret = []
     for amp in normalized_amps:
-        bins = np.linspace(0, np.max(amp)*1.5, 50)
-        hh, be = np.histogram(amp, bins=bins)
+        if bins is None:
+            bin = np.linspace(0, np.max(amp)*1.5, 50)
+        else:
+            bin = bins
+        hh, be = np.histogram(amp, bins=bin)
         bc = 0.5 * (be[1:] + be[:-1])
         
         if noise:
@@ -422,20 +435,25 @@ def fit_amps_gaus(normalized_amps, noise=False):
         hhs.append(hh)
         bcs.append(bc)
         gps.append(gp)
-    return hhs, bcs, gps
-
+        bins_ret.append(bin)
+    
+    if return_bins:
+        return hhs, bcs, gps, bins_ret
+    else:
+        return hhs, bcs, gps
+    
 def plot_gaus_fit(pulseamps, normalized_amps, hhs, bcs, gps, amp2kev=None, noise=False, title=None, fig=None, ax=None, colors=None):
     if ax is None:
         fig, ax = plt.subplots(figsize=(10, 5))
     xx = np.linspace(0, np.max(np.asarray(bcs).flatten()), 1000)
-    
+
     if colors is None:
         colors = plt.colormaps.get_cmap('tab20b').resampled(len(pulseamps)).colors
     for i, _ in enumerate(normalized_amps):
         color = colors[i]
 
         if amp2kev is not None:
-            ax.errorbar(bcs[i]*amp2kev, hhs[i], yerr=np.sqrt(hhs[i]), fmt='o', color=color)
+            ax.errorbar(bcs[i]*amp2kev, hhs[i], yerr=np.sqrt(hhs[i]), fmt='.', markersize=10, color=color)
             gps_normalized = [gps[i][0], gps[i][1]*amp2kev, gps[i][2]*amp2kev]
             if noise:
                 ax.plot(xx*amp2kev, gauss(xx*amp2kev, *gps_normalized), label=f'{pulseamps[i]} keV (noise), $\sigma$ = {gps_normalized[2]:.1f} keV', color=color)
@@ -452,7 +470,7 @@ def plot_gaus_fit(pulseamps, normalized_amps, hhs, bcs, gps, amp2kev=None, noise
     if title is not None:
         ax.set_title(title, fontsize=16)
     ax.set_xlabel('Reconstruced pulse (keV/c)', fontsize=14)
-    ax.set_ylabel('Count', fontsize=14)
+    ax.set_ylabel(f'Counts', fontsize=14)
     ax.legend(fontsize=14)
     
     return fig, ax
@@ -517,11 +535,10 @@ def get_c_mv(data_files_ordered, vp2p, omegad, passband, charge=3, n_chunk=10):
     
     return np.sqrt(1 / np.asarray(c_cals))
 
-
 ## After processing
 def load_histograms(data_dir, data_prefix, n_file):
     bc = None
-    hhs, good_dets, temps = [], [], []
+    hhs, good_dets, noise_levels = [], [], []
 
     for i in range(n_file):
         file = os.path.join(data_dir, f'{data_prefix}{i}_processed.hdf5')
@@ -532,35 +549,144 @@ def load_histograms(data_dir, data_prefix, n_file):
         
         hhs.append(f['data_processed']['histogram'][:])
         good_dets.append(f['data_processed']['good_detection'][:])
-        temps.append(f['data_processed']['temp'][:])
+        noise_levels.append(f['data_processed']['noise_level_kev'][:])
 
         f.close()
     
     hhs = np.asarray(hhs)
-    temps = np.asarray(temps)
+    noise_levels = np.asarray(noise_levels)
     good_dets = np.array(good_dets)
 
-    return bc, hhs, good_dets, temps
+    return bc, hhs, good_dets, noise_levels
 
-def plot_hist_events(data_files, file_idx, idx, window_length, bins, bc, c_mv, amp2kev):
-    file = data_files[file_idx]
+def check_excess_event(hhs, bc, thr=1500):
+    no_excess_events = np.full(shape=hhs.shape[0:2], fill_value=True)
+    for i, _hh_file in enumerate(hhs):
+        for j, _hh in enumerate(_hh_file):
+            if np.sum(_hh[bc > thr]) > 1 or np.sum(_hh) < 50:
+                no_excess_events[i, j] = False
+
+    return no_excess_events
+
+def check_noise_level(noise_all, thr=400):
+    return (noise_all < thr)
+
+def load_data_hists(data_dir, data_prefix, n_file, excess_thr=1500, noise_thr=400):
+    bc, hhs, good_dets, noise_levels = load_histograms(data_dir, data_prefix, n_file)
+    good_noise_level = check_noise_level(noise_levels, noise_thr)
+    no_excess_events = check_excess_event(hhs, bc, thr=excess_thr)
+
+    hh_cut_det   = hhs[good_dets]
+    hh_cut_noise = hhs[np.logical_and(good_dets, good_noise_level)]
+    hh_cut_all   = hhs[np.logical_and(np.logical_and(good_dets, good_noise_level), no_excess_events)]
+
+    return [bc, hhs, hh_cut_det, hh_cut_noise, hh_cut_all, good_dets, good_noise_level, no_excess_events]
+
+def get_events_after_cut(hists, thr=4000):
+    bc, hhs, good_dets, good_noise_level, no_excess_events = hists[0], hists[1], hists[5], hists[6], hists[7]
+
+    events_after_cut = []
+    for i, _hh_file in enumerate(hhs):
+        for j, _hh in enumerate(_hh_file):
+            if not good_dets[i, j]:  continue
+            if not good_noise_level[i, j]: continue
+            if not no_excess_events[i, j]: continue
+
+            n_large_events = np.sum(_hh[bc > thr])
+            if n_large_events > 0:
+                events_after_cut.append((i, j))
+    return events_after_cut
+
+def get_summed_rates(data_dir, dataset):
+    f = h5py.File(os.path.join(data_dir, f'{dataset}_summed_histograms.hdf5'), 'r')
+
+    bc = f['summed_histograms'].attrs['bin_center_kev']
+    scaling = f['summed_histograms'].attrs['scaling']
+
+    hhs, rates_hz_kev, n_windows = [], [], []
+    for hist in ['hh_all_sum', 'hh_cut_det_sum', 'hh_cut_noise_sum', 'hh_cut_all_sum']:
+        hh = f['summed_histograms'][hist][:]
+        n_window = f['summed_histograms'][hist].attrs['n_window']
+
+        hhs.append(hh)
+        rates_hz_kev.append(hh / (n_window * scaling))
+        n_windows.append(n_window)
+
+    f.close()
+
+    return bc, hhs, rates_hz_kev, n_windows, scaling
+
+def plot_hist(dataset, data_prefix, n_file, hists):
+    data_dir = rf'/Volumes/LaCie/dm_data/{dataset}'
+    file = os.path.join(data_dir, f'{data_prefix}0.hdf5')
+    f = h5py.File(file, 'r')
+    start_time = str(datetime.fromtimestamp(f['data'].attrs['timestamp']))
+    f.close()
+
+    hhs, hh_cut_det, hh_cut_noise, hh_cut_all = hists[1], hists[2], hists[3], hists[4]
+    hh_all_sum = np.sum(np.sum(hhs, axis=0), axis=0)
+    hh_cut_det_sum = np.sum(hh_cut_det, axis=0)
+    hh_cut_noise_sum = np.sum(hh_cut_noise, axis=0)
+    hh_cut_all_sum = np.sum(hh_cut_all, axis=0)
+
+    n_search_per_win = (5000 - 150) / 25
+    time_per_search = 2e-6 * 25
+    scaling = n_search_per_win * time_per_search * (hists[0][1] - hists[0][0])
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.plot(hists[0], hh_all_sum / (hhs.shape[0] * hhs.shape[1] * scaling), '-', color=yale_colors[0], label='All', alpha=1)
+    ax.plot(hists[0], hh_cut_det_sum / (hh_cut_det.shape[0] * scaling), '-', color=yale_colors[1], label='Detection quality cut', alpha=1)
+    ax.plot(hists[0], hh_cut_noise_sum / (hh_cut_noise.shape[0] * scaling), '-', color=yale_colors[2], label='Detection quality + noise cut', alpha=1)
+    ax.plot(hists[0], hh_cut_all_sum / (hh_cut_all.shape[0] * scaling), '-', color=yale_colors[3], label='Detection quality + noise + anti-coincidence cut', alpha=1)
+
+    ax.legend(frameon=False, fontsize=12)
+
+    ax.set_yscale('log')
+    # ax.set_xscale('log')
+    ax.set_xlim(0, 10000)
+    ax.set_ylim(1e-7, 100)
+
+    ax.set_xlabel('Recon. amplitude (keV)')
+    ax.set_ylabel('Differential count (Hz/keV)')
+    ax.set_title(f'Data ({n_file/60:.1f} hours), begins {start_time}')
+
+    return fig, ax
+
+def plot_hist_events(data_dir, data_prefix, file_idx, idx, window_length, bins, bc, c_mv, amp2kev, acce_micro=False, zoom=True):
+    # data_dir = rf'/Volumes/LaCie/dm_data/{dataset}'
+
+    file = os.path.join(data_dir, f'{data_prefix}{file_idx}.hdf5')
     print(file)
 
     f = h5py.File(file, "r")
     zz = f['data']['channel_d'][:] * f['data']['channel_d'].attrs['adc2mv'] / 1e3
-    ff = f['data']['channel_f'][:] * f['data']['channel_f'].attrs['adc2mv'] / 1e3
 
     dtt = f['data'].attrs['delta_t']
     fs = int(np.ceil(1 / dtt))
 
+    # If the sphere is charged and driven, apply a notch filter
+    try:
+        if f['data'].attrs['channel_e_mean_mv'] > 50:
+            zz = notch_filtered(zz, fs, 93000, 100)
+    except KeyError:
+        pass
+
     zz_bp = bandpass_filtered(zz, fs, 30000, 80000)
-    ff_lp = lowpass_filtered(ff, fs, 10000)
 
     # Long window    
     zz_long = np.reshape(zz, (int(zz.size / window_length), window_length))
     zz_bp_long = np.reshape(zz_bp, (int(zz_bp.size / window_length), window_length))
-    ff_lp_long = np.reshape(ff_lp, (int(ff.size / window_length), window_length))
-    
+
+    if acce_micro:
+        ff = f['data']['channel_f'][:] * f['data']['channel_f'].attrs['adc2mv'] / 1e3
+        gg = f['data']['channel_g'][:] * f['data']['channel_g'].attrs['adc2mv'] / 1e3
+
+        ff_lp = lowpass_filtered(ff, fs, 10000)
+        gg_lp = lowpass_filtered(gg, fs, 10000)
+
+        ff_lp_long = np.reshape(ff_lp, (int(ff.size / window_length), window_length))
+        gg_lp_long = np.reshape(gg_lp, (int(ff.size / window_length), window_length))
+
     idx_window = np.full(zz.size, True)
     idx_window[0:window_length*idx] = False
     idx_window[window_length*(idx+1):] = False
@@ -568,13 +694,17 @@ def plot_hist_events(data_files, file_idx, idx, window_length, bins, bc, c_mv, a
     amp, amp_lp, temp = recon_force(dtt, zz_bp_long[idx], c_mv)
 
     amp_search = np.abs(amp_lp[100:-50])
-    amp_reshaped = np.reshape(amp_search, (int(amp_search.size/50), 50))
+    amp_reshaped = np.reshape(amp_search, (int(amp_search.size/25), 25))
     amp_searched = np.max(amp_reshaped, axis=1)
 
     hh = np.histogram(amp_searched*amp2kev, bins=bins)[0]
     # hh = np.histogram(amp_lp[500:-500], bins=bins)[0]
     
-    fig, ax = plt.subplots(1, 4, figsize=(12, 3))
+    if not acce_micro:
+        fig, ax = plt.subplots(1, 3, figsize=(10, 3))
+    else:
+        fig, ax = plt.subplots(1, 5, figsize=(15, 3))
+
     ax[0].errorbar(bc, hh, np.sqrt(hh), fmt='o', markersize=2)
     ax[0].set_yscale('log')
     # ax[0].set_xlim(0, 5000)
@@ -588,13 +718,26 @@ def plot_hist_events(data_files, file_idx, idx, window_length, bins, bc, c_mv, a
     ax[1].set_xlabel('Time ($\mu s$)', fontsize=12)
     ax[1].set_ylabel('Amp. (MeV/c)', fontsize=12)
     
-    ax[2].plot(dtt*1e6*np.arange(0, zz_bp_long[idx].size), zz_bp_long[idx])
-    ax[2].set_ylabel('Z homodyne (V)', fontsize=12)
+    ax[2].plot(dtt*1e6*np.arange(0, zz_bp_long[idx].size), c_mv*zz_bp_long[idx]*1e9)
+    ax[2].set_ylabel('Z homodyne (nm)', fontsize=12)
     ax[2].set_xlabel('Time ($\mu s$)', fontsize=12)
 
-    ax[3].plot(dtt*1e6*np.arange(0, ff_lp_long[idx].size), ff_lp_long[idx])
-    ax[3].set_ylabel('Accelerometer (V)', fontsize=12)
-    ax[3].set_xlabel('Time ($\mu s$)', fontsize=12)
+    if zoom:
+        arg = np.argmax(np.abs(amp_lp[100:-50])) + 100
+        lb = max(0, arg-100)
+        ub = min(amp_lp.size, arg+100)
+
+        ax[1].set_xlim(dtt*1e6*lb, dtt*1e6*ub)
+        ax[2].set_xlim(dtt*1e6*lb, dtt*1e6*ub)
+
+    if acce_micro:
+        ax[3].plot(dtt*1e6*np.arange(0, ff_lp_long[idx].size), ff_lp_long[idx])
+        ax[3].set_ylabel('Accelerometer (V)', fontsize=12)
+        ax[3].set_xlabel('Time ($\mu s$)', fontsize=12)
+
+        ax[4].plot(dtt*1e6*np.arange(0, gg_lp_long[idx].size), gg_lp_long[idx])
+        ax[4].set_ylabel('Microphone (V)', fontsize=12)
+        ax[4].set_xlabel('Time ($\mu s$)', fontsize=12)
     
     fig.suptitle(f'Event (file_{file_idx}, window_{idx})')
     fig.tight_layout()
