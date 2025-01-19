@@ -7,21 +7,13 @@ import analysis_utils as utils
 
 c_mv = 5.522e-08
 # amp2kev = 7381.747090660193  # Sphere 20241202; averaged over 5 calibration datasets
-# amp2kev = 6927.379154444802    # Sphere 20241219; calibration 20241220
-amp2kev = 6844.611961407297    # Sphere 20241221; calibration 20241222
+# amp2kev = 6927.379154444802  # Sphere 20241219; calibration 20241220
+# amp2kev = 6844.611961407297  # Sphere 20241221; calibration 20241222
+amp2kev = 7396.062147743912  # Sphere 20250103; averaged over 8 calibration datasets
 
 window_length = 5000  # 10 ms analysis window, assume dt=2 us
 bins = np.arange(0, 10000, 50)  # keV
 bc = 0.5 * (bins[:-1] + bins[1:])
-
-idx_start = 0
-nfile = 1331 - idx_start
-
-sphere = 'sphere_20241221'
-dataset = '20241221_3e-7mbar_16e_alignment0_long'
-data_prefix = r'20241221_d_'
-data_dir = rf'/Volumes/LaCie/dm_data/{sphere}/{dataset}'
-out_dir = rf'/Users/yuhan/work/nanospheres/data/dm_data_processed/{sphere}/{dataset}'
 
 def bad_detection_quality(zz_windowed, zz_bp_windowed):
     # Z signal out of balance, meaning that homodyne losing lock
@@ -37,7 +29,9 @@ def bad_detection_quality(zz_windowed, zz_bp_windowed):
     if np.sum(convolved < 1e-3) > 0:
         return True
 
-def main():
+def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
+    data_dir = rf'/Volumes/LaCie/dm_data/{sphere}/{dataset}'
+    out_dir = rf'/Users/yuhan/work/nanospheres/data/dm_data_processed/{sphere}/{dataset}'
     if not os.path.isdir(out_dir):
         os.mkdir(out_dir)
 
@@ -105,4 +99,30 @@ def main():
         f.close()
 
 if __name__ == '__main__':
-    main()
+    sphere = 'sphere_20250103'
+
+    datasets = ['20250109_1e-8mbar_8e_alignment1_long',
+                '20250110_1e-8mbar_8e_alignment1_long',
+                '20250111_1e-8mbar_8e_alignment1_long',
+                '20250112_9e-9mbar_8e_alignment1_long',
+                '20250113_5e-8mbar_8e_alignment1_long',
+                '20250114_1e-8mbar_1e_alignment1_long',
+                '20250115_8e-9mbar_0e_alignment1_long',
+                '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
+            ]
+
+    data_prefixs = ['20250109_d_',
+                    '20250110_d_',
+                    '20250111_d_',
+                    '20250112_d_',
+                    '20250113_d_',
+                    '20250114_d_',
+                    '20250115_d_',
+                    '20250116_d_',
+                    ]
+
+    idx_start = 0
+    n_files = [1440, 1440, 1440, 780, 1440, 1440, 1440, 1440]
+
+    for idx, dataset in enumerate(datasets):
+        process_dataset(sphere, dataset, data_prefixs[idx], n_files[idx], idx_start)

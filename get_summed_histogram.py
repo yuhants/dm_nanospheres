@@ -3,13 +3,12 @@ import analysis_utils as utils
 import h5py
 import os
 
-sphere = 'sphere_20241221'
-dataset = '20241221_3e-7mbar_16e_alignment0_long'
-data_prefix = r'20241221_d_'
+sphere = 'sphere_20250103'
+dataset = '20250115_8e-9mbar_0e_alignment1_long'
+data_prefix = r'20250115_d_'
+nfile = 1440
+
 data_dir = f'/Users/yuhan/work/nanospheres/data/dm_data_processed/{sphere}/{dataset}'
-
-nfile = 1331
-
 outfile_name = f'{dataset}_summed_histograms.hdf5'
 
 excess_thr = 1600
