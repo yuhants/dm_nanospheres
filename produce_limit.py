@@ -5,7 +5,37 @@ import numpy as np
 from scipy.special import erf
 from scipy.optimize import minimize
 
-NLL_OFFSET = 3.76735915e+09
+from multiprocessing import Pool
+
+# Fit params for no dark matter
+params_nodm = np.array([9.99999411e-01, 3.63789735e+02, 5.82216279e-02, 1.41641008e+02, 1.47480619e+03, 1.23523645e+02])
+NLL_OFFSET = 4304827608.245811
+
+# Read in reconstruction histogram and signal efficiency
+file = '/Users/yuhan/work/nanospheres/data/dm_data_processed/sphere_20250103/sphere_20250103_recon_all.h5py'
+with h5py.File(file, 'r') as fout:
+    g = fout['recon_data_all']
+    hist = g['hist'][:]
+    n_window = g['hist'].attrs['n_windows']
+    scaling = g['hist'].attrs['scaling']
+
+    rate_all = g['rate_hist'][:]
+    rate_all_err = g['rate_hist_err'][:]
+    bc = g['bc'][:]
+
+    time_all = g.attrs['time_hours']
+
+    fout.close()
+
+hist_norm = n_window * scaling
+
+file = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed/sphere_20250103_calibration_all.h5py'
+with h5py.File(file, 'r') as fout:
+    g = fout['calibration_data_processed']
+    eff_coefs = g['sig_efficiency_fit_params'][:]
+
+    fout.close()
+
 
 def func2(x, z, f):
     return 0.5 * erf((x - z) * f) + 0.5
@@ -98,54 +128,38 @@ def nll_dm_scaled(alpha, mu, m, n, b, xi, q_scale, n_scale,
 
     return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
 
-def calc_profile_nlls(bc, hist, eff_coefs, hist_norm, mphi, mx_list, alpha_list):
+def minimize_nll(mphi, mx, alpha):
+    args = (bc, hist, eff_coefs, mphi, mx, alpha, hist_norm)
+    res = minimize(fun=lambda x: nll_dm_scaled(*x, *args), x0=[*params_nodm, 1, 1],
+            method='Nelder-Mead',
+            bounds=[(0.99, 1), (0, 500), (0, 0.1), (100, 300), (1000, 1500), (90, 160), (0.9, 1.1), (0.8, 1.2)],
+            options={'disp' : False,
+                    'maxiter': 50000,
+                    'maxfev': 50000,
+                    'adaptive': True,
+                    'fatol': 0.001,
+                    }
+            )
+    return res
+
+def calc_profile_nlls(mphi, mx_list, alpha_list):
     nlls = np.empty((mx_list.size, alpha_list.size))
+
     for i, mx in enumerate(mx_list):
         print(fr'Working on $M_x=$ {mx:.2f} GeV')
+        
+        pool = Pool(8)
+        n_alpha = alpha_list.size
+        params = list(np.vstack((np.full(n_alpha, mphi), np.full(n_alpha, mx), alpha_list)).T)
+        res_pool = pool.starmap(minimize_nll, params)
 
-        for j, alpha in enumerate(alpha_list):
-            args = (bc, hist, eff_coefs, mphi, mx, alpha, hist_norm)
-            res = minimize(fun=lambda x: nll_dm_scaled(*x, *args), x0=[0.999999068, 378, 5.6e-2, 142, 1414, 140, 1, 1],
-                    method='Nelder-Mead',
-                    bounds=[(0.99, 1), (0, 500), (0, 0.1), (100, 300), (1000, 1500), (90, 160), (0.9, 1.1), (0.8, 1.2)],
-                    options={'disp' : False,
-                            'maxiter': 10000,
-                            'maxfev': 10000,
-                            'adaptive': True,
-                            'fatol': 0.01,
-                            }
-                    )
-            if res.success:
-                nlls[i, j] = res.fun
+        for j in range(n_alpha):
+            if res_pool[j].success:
+                nlls[i, j] = res_pool[j].fun
             else:
                 nlls[i, j] = np.nan
+
     return nlls
-
-def smooth_nlls(alpha_list, nlls):
-    _res = np.copy(nlls)
-    for i, nll in enumerate(_res):
-        if i == 0:
-            continue
-
-        if nll < _res[i-1]:
-            if i == (_res.size - 1):
-                _res[i] = _res[i - 1]
-            else:
-                _res[i] = np.interp(alpha_list[i], [alpha_list[i-1], alpha_list[i+1]], [_res[i-1], _res[i+1]])
-    return _res
-
-def get_upper_alpha(alpha_list, nlls):
-    idx_ml = np.argmin(nlls)
-
-    # Make sure NLLs are strictly increasing above the
-    # maximum likelihood alpha
-    idx_search = alpha_list >= alpha_list[idx_ml]
-    if np.sum(idx_search) == 0:
-        return np.nan
-
-    delta_nlls_smoothed = smooth_nlls(alpha_list[idx_search], nlls[idx_search] - nlls[idx_ml])
-
-    return np.interp(3.841, 2*delta_nlls_smoothed, alpha_list[idx_search], left=np.nan, right=np.nan)
 
 
 if __name__ == "__main__":
@@ -155,37 +169,17 @@ if __name__ == "__main__":
     mx_list_1    = np.logspace(0, 1, 10)
     alpha_list_1 = np.logspace(-7, -3, 20)
 
+    mx_list_2    = np.logspace(-1, 4, 20)
+    alpha_list_2 = np.logspace(-7, -3, 40)
+
     mphi      = float(sys.argv[1])  # Mediator mass in eV
     print(f'Working on m_phi = {mphi:.0e} eV')
 
-    # Read in reconstruction histogram and signal efficiency
-    file = '/Users/yuhan/work/nanospheres/data/dm_data_processed/sphere_20250103/sphere_20250103_recon_all.h5py'
-    with h5py.File(file, 'r') as fout:
-        g = fout['recon_data_all']
-        hist = g['hist'][:]
-        n_window = g['hist'].attrs['n_windows']
-        scaling = g['hist'].attrs['scaling']
-
-        rate_all = g['rate_hist'][:]
-        rate_all_err = g['rate_hist_err'][:]
-        bc = g['bc'][:]
-
-        time_all = g.attrs['time_hours']
-
-        fout.close()
-
-    hist_norm = n_window * scaling
-
-    file = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed/sphere_20250103_calibration_all.h5py'
-    with h5py.File(file, 'r') as fout:
-        g = fout['calibration_data_processed']
-        eff_coefs = g['sig_efficiency_fit_params'][:]
-
-        fout.close()
-
+    # Calculate profile NLLs for each DM parameter
+    idx = 2
     mx_list, alpha_list = mx_list_0, alpha_list_0
-    nlls_all = calc_profile_nlls(bc, hist, eff_coefs, hist_norm, mphi, mx_list, alpha_list)
+    nlls_all = calc_profile_nlls(mphi, mx_list, alpha_list)
 
-    file_out = f'/Users/yuhan/work/nanospheres/impulse_analysis/profile_nlls/profile_nlls_{mphi:.0e}_0.npz'
-    print(f'Writing file {file_out}')
-    np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all)
+    # file_out = f'/Users/yuhan/work/nanospheres/impulse_analysis/profile_nlls/profile_nlls_{mphi:.0e}_{idx}.npz'
+    # print(f'Writing file {file_out}')
+    # np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all)

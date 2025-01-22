@@ -101,28 +101,14 @@ def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
 if __name__ == '__main__':
     sphere = 'sphere_20250103'
 
-    datasets = ['20250109_1e-8mbar_8e_alignment1_long',
-                '20250110_1e-8mbar_8e_alignment1_long',
-                '20250111_1e-8mbar_8e_alignment1_long',
-                '20250112_9e-9mbar_8e_alignment1_long',
-                '20250113_5e-8mbar_8e_alignment1_long',
-                '20250114_1e-8mbar_1e_alignment1_long',
-                '20250115_8e-9mbar_0e_alignment1_long',
-                '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
+    datasets = ['20250121_8e-9mbar_1e_alignment1_long',
             ]
 
-    data_prefixs = ['20250109_d_',
-                    '20250110_d_',
-                    '20250111_d_',
-                    '20250112_d_',
-                    '20250113_d_',
-                    '20250114_d_',
-                    '20250115_d_',
-                    '20250116_d_',
+    data_prefixs = ['20250121_d_',
                     ]
 
     idx_start = 0
-    n_files = [1440, 1440, 1440, 780, 1440, 1440, 1440, 1440]
+    n_files = [1440]
 
     for idx, dataset in enumerate(datasets):
         process_dataset(sphere, dataset, data_prefixs[idx], n_files[idx], idx_start)
