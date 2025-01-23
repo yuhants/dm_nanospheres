@@ -8,12 +8,17 @@ from scipy.optimize import minimize
 from multiprocessing import Pool
 
 # Fit params for no dark matter
-params_nodm = np.array([9.99999411e-01, 3.63789735e+02, 5.82216279e-02, 1.41641008e+02, 1.47480619e+03, 1.23523645e+02])
-NLL_OFFSET = 4304827608.245811
+# params_nodm = np.array([9.99999411e-01, 3.63789735e+02, 5.82216279e-02, 1.41641008e+02, 1.47480619e+03, 1.23523645e+02])
+params_nodm = np.array([9.99999447e-01, 3.56746616e+02, 5.79875030e-02, 1.42746398e+02, 1.47496320e+03, 1.24520579e+02])
+NLL_OFFSET = 4346738282.505365
+
+data_dir = '/home/yt388/microspheres/impulse_analysis/data_processed'
+rate_dir = '/home/yt388/palmer_scratch/data/dm_rate'
 
 # Read in reconstruction histogram and signal efficiency
-file = '/Users/yuhan/work/nanospheres/data/dm_data_processed/sphere_20250103/sphere_20250103_recon_all.h5py'
-with h5py.File(file, 'r') as fout:
+# file = '/Users/yuhan/work/nanospheres/data/dm_data_processed/sphere_20250103/sphere_20250103_recon_all.h5py'
+file_dm = f'{data_dir}/sphere_20250103_recon_all.h5py'
+with h5py.File(file_dm, 'r') as fout:
     g = fout['recon_data_all']
     hist = g['hist'][:]
     n_window = g['hist'].attrs['n_windows']
@@ -29,8 +34,9 @@ with h5py.File(file, 'r') as fout:
 
 hist_norm = n_window * scaling
 
-file = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed/sphere_20250103_calibration_all.h5py'
-with h5py.File(file, 'r') as fout:
+# file = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed/sphere_20250103_calibration_all.h5py'
+file_cal = f'{data_dir}/sphere_20250103_calibration_all.h5py'
+with h5py.File(file_cal, 'r') as fout:
     g = fout['calibration_data_processed']
     eff_coefs = g['sig_efficiency_fit_params'][:]
 
@@ -77,7 +83,8 @@ def half_gaus_mod(x, mu, m, n):
 
 def read_dm_rate(mphi, mx, alpha):
     R_um       = 0.083
-    file = f'/Users/yuhan/work/nanospheres/data/dm_rate/mphi_{mphi:.0e}/drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+    # file = f'/Users/yuhan/work/nanospheres/data/dm_rate/mphi_{mphi:.0e}/drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+    file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
     drdq_npz = np.load(file)
 
     qq = drdq_npz['bc_kev']
@@ -148,7 +155,7 @@ def calc_profile_nlls(mphi, mx_list, alpha_list):
     for i, mx in enumerate(mx_list):
         print(fr'Working on $M_x=$ {mx:.2f} GeV')
         
-        pool = Pool(8)
+        pool = Pool(32)
         n_alpha = alpha_list.size
         params = list(np.vstack((np.full(n_alpha, mphi), np.full(n_alpha, mx), alpha_list)).T)
         res_pool = pool.starmap(minimize_nll, params)
@@ -169,7 +176,7 @@ if __name__ == "__main__":
     mx_list_1    = np.logspace(0, 1, 10)
     alpha_list_1 = np.logspace(-7, -3, 20)
 
-    mx_list_2    = np.logspace(-1, 4, 20)
+    mx_list_2    = np.logspace(-1, 4, 39)
     alpha_list_2 = np.logspace(-7, -3, 40)
 
     mphi      = float(sys.argv[1])  # Mediator mass in eV
@@ -177,9 +184,11 @@ if __name__ == "__main__":
 
     # Calculate profile NLLs for each DM parameter
     idx = 2
-    mx_list, alpha_list = mx_list_0, alpha_list_0
+    mx_list, alpha_list = mx_list_2, alpha_list_2
+    
     nlls_all = calc_profile_nlls(mphi, mx_list, alpha_list)
 
     # file_out = f'/Users/yuhan/work/nanospheres/impulse_analysis/profile_nlls/profile_nlls_{mphi:.0e}_{idx}.npz'
-    # print(f'Writing file {file_out}')
-    # np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all)
+    file_out = f'{data_dir}/profile_nlls/profile_nlls_{mphi:.0e}_{idx}.npz'
+    print(f'Writing file {file_out}')
+    np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all)

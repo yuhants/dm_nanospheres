@@ -1,0 +1,284 @@
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
+Working on m_phi = 1e-02 eV
+Working on $M_x=$ 0.10 GeV
+Working on $M_x=$ 0.14 GeV
+Working on $M_x=$ 0.18 GeV
+Working on $M_x=$ 0.25 GeV
+Working on $M_x=$ 0.34 GeV
+Working on $M_x=$ 0.45 GeV
+Working on $M_x=$ 0.62 GeV
+Working on $M_x=$ 0.83 GeV
+Working on $M_x=$ 1.13 GeV
+Working on $M_x=$ 1.53 GeV
+Working on $M_x=$ 2.07 GeV
+Working on $M_x=$ 2.80 GeV
+Working on $M_x=$ 3.79 GeV
+Working on $M_x=$ 5.13 GeV
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+Working on $M_x=$ 6.95 GeV
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+Working on $M_x=$ 9.41 GeV
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+Working on $M_x=$ 12.74 GeV
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+Working on $M_x=$ 17.25 GeV
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+Working on $M_x=$ 23.36 GeV
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: divide by zero encountered in log
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../calc_profile_nlls.py:136: RuntimeWarning: invalid value encountered in multiply
+  return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
+Working on $M_x=$ 31.62 GeV
+Working on $M_x=$ 42.81 GeV
+Working on $M_x=$ 57.96 GeV
+Working on $M_x=$ 78.48 GeV
+Working on $M_x=$ 106.25 GeV
+Working on $M_x=$ 143.84 GeV
+Working on $M_x=$ 194.75 GeV
+Working on $M_x=$ 263.67 GeV
+Working on $M_x=$ 356.97 GeV
+Working on $M_x=$ 483.29 GeV
+Working on $M_x=$ 654.32 GeV
+Working on $M_x=$ 885.87 GeV
+Working on $M_x=$ 1199.35 GeV
+Working on $M_x=$ 1623.78 GeV
+Working on $M_x=$ 2198.39 GeV
+Working on $M_x=$ 2976.35 GeV
+Working on $M_x=$ 4029.61 GeV
+Working on $M_x=$ 5455.59 GeV
+Working on $M_x=$ 7386.20 GeV
+Working on $M_x=$ 10000.00 GeV
+Writing file /home/yt388/microspheres/impulse_analysis/data_processed/profile_nlls/profile_nlls_1e-02_2.npz

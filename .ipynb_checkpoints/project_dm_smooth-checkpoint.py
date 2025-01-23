@@ -30,17 +30,25 @@ alpha_list = np.logspace(-7, -3, 40)
 
 sigma_gaus = 200  # keV/c
 
-# n_mc = int(1e8)
-# rand_seed = 22040403
-# rng = np.random.default_rng(rand_seed)
+n_mc = int(1e8)
+rand_seed = 22040403
+rng = np.random.default_rng(rand_seed)
 
-# rr = rng.uniform(0, 1, n_mc)
-# phiphi = rng.uniform(0, np.pi, n_mc)
-# noise_gaussian = rng.normal(0, 200, n_mc)
+rr = rng.uniform(0, 1, n_mc)
+phiphi = rng.uniform(0, np.pi, n_mc)
+noise_gaussian = rng.normal(0, 200, n_mc)
 
-# np.savez(f'/home/yt388/palmer_scratch/data/dm_rate/noise_mc.npz', rr=rr, phiphi=phiphi, noise_gaussian=noise_gaussian)
+def project_smooth(mphi, mx, alpha):
+    # data_dir = f'/Users/yuhan/work/nanospheres/data/dm_rate/mphi_{mphi:.0e}'
+    data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
 
-def project_smooth(mphi, mx, alpha, outfile):
+    outfile_name = f'drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+    outfile = os.path.join(data_dir, outfile_name)
+
+    if os.path.isfile(outfile):
+        print(f'Skipping {outfile_name}')
+        return
+
     file = f'{data_dir}/drdq_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
     drdq_npz = np.load(file)
 
@@ -60,11 +68,6 @@ def project_smooth(mphi, mx, alpha, outfile):
         if np.sum(_drdq_smoothed) == 0:
             _drdq_smoothed = drdq
 
-        # Read in the MC noise
-        noise_file = '/home/yt388/palmer_scratch/data/dm_rate/noise_mc.npz'
-        noise_npz = np.load(noise_file)
-        rr, phiphi, noise_gaussian = noise_npz['rr'], noise_npz['phiphi'], noise_npz['noise_gaussian']
-
         qq_sampled, norm = get_random_q_samples(_qq, _drdq_smoothed, rr)
         qmax = max(50 * ((np.max(qq_sampled) // 50) + 2), 10000)
 
@@ -80,7 +83,7 @@ def project_smooth(mphi, mx, alpha, outfile):
 def get_projected_spectrum(mphi):
     for i, mx in enumerate(mx_list):
 
-        # pool = Pool(16)
+        # pool = Pool(32)
         # n_alpha = alpha_list.size
         # params = list(np.vstack((np.full(n_alpha, mphi), np.full(n_alpha, mx), alpha_list)).T)
         # pool.starmap(project_smooth, params)
@@ -89,20 +92,7 @@ def get_projected_spectrum(mphi):
             project_smooth(mphi, mx, alpha)
 
 if __name__ == "__main__":
-    mx     = float(sys.argv[1])  # DM mass in GeV
-    alpha  = float(sys.argv[2])  # Single neutron coupling
-    mphi  = float(sys.argv[3])   # Mediator mass in eV
+    m_phi      = float(sys.argv[1])  # Mediator mass in eV
+    print(f'Working on m_phi = {m_phi:.0e} eV')
 
-    # data_dir = f'/Users/yuhan/work/nanospheres/data/dm_rate/mphi_{mphi:.0e}'
-    data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
-
-    outfile_name = f'drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
-    outfile = os.path.join(data_dir, outfile_name)
-
-    if os.path.isfile(outfile):
-        print(f'Skipping {outfile_name}')
-
-    else:    
-        print(f'Working on mx = {mx:.5e} GeV, alpha = {alpha:.5e} m_phi = {mphi:.0e} eV')
-        project_smooth(mphi, mx, alpha, outfile)
-        # get_projected_spectrum(m_phi)
+    get_projected_spectrum(m_phi)

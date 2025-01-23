@@ -1,0 +1,1566 @@
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
+/vast/palmer/home.grace/yt388/microspheres/impulse_analysis/jobfiles/../project_dm_smooth.py:67: RuntimeWarning: divide by zero encountered in log
+  _qq, _drdq_smoothed = qq, np.nan_to_num( np.exp(savgol_filter(np.log(drdq), 50, 1)), nan=0 )
+Working on m_phi = 1e-02 eV
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e-01_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.35388e-01_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.35388e-01_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.83298e-01_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.48163e-01_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.35982e-01_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.54878e-01_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.15848e-01_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_8.33782e-01_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.12884e+00_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.52831e+00_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.06914e+00_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.80136e+00_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_3.79269e+00_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.13483e+00_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_6.95193e+00_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_9.41205e+00_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.27427e+01_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.72521e+01_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.33572e+01_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.16228e+01_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.28133e+01_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_5.79639e+01_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_7.84760e+01_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.06247e+02_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.43845e+02_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.94748e+02_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.63665e+02_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_3.56970e+02_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_4.83293e+02_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_6.54319e+02_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_8.85867e+02_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_1.19935e+03_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.62378e+03_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_2.19839e+03_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_2.97635e+03_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_4.02961e+03_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_5.45559e+03_1.00000e-03_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.00000e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.26638e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.60372e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_2.03092e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_2.57191e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_3.25702e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_4.12463e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_5.22335e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_6.61474e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_8.37678e-07_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.06082e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.34340e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.70125e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_2.15443e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_2.72833e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_3.45511e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_4.37548e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_5.54102e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_7.01704e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_8.88624e-06_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.12534e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.42510e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.80472e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_2.28546e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_2.89427e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_3.66524e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_4.64159e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_5.87802e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_7.44380e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_9.42668e-05_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.19378e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.51178e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.91448e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_2.42446e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_3.07029e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_3.88816e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_4.92388e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_6.23551e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_7.89652e-04_1e-02.npz
+Writing file /home/yt388/palmer_scratch/data/dm_rate/mphi_1e-02/drdqz_nanosphere_8.30e-02_7.38620e+03_1.00000e-03_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.00000e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.26638e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.60372e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_2.03092e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_2.57191e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_3.25702e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_4.12463e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_5.22335e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_6.61474e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_8.37678e-07_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.06082e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.34340e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.70125e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_2.15443e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_2.72833e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_3.45511e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_4.37548e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_5.54102e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_7.01704e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_8.88624e-06_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.12534e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.42510e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.80472e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_2.28546e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_2.89427e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_3.66524e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_4.64159e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_5.87802e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_7.44380e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_9.42668e-05_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.19378e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.51178e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.91448e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_2.42446e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_3.07029e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_3.88816e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_4.92388e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_6.23551e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_7.89652e-04_1e-02.npz
+Skipping drdqz_nanosphere_8.30e-02_1.00000e+04_1.00000e-03_1e-02.npz
