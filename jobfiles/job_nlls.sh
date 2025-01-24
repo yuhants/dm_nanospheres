@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J nanosphere_alpha_nll_0_01
+#SBATCH -J nanosphere_alpha_nll_10
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
@@ -10,4 +10,4 @@
 
 module load miniconda
 conda activate microsphere
-python ../calc_profile_nlls.py 0.01
+python ../calc_profile_nlls.py 10

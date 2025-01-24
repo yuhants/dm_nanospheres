@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J nanosphere_smooth_0_1
+#SBATCH -J nanosphere_smooth_10
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
@@ -10,4 +10,4 @@
 
 module load miniconda
 conda activate microsphere
-python ../project_dm_smooth.py 0.1
+python ../project_dm_smooth.py 10

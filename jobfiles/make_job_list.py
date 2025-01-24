@@ -5,11 +5,15 @@ R_um       = 0.083
 # mx_list    = np.logspace(-1, 4, 40)
 # alpha_list = np.logspace(-8, -3, 80)
 
-mx_list = np.logspace(-1, 4, 39)
-alpha_list = np.logspace(-7, -3, 40)
-mphi_list  = [0.1, 1, 10]
+# mx_list = np.logspace(-1, 4, 39)
+# alpha_list = np.logspace(-7, -3, 40)
 
-job_file = open("job_list_smooth.txt", "wt")
+mx_list = np.logspace(-1, 4, 77)
+alpha_list = np.logspace(-7, -3, 79)
+
+mphi_list  = [10]
+
+job_file = open("job_list_smooth_10.txt", "wt")
 
 for mx in mx_list:
     for alpha in alpha_list:

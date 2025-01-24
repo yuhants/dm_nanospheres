@@ -179,12 +179,15 @@ if __name__ == "__main__":
     mx_list_2    = np.logspace(-1, 4, 39)
     alpha_list_2 = np.logspace(-7, -3, 40)
 
+    mx_list_3    = np.logspace(-1, 4, 77)
+    alpha_list_3 = np.logspace(-7, -3, 79)
+
     mphi      = float(sys.argv[1])  # Mediator mass in eV
     print(f'Working on m_phi = {mphi:.0e} eV')
 
     # Calculate profile NLLs for each DM parameter
-    idx = 2
-    mx_list, alpha_list = mx_list_2, alpha_list_2
+    idx = 3
+    mx_list, alpha_list = mx_list_3, alpha_list_3
     
     nlls_all = calc_profile_nlls(mphi, mx_list, alpha_list)
 

@@ -25,8 +25,11 @@ R_um       = 0.083
 # mx_list    = np.logspace(0, 1, 10)
 # alpha_list = np.logspace(-7, -3, 20)
 
-mx_list    = np.logspace(-1, 4, 39)
-alpha_list = np.logspace(-7, -3, 40)
+# mx_list    = np.logspace(-1, 4, 39)
+# alpha_list = np.logspace(-7, -3, 40)
+
+mx_list    = np.logspace(-1, 4, 77)
+alpha_list = np.logspace(-7, -3, 79)
 
 sigma_gaus = 200  # keV/c
 
