@@ -9,6 +9,7 @@ c_mv = 5.522e-08
 # amp2kev = 7381.747090660193  # Sphere 20241202; averaged over 5 calibration datasets
 # amp2kev = 6927.379154444802  # Sphere 20241219; calibration 20241220
 # amp2kev = 6844.611961407297  # Sphere 20241221; calibration 20241222
+# amp2kev = 7034.799462287863  # Sphere 20241226; calibration 20241228
 amp2kev = 7396.062147743912  # Sphere 20250103; averaged over 8 calibration datasets
 
 window_length = 5000  # 10 ms analysis window, assume dt=2 us
@@ -101,14 +102,18 @@ def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
 if __name__ == '__main__':
     sphere = 'sphere_20250103'
 
-    datasets = ['20250121_8e-9mbar_1e_alignment1_long',
+    datasets = ['20250123_7e-9mbar_1e_alignment1_long',
+                '20250124_7e-9mbar_1e_alignment1_long',
+                '20250125_7e-9mbar_1e_alignment1_long'    
             ]
 
-    data_prefixs = ['20250121_d_',
+    data_prefixs = ['20250123_d_',
+                    '20250124_d_',
+                    '20250125_d_',
                     ]
 
     idx_start = 0
-    n_files = [1440]
+    n_files = [1440, 1440, 1121]
 
     for idx, dataset in enumerate(datasets):
         process_dataset(sphere, dataset, data_prefixs[idx], n_files[idx], idx_start)
