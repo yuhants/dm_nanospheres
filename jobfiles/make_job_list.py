@@ -8,12 +8,19 @@ R_um       = 0.083
 # mx_list = np.logspace(-1, 4, 39)
 # alpha_list = np.logspace(-7, -3, 40)
 
-mx_list = np.logspace(-1, 4, 77)
-alpha_list = np.logspace(-7, -3, 79)
+# mx_list = np.logspace(-1, 4, 77)
+# alpha_list = np.logspace(-7, -3, 79)
 
-mphi_list  = [10]
+mx_list_fine = np.logspace(-1, 4, 153)
+alpha_list_fine = np.logspace(-7, -3, 157)
 
-job_file = open("job_list_smooth_10.txt", "wt")
+## For finer search on the left end
+mx_list = mx_list_fine[np.logical_and(mx_list_fine > 2, mx_list_fine < 5)]
+alpha_list = alpha_list_fine
+
+mphi_list  = [10, 1, 0.1, 0.01]
+
+job_file = open("joblist_smooth_fine_all.txt", "wt")
 
 for mx in mx_list:
     for alpha in alpha_list:
