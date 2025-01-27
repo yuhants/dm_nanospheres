@@ -48,16 +48,19 @@ def get_summed_hist(sphere, dataset, data_prefix, nfile):
         fout.close()
 
 if __name__ == '__main__':
-    sphere = 'sphere_20241226'
-    # sphere = 'sphere_20250103'
+    sphere = 'sphere_20250103'
 
-    datasets = ['20241227_6e-8mbar_alignment0_long',
+    datasets = ['20250123_7e-9mbar_1e_alignment1_long',
+                '20250124_7e-9mbar_1e_alignment1_long',
+                '20250125_7e-9mbar_1e_alignment1_long'    
             ]
 
-    data_prefixs = ['20241227_d_',
+    data_prefixs = ['20250123_d_',
+                    '20250124_d_',
+                    '20250125_d_',
                     ]
 
-    n_files = [1440]
+    n_files = [1440, 1440, 1121]
 
     for idx, dataset in enumerate(datasets):
         get_summed_hist(sphere, dataset, data_prefixs[idx], n_files[idx])
