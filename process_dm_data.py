@@ -12,6 +12,14 @@ c_mv = 5.522e-08
 # amp2kev = 7034.799462287863  # Sphere 20241226; calibration 20241228
 amp2kev = 7396.062147743912  # Sphere 20250103; averaged over 8 calibration datasets
 
+cal_file = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed/sphere_20250103_calibration_all.h5py'
+with h5py.File(cal_file, 'r') as fout:
+    amp_true = fout['calibration_data_processed']['amp_true'][:]
+    amp_after_search = fout['calibration_data_processed']['amp_search'][:]
+    fout.close()
+
+search_bias_amp_true = amp_after_search - amp_true
+
 window_length = 5000  # 10 ms analysis window, assume dt=2 us
 bins = np.arange(0, 10000, 50)  # keV
 bc = 0.5 * (bins[:-1] + bins[1:])
@@ -30,9 +38,10 @@ def bad_detection_quality(zz_windowed, zz_bp_windowed):
     if np.sum(convolved < 1e-3) > 0:
         return True
 
-def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
+def process_dataset(sphere, dataset, data_prefix, nfile, idx_start, save_nosearch=False):
     data_dir = rf'/Volumes/LaCie/dm_data/{sphere}/{dataset}'
-    out_dir = rf'/Users/yuhan/work/nanospheres/data/dm_data_processed/{sphere}/{dataset}'
+    # out_dir = rf'/Users/yuhan/work/nanospheres/data/dm_data_processed/{sphere}/{dataset}'
+    out_dir = rf'/Users/yuhan/work/nanospheres/data/dm_data_processed_w_nosearch/{sphere}/{dataset}'
     if not os.path.isdir(out_dir):
         os.mkdir(out_dir)
 
@@ -66,6 +75,10 @@ def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
         zz_bp_shaped = np.reshape(zz_bp, (int(zz_bp.size / window_length), window_length))
 
         hh_all = np.empty(shape=(zz_bp_shaped.shape[0], bc.size), dtype=np.int16)
+        hh_all_debiased = np.empty(shape=(zz_bp_shaped.shape[0], bc.size), dtype=np.int16)
+        if save_nosearch:
+            hh_all_nosearch = np.empty(shape=(zz_bp_shaped.shape[0], bc.size), dtype=np.int16)
+
         noise_level_all = np.empty(shape=zz_bp_shaped.shape[0])
         good_detection = np.full(shape=zz_bp_shaped.shape[0], fill_value=True)
 
@@ -77,7 +90,17 @@ def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
             amp_reshaped = np.reshape(amp_search, (int(amp_search.size/25), 25))
             amp_searched = np.max(amp_reshaped, axis=1)
 
+            # Correct for search bias
+            # bias_amp_searched = np.interp(amp_searched*amp2kev, amp_true, search_bias_amp_true, left=0)
+            bias_amp_searched = 178.1
+            amp_searched_debiased_kev = amp_searched*amp2kev - bias_amp_searched
+            amp_searched_debiased_kev[amp_searched_debiased_kev < 0] = 0
+
             hh_all[j] = np.histogram(amp_searched*amp2kev, bins=bins)[0]
+            hh_all_debiased[j] = np.histogram(amp_searched_debiased_kev, bins=bins)[0]
+            if save_nosearch:
+                hh_all_nosearch[j] = np.histogram(amp_search*amp2kev, bins=bins)[0]
+
             noise_level_all[j] = np.std(amp_lp[100:-50]*amp2kev)
             
             # Identify period of poor detection quality
@@ -92,6 +115,10 @@ def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
             g.attrs['bin_center_kev'] = bc
             g.attrs['amp2kev'] = amp2kev
             g.create_dataset('histogram', data=hh_all, dtype=np.int16)
+            g.create_dataset('histogram_debiased', data=hh_all_debiased, dtype=np.int16)
+            if save_nosearch:
+                g.create_dataset('histogram_nosearch', data=hh_all_nosearch, dtype=np.int16)
+
             g.create_dataset('noise_level_kev', data=noise_level_all)
             g.create_dataset('good_detection', data=good_detection, dtype=np.bool_)
 
@@ -102,18 +129,14 @@ def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
 if __name__ == '__main__':
     sphere = 'sphere_20250103'
 
-    datasets = ['20250123_7e-9mbar_1e_alignment1_long',
-                '20250124_7e-9mbar_1e_alignment1_long',
-                '20250125_7e-9mbar_1e_alignment1_long'    
+    datasets = ['20250111_1e-8mbar_8e_alignment1_long',   
             ]
 
-    data_prefixs = ['20250123_d_',
-                    '20250124_d_',
-                    '20250125_d_',
+    data_prefixs = ['20250111_d_',
                     ]
 
     idx_start = 0
-    n_files = [1440, 1440, 1121]
+    n_files = [5]
 
     for idx, dataset in enumerate(datasets):
-        process_dataset(sphere, dataset, data_prefixs[idx], n_files[idx], idx_start)
+        process_dataset(sphere, dataset, data_prefixs[idx], n_files[idx], idx_start, save_nosearch=True)
