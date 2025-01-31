@@ -1,26 +1,33 @@
 import os
 import numpy as np
 
-R_um       = 0.083 
+R_um       = 0.083
+
+## Parameters that has been calculated
 # mx_list    = np.logspace(-1, 4, 40)
 # alpha_list = np.logspace(-8, -3, 80)
 
 # mx_list = np.logspace(-1, 4, 39)
 # alpha_list = np.logspace(-7, -3, 40)
 
+## Coarse search over a larger range
 # mx_list = np.logspace(-1, 4, 77)
 # alpha_list = np.logspace(-7, -3, 79)
 
 mx_list_fine = np.logspace(-1, 4, 153)
 alpha_list_fine = np.logspace(-7, -3, 157)
 
-## For finer search on the left end
-mx_list = mx_list_fine[np.logical_and(mx_list_fine > 2, mx_list_fine < 5)]
-alpha_list = alpha_list_fine
+# ## For finer search on the left end
+# mx_list = mx_list_fine[np.logical_and(mx_list_fine > 2, mx_list_fine < 5)]
+# alpha_list = alpha_list_fine
 
-mphi_list  = [10, 1, 0.1, 0.01]
+## Fine search at the bottom
+mx_list = mx_list_fine[np.logical_and(mx_list_fine > 4, mx_list_fine < 30)]
+alpha_list = alpha_list_fine[alpha_list_fine < 1e-6]
 
-job_file = open("joblist_smooth_fine_all.txt", "wt")
+mphi_list  = [1, 0.1, 0.01]
+
+job_file = open("joblist_smooth_fine_bottom.txt", "wt")
 
 for mx in mx_list:
     for alpha in alpha_list:

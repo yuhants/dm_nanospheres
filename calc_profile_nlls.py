@@ -8,16 +8,17 @@ from scipy.optimize import minimize
 from multiprocessing import Pool
 
 # Fit params for no dark matter
-# params_nodm = np.array([9.99999411e-01, 3.63789735e+02, 5.82216279e-02, 1.41641008e+02, 1.47480619e+03, 1.23523645e+02])
-params_nodm = np.array([9.99999447e-01, 3.56746616e+02, 5.79875030e-02, 1.42746398e+02, 1.47496320e+03, 1.24520579e+02])
-NLL_OFFSET = 4346738282.505365
+params_nodm = np.array([9.99999963e-01, 3.88844938e+00, 1.88930977e+01, 1.64962666e+02, 2.55454974e+02, 1.70317112e+03, 3.73851449e+02])
+NLL_OFFSET = 325398931.400860
 
-data_dir = '/home/yt388/microspheres/impulse_analysis/data_processed'
+ana_threshold = 1000.  # Analysis threhsold in keV/c
+
+data_dir = '/home/yt388/microspheres/dm_nanospheres/data_processed'
 rate_dir = '/home/yt388/palmer_scratch/data/dm_rate'
 
 # Read in reconstruction histogram and signal efficiency
 # file = '/Users/yuhan/work/nanospheres/data/dm_data_processed/sphere_20250103/sphere_20250103_recon_all.h5py'
-file_dm = f'{data_dir}/sphere_20250103_recon_all.h5py'
+file_dm = f'{data_dir}/sphere_data/sphere_20250103_recon_all.h5py'
 with h5py.File(file_dm, 'r') as fout:
     g = fout['recon_data_all']
     hist = g['hist'][:]
@@ -34,56 +35,76 @@ with h5py.File(file_dm, 'r') as fout:
 
 hist_norm = n_window * scaling
 
-# file = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed/sphere_20250103_calibration_all.h5py'
-file_cal = f'{data_dir}/sphere_20250103_calibration_all.h5py'
+file_cal = f'{data_dir}/sphere_data/sphere_20250103_calibration_all.h5py'
 with h5py.File(file_cal, 'r') as fout:
     g = fout['calibration_data_processed']
     eff_coefs = g['sig_efficiency_fit_params'][:]
 
     fout.close()
 
-
 def func2(x, z, f):
     return 0.5 * erf((x - z) * f) + 0.5
 
-def expo_corrected(x, b, xi, eff_coefs=None):
+def expo_corrected(x, cutoff, xi):
     # Re-normalize exponential after applying efficiency correction 
     # and truncate from below
-    xx = np.linspace(0, 50000, 50000)
+    xx = np.linspace(0, 50000, 5000)
 
-    if eff_coefs is not None:
-        eff_xx = func2(xx, *eff_coefs)
-        expo_eff_truncated = eff_xx * np.exp(-1 * (xx) / xi) / xi
-    else:
-        expo_eff_truncated = np.exp(-1 * (xx) / xi) / xi
-    expo_eff_truncated[xx < b] = 0
+    expo_eff_truncated = np.exp(-1 * (xx) / xi) / xi
+    expo_eff_truncated[xx < cutoff] = 0
 
     expo_corrected_norm = np.trapz(expo_eff_truncated, xx)
 
     x = np.asarray(x)
-    if eff_coefs is not None:
-        eff_x = func2(x, *eff_coefs)
-        ret = eff_x * np.exp(-1 * (x) / xi) / xi
-    else:
-        ret = np.exp(-1 * (x) / xi) / xi
-    ret[x < b] = 0
+    ret = np.exp(-1 * (x) / xi) / xi
+    ret[x < cutoff] = 0
 
     if ret.size == 1:
         return ret[0] / expo_corrected_norm
     else:
         return ret / expo_corrected_norm
 
-def half_gaus_mod(x, mu, m, n):
-    xx = np.linspace(0, 50000, 50000)
-    sigma = m * xx + n
-    _norm = np.trapz((1 / (np.sqrt(2 * np.pi) * sigma)) * np.exp(-1 * (xx - mu)**2 / (2 * sigma**2)), xx)
+# def half_gaus_mod(x, mu, m, n):
+#     xx = np.linspace(0, 50000, 50000)
+#     sigma = m * xx + n
+#     _norm = np.trapz((1 / (np.sqrt(2 * np.pi) * sigma)) * np.exp(-1 * (xx - mu)**2 / (2 * sigma**2)), xx)
 
-    sigma_x = m * x + n
-    return (1 / (np.sqrt(2 * np.pi) * sigma_x)) * np.exp(-1 * (x - mu)**2 / (2 * sigma_x**2)) / _norm
+#     sigma_x = m * x + n
+#     return (1 / (np.sqrt(2 * np.pi) * sigma_x)) * np.exp(-1 * (x - mu)**2 / (2 * sigma_x**2)) / _norm
+
+def crystal_ball_rev(x, alpha, n, mu, sigma):
+    # Modified from https://arxiv.org/pdf/1603.08591
+    # and https://en.wikipedia.org/wiki/Crystal_Ball_function
+
+    x = np.asarray(x)
+    ret = np.empty_like(x)
+
+    A = np.power(n / np.abs(alpha), n) * np.exp(-1 * alpha**2 / 2)
+    B = n / np.abs(alpha) - np.abs(alpha)
+
+    # Flip the direction to get the tail on the positive side
+    idx_gaus = ((x - mu) / sigma) < alpha
+    idx_other = ((x - mu) / sigma) > alpha
+
+    # Flip `B - ...` to `B + ...` to reverse the power law tail 
+    ret[idx_gaus] = np.exp(-1 * (x[idx_gaus] - mu)**2 / (2 * sigma**2))
+    ret[idx_other] = A * np.power((B + (x[idx_other] - mu) / sigma), (-1 * n))
+
+    return ret
+
+def crystal_ball_rev_normalized(x, alpha, n, mu, sigma):
+    xx = np.linspace(0, 50000, 5000)
+    func_val = crystal_ball_rev(xx, alpha, n, mu, sigma)
+    norm = np.trapz(func_val, xx)
+
+    x = np.asarray(x)
+    if x.size == 1:
+        return crystal_ball_rev(x, alpha, n, mu, sigma)[0] / norm
+    else:
+        return crystal_ball_rev(x, alpha, n, mu, sigma) / norm
 
 def read_dm_rate(mphi, mx, alpha):
     R_um       = 0.083
-    # file = f'/Users/yuhan/work/nanospheres/data/dm_rate/mphi_{mphi:.0e}/drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
     file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
     drdq_npz = np.load(file)
 
@@ -92,7 +113,7 @@ def read_dm_rate(mphi, mx, alpha):
     
     return qq, drdqzn
 
-def nll_dm_scaled(alpha, mu, m, n, b, xi, q_scale, n_scale,
+def nll_dm_scaled(a, alpha, n, mu, sigma, cutoff, xi, q_scale, n_scale,
                   bc, hist, eff_coefs, mphi, mx, alpha_n, hist_norm):
     
     # Rescale DM model to account for uncertainties in
@@ -113,7 +134,7 @@ def nll_dm_scaled(alpha, mu, m, n, b, xi, q_scale, n_scale,
         hist = np.pad(hist, (0, qq.size - bc.size))
         bc = qq
 
-    idx = qq > 800
+    idx = qq > ana_threshold
 
     bi = bc[idx]
     ni = hist[idx]
@@ -125,7 +146,8 @@ def nll_dm_scaled(alpha, mu, m, n, b, xi, q_scale, n_scale,
     # Use only the central value of pdf
     # faster and avoid numerical issues from integration
     # No correctiion for efficiency for the background
-    joint_pdf = alpha * half_gaus_mod(bi, mu, m, n) + (1 - alpha) * expo_corrected(bi, b, xi, eff_coefs=None)
+    # joint_pdf = alpha * half_gaus_mod(bi, mu, m, n) + (1 - alpha) * expo_corrected(bi, b, xi, eff_coefs=None)
+    joint_pdf = a * crystal_ball_rev_normalized(bi, alpha, n, mu, sigma) + (1 - a) * expo_corrected(bi, cutoff, xi)
     mui = ntot * joint_pdf * 50 + hist_dm[idx]
 
     sigma_q = 0.05
@@ -139,7 +161,7 @@ def minimize_nll(mphi, mx, alpha):
     args = (bc, hist, eff_coefs, mphi, mx, alpha, hist_norm)
     res = minimize(fun=lambda x: nll_dm_scaled(*x, *args), x0=[*params_nodm, 1, 1],
             method='Nelder-Mead',
-            bounds=[(0.99, 1), (0, 500), (0, 0.1), (100, 300), (1000, 1500), (90, 160), (0.9, 1.1), (0.8, 1.2)],
+            bounds=[(0.9999, 1), (3, 4), (10, 30), (100, 200), (200, 300), (1400, 2000), (300, 500), (0.9, 1.1), (0.8, 1.2)],
             options={'disp' : False,
                     'maxiter': 50000,
                     'maxfev': 50000,
@@ -170,28 +192,39 @@ def calc_profile_nlls(mphi, mx_list, alpha_list):
 
 
 if __name__ == "__main__":
-    mx_list_0    = np.logspace(-2, 5, 40)
-    alpha_list_0 = np.logspace(-10, -4, 40)
+    ######## Previous parameters ########
+    #################################
+    # mx_list_0    = np.logspace(-2, 5, 40)
+    # alpha_list_0 = np.logspace(-10, -4, 40)
 
-    mx_list_1    = np.logspace(0, 1, 10)
-    alpha_list_1 = np.logspace(-7, -3, 20)
+    # mx_list_1    = np.logspace(0, 1, 10)
+    # alpha_list_1 = np.logspace(-7, -3, 20)
 
-    mx_list_2    = np.logspace(-1, 4, 39)
-    alpha_list_2 = np.logspace(-7, -3, 40)
+    # mx_list_2    = np.logspace(-1, 4, 39)
+    # alpha_list_2 = np.logspace(-7, -3, 40)
+    ######## End of previous parameters####
 
-    mx_list_3    = np.logspace(-1, 4, 77)
-    alpha_list_3 = np.logspace(-7, -3, 79)
+    ## Coarse search over a larger range
+    # mx_list_coarse = np.logspace(-1, 4, 77)
+    # alpha_list_coarse = np.logspace(-7, -3, 79)
 
-    mphi      = float(sys.argv[1])  # Mediator mass in eV
+    mx_list_fine = np.logspace(-1, 4, 153)
+    alpha_list_fine = np.logspace(-7, -3, 157)
+
+    ## For finer search on the left end
+    mx_list = mx_list_fine[np.logical_and(mx_list_fine > 2, mx_list_fine < 5)]
+    alpha_list = alpha_list_fine
+
+    ## Fine search at the bottom
+    # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 4, mx_list_fine < 30)]
+    # alpha_list = alpha_list_fine[alpha_list_fine < 1e-6]
+
+    mphi = float(sys.argv[1])  # Mediator mass in eV
     print(f'Working on m_phi = {mphi:.0e} eV')
 
     # Calculate profile NLLs for each DM parameter
-    idx = 3
-    mx_list, alpha_list = mx_list_3, alpha_list_3
-    
     nlls_all = calc_profile_nlls(mphi, mx_list, alpha_list)
 
-    # file_out = f'/Users/yuhan/work/nanospheres/impulse_analysis/profile_nlls/profile_nlls_{mphi:.0e}_{idx}.npz'
-    file_out = f'{data_dir}/profile_nlls/profile_nlls_{mphi:.0e}_{idx}.npz'
+    file_out = f'{data_dir}/profile_nlls/profile_nlls_{mphi:.0e}_fine_left.npz'
     print(f'Writing file {file_out}')
     np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all)

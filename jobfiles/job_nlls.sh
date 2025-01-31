@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J nanosphere_alpha_nll_10
+#SBATCH -J nanosphere_alpha_nll_fine_10
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
