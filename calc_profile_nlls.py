@@ -7,8 +7,13 @@ from scipy.optimize import minimize
 
 from multiprocessing import Pool
 
-# Fit params for no dark matter
+# Params for Sphere 20241202
+# params_nodm = np.array([9.99996691e-01, 3.47276505e+00, 1.79826515e+02, 6.07498287e-05, 2.88315297e+02, 1.43813146e+03, 2.46167781e+02])
+# NLL_OFFSET = 152178767.020342
+
+# Fit params for no dark matter (Sphere 20250103)
 params_nodm = np.array([9.99999963e-01, 3.88844938e+00, 1.88930977e+01, 1.64962666e+02, 2.55454974e+02, 1.70317112e+03, 3.73851449e+02])
+# params_nodm = np.array([0.99999, 3.88844938e+00, 1.88930977e+01, 1.64962666e+02, 2.55454974e+02, 1.70317112e+03, 3.73851449e+02])
 NLL_OFFSET = 325398931.400860
 
 ana_threshold = 1000.  # Analysis threhsold in keV/c
@@ -17,7 +22,6 @@ data_dir = '/home/yt388/microspheres/dm_nanospheres/data_processed'
 rate_dir = '/home/yt388/palmer_scratch/data/dm_rate'
 
 # Read in reconstruction histogram and signal efficiency
-# file = '/Users/yuhan/work/nanospheres/data/dm_data_processed/sphere_20250103/sphere_20250103_recon_all.h5py'
 file_dm = f'{data_dir}/sphere_data/sphere_20250103_recon_all.h5py'
 with h5py.File(file_dm, 'r') as fout:
     g = fout['recon_data_all']
@@ -157,16 +161,19 @@ def nll_dm_scaled(a, alpha, n, mu, sigma, cutoff, xi, q_scale, n_scale,
 
     return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + NLL_OFFSET
 
-def minimize_nll(mphi, mx, alpha):
+def minimize_nll(mphi, mx, alpha, x0_bg=None):
+    if x0_bg is None:
+        x0_bg = params_nodm
+
     args = (bc, hist, eff_coefs, mphi, mx, alpha, hist_norm)
-    res = minimize(fun=lambda x: nll_dm_scaled(*x, *args), x0=[*params_nodm, 1, 1],
+    res = minimize(fun=lambda x: nll_dm_scaled(*x, *args), x0=[*x0_bg, 1, 1],
             method='Nelder-Mead',
-            bounds=[(0.9999, 1), (3, 4), (10, 30), (100, 200), (200, 300), (1400, 2000), (300, 500), (0.9, 1.1), (0.8, 1.2)],
+            # bounds=[(0.9999, 1), (3, 5), (10, 30), (0, 500), (100, 350), (1200, 2000), (100, 500), (0.9, 1.1), (0.8, 1.2)],
             options={'disp' : False,
                     'maxiter': 50000,
                     'maxfev': 50000,
                     'adaptive': True,
-                    'fatol': 0.001,
+                    'fatol': 1e-6,
                     }
             )
     return res
@@ -190,7 +197,6 @@ def calc_profile_nlls(mphi, mx_list, alpha_list):
 
     return nlls
 
-
 if __name__ == "__main__":
     ######## Previous parameters ########
     #################################
@@ -205,26 +211,34 @@ if __name__ == "__main__":
     ######## End of previous parameters####
 
     ## Coarse search over a larger range
-    # mx_list_coarse = np.logspace(-1, 4, 77)
-    # alpha_list_coarse = np.logspace(-7, -3, 79)
+    mx_list_coarse = np.logspace(-1, 4, 77)
+    alpha_list_coarse = np.logspace(-7, -3, 79)
 
     mx_list_fine = np.logspace(-1, 4, 153)
     alpha_list_fine = np.logspace(-7, -3, 157)
+    
+    alpha_list_veryfine = np.logspace(-7, -3, 625)
 
     ## For finer search on the left end
-    mx_list = mx_list_fine[np.logical_and(mx_list_fine > 2, mx_list_fine < 5)]
-    alpha_list = alpha_list_fine
+    # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 2, mx_list_fine < 5)]
+    # alpha_list = alpha_list_fine
 
-    ## Fine search at the bottom
-    # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 4, mx_list_fine < 30)]
-    # alpha_list = alpha_list_fine[alpha_list_fine < 1e-6]
+    ## Very fine search at the bottom (1, 0.1, 0.01 eV)
+    mx_list = mx_list_fine[np.logical_and(mx_list_fine > 4, mx_list_fine < 30)]
+    alpha_list = alpha_list_veryfine[alpha_list_veryfine < 1e-6]
 
+    ## Further fine search for 0.1 and 0.01 eV on the side
+    # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 30, mx_list_fine < 1000)]
+    # alpha_list = alpha_list_fine[alpha_list_fine < 1e-4]
+
+    ## Start calculation
+    dataset = 'veryfine_bottom'
     mphi = float(sys.argv[1])  # Mediator mass in eV
     print(f'Working on m_phi = {mphi:.0e} eV')
 
     # Calculate profile NLLs for each DM parameter
     nlls_all = calc_profile_nlls(mphi, mx_list, alpha_list)
 
-    file_out = f'{data_dir}/profile_nlls/profile_nlls_{mphi:.0e}_fine_left.npz'
+    file_out = f'{data_dir}/profile_nlls/sphere_20250103/profile_nlls_{mphi:.0e}_{dataset}.npz'
     print(f'Writing file {file_out}')
     np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all)

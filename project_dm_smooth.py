@@ -44,8 +44,12 @@ alpha_list_fine = np.logspace(-7, -3, 157)
 # alpha_list = alpha_list_fine
 
 ## Fine search at the bottom
-mx_list = mx_list_fine[np.logical_and(mx_list_fine > 4, mx_list_fine < 30)]
-alpha_list = alpha_list_fine[alpha_list_fine < 1e-6]
+# mx_list = mx_list_fine[np.logical_and(mx_list_fine > 4, mx_list_fine < 30)]
+# alpha_list = alpha_list_fine[alpha_list_fine < 1e-6]
+
+## Further fine search for 0.1 and 0.01 eV on the side
+mx_list = mx_list_fine[np.logical_and(mx_list_fine > 30, mx_list_fine < 1000)]
+alpha_list = alpha_list_fine[alpha_list_fine < 1e-4]
 
 sigma_gaus = 200  # keV/c
 
@@ -109,20 +113,19 @@ def get_projected_spectrum(mphi):
             project_smooth(mphi, mx, alpha)
 
 if __name__ == "__main__":
-    print(mx_list)
-    # mx     = float(sys.argv[1])  # DM mass in GeV
-    # alpha  = float(sys.argv[2])  # Single neutron coupling
-    # mphi  = float(sys.argv[3])   # Mediator mass in eV
+    mx     = float(sys.argv[1])  # DM mass in GeV
+    alpha  = float(sys.argv[2])  # Single neutron coupling
+    mphi  = float(sys.argv[3])   # Mediator mass in eV
 
-    # data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
+    data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
 
-    # outfile_name = f'drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
-    # outfile = os.path.join(data_dir, outfile_name)
+    outfile_name = f'drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+    outfile = os.path.join(data_dir, outfile_name)
 
-    # if os.path.isfile(outfile):
-    #     print(f'Skipping {outfile_name}')
+    if os.path.isfile(outfile):
+        print(f'Skipping {outfile_name}')
 
-    # else:    
-    #     print(f'Working on mx = {mx:.5e} GeV, alpha = {alpha:.5e} m_phi = {mphi:.0e} eV')
-    #     project_smooth(mphi, mx, alpha, outfile)
-    #     # get_projected_spectrum(m_phi)
+    else:    
+        print(f'Working on mx = {mx:.5e} GeV, alpha = {alpha:.5e} m_phi = {mphi:.0e} eV')
+        project_smooth(mphi, mx, alpha, outfile)
+        # get_projected_spectrum(m_phi)

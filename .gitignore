@@ -1,4 +1,7 @@
 recon_amp/*
 recon_amp/*/*
-jobfiles/*
 .DS_Store
+*.tsv
+*.out
+jobfiles/*.txt
+dm_xsec_calc/dm_xsec/jobfiles/*.txt
