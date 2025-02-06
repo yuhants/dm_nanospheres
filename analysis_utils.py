@@ -526,7 +526,7 @@ def get_c_mv(data_files_ordered, vp2p, omegad, passband, charge=3, n_chunk=10):
             pp = ppss[i][j]
             v2_drive = get_area_driven_peak(ff, pp, passband=passband, plot=False)
 
-            idx_band = np.logical_and(ff > 40000, ff < 80000)
+            idx_band = np.logical_and(ff > 30000, ff < 80000)
             omega0 = 2 * np.pi * ff[idx_band][np.argmax(pp[idx_band])]
             z2_drive = (fd0**2 / 2) / ((m * (omega0**2 - omegad**2))**2)
 
