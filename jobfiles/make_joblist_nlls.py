@@ -1,13 +1,13 @@
 import os
 import numpy as np
 
-# sphere = 'sphere_20250103'
-sphere = 'sphere_20241202'
+sphere = 'sphere_20250103'
+# sphere = 'sphere_20241202'
 
 datasets = ['coarse', 'fine_left', 'veryfine_bottom', 'fine_side']
 mphi_lists  = [[0.01, 0.1, 1, 10], [0.01, 0.1, 1, 10], [0.01, 0.1, 1], [0.01, 0.1]]
 
-outfile = 'joblist_nlls_sphere_20241202_all.txt'
+outfile = 'joblist_nlls_sphere_20250103_all.txt'
 
 job_file = open(outfile, "wt")
 print(f'Writing file {outfile}')
