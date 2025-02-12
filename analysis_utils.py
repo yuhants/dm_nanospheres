@@ -43,6 +43,7 @@ def load_timestreams(file, channels=['C']):
 
         if delta_t is None:
                 delta_t = f['data'].attrs['delta_t']
+        f.close()
             
     return delta_t, timestreams
 
@@ -282,7 +283,7 @@ def recon_force(dtt, zz_bp, c_mv=None):
 
     return amp/1e9, amp_lp/1e9, temp
 
-def recon_pulse(idx, dtt, zz_bp, dd, plot=False, fname=None, 
+def recon_pulse(idx, dtt, zz_bp, dd,
                 analysis_window_length=100000,
                 prepulse_window_length=5000,
                 search_window_length=20,
@@ -297,6 +298,8 @@ def recon_pulse(idx, dtt, zz_bp, dd, plot=False, fname=None,
     window, pulse_idx_in_window = get_analysis_window(dd, idx, analysis_window_length)
     prepulse_window = get_prepulse_window(dd, idx, prepulse_window_length)
 
+    # FFT the bandpass z signal in the prepulse window to find
+    # the resonant frequency
     zzk = rfft(zz_bp[prepulse_window])
     ff = rfftfreq(zz_bp[prepulse_window].size, dtt)
     pp = np.abs(zzk)**2 / (zz_bp[prepulse_window].size / dtt)
@@ -317,81 +320,70 @@ def recon_pulse(idx, dtt, zz_bp, dd, plot=False, fname=None,
     omega0_guess = ff[np.argmax(pp)] * 2 * np.pi
     omega0_fit = omega0_guess
 
-    # Use a fixed damping (2 pi * 1 Hz) to reconstruct pulse amp
+    # Use a fixed damping to reconstruct pulse amp
     # Actual damping doesn't matter as long as gamma << omega0
-    # amp = get_pulse_amp(dtt, zz_bp[window], omega0_fit, 1*2*np.pi)
+    # At some poing we've started using the frequency resolution set by FFT (20250210)
     amp = get_pulse_amp(dtt, zz_bp[window], omega0_fit, (ff[1]-ff[0])*2*np.pi)
 
+    # Low pass the reconstructed amplitude to reject high frequency noise
     ## Modified 20241104
     ## Change lowpass from 100 to 80 kHz
     amp_lp = lowpass_filtered(amp, fs, 80000, 3)
 
-    # cal_window = get_cal_window(amp, pulse_idx_in_window, cal_window_length=20000)
-    # recon_amp = np.abs(np.min(amp_lp[search_window])/np.var(amp_lp[cal_window]))
+    # Search the absolute value because homodyne could lock differently from time to time
     search_window = get_search_window(amp, pulse_idx_in_window, search_window_length, pulse_length)
-    # recon_amp = np.abs(np.max(amp_lp[search_window])/1e9)
     recon_amp = np.max(np.abs(amp_lp[search_window])/1e9)
 
-    # amp_lp_search = amp_lp[search_window]
-    # min_idx = np.argmax(np.abs(amp_lp_search))
-    # recon_amp = np.sum(np.abs( amp_lp_search[min_idx-10:min_idx+10] ) )
-
-    if plot:
-        fig, axes = plt.subplots(2, 1, figsize=(8, 6))
-
-        ax0_twinx = axes[0].twinx()
-        sig0 = axes[0].plot((tt[window]-tt[idx])*1e3, zz_bp[window], color=yale_colors[1], alpha=0.7, label='$z$ signal')
-        sig1 = ax0_twinx.plot((tt[window]-tt[idx])*1e3, dd[window], color=yale_colors[3], alpha=0.6, label='Drive signal')
-        labs = [s.get_label() for s in (sig0+sig1)]
-        
-        axes[0].set_ylabel('$z$ signal (V)')
-        ax0_twinx.set_ylabel('Drive signal (V)')
-        axes[0].legend((sig0+sig1), labs, fontsize=12, loc='upper right')
-        
-        #axes[1].plot((tt[window][100:-100]-tt[idx])*1e3, amp[100:-100]/1e9, label='Recon. force')
-        axes[1].plot((tt[window][100:-100]-tt[idx])*1e3, amp_lp[100:-100]/1e9, label='Recon. force (filtered)', color=yale_colors[0])
-        axes[1].set_ylabel('Reconstruction (a. u.)')
-        axes[1].set_xlabel('Time (ms)')
-        axes[1].legend(fontsize=12, loc='upper right')
-        
-        for ax in axes:
-            ax.set_xlim(-0.25, 0.25)
-        # axes[0].set_ylim(-0.04, 0.04)
-        # axes[1].set_ylim(-0.75, 1)
-            
-        fig.tight_layout()
-
-        if fname is not None:
-            plt.savefig(fname, format='png', transparent=True, dpi=400)
     return window, amp, amp_lp, recon_amp
 
-def get_unnormalized_amps(data_files, noise=False):
+def get_unnormalized_amps(data_files, 
+                          noise=False,
+                          positive_pulse=True,
+                          passband=(30000, 80000),
+                          analysis_window_length=50000,
+                          prepulse_window_length=50000,
+                          search_window_length=250,
+                          search_offset_length=20
+                          ):
     amps = []
     for file in data_files:
         dtt, nn = load_timestreams(file, ['D', 'G'])
         fs = int(np.ceil(1 / dtt))
+        zz, dd = nn[0], nn[1]
 
         ## Modified 20241104
         ## Change bandpass filter upper bound from 100 to 80 kHz
-        zz, dd = nn[0], nn[1]
-        zz_bp = bandpass_filtered(zz, fs, 30000, 80000)
-        pulse_idx = get_pulse_idx(dd, 0.5, True)  # use this for positive pulses
-        # pulse_idx = get_pulse_idx(dd, -0.5, False) 
+        bandpass_lb, bandpass_ub = passband
+        zz_bp = bandpass_filtered(zz, fs, bandpass_lb, bandpass_ub)
+
+        trigger_level = positive_pulse * 0.5
+        pulse_idx = get_pulse_idx(dd, trigger_level, positive_pulse)
         
         if noise:
             # Fit noise away from the pulses
             pulse_idx = np.ceil(0.5 * (pulse_idx[:-1] + pulse_idx[1:])).astype(np.int64)
 
         for i, idx in enumerate(pulse_idx):
-            if idx < 100000 or idx > zz.size-100000:
+            if idx < prepulse_window_length:
+                print('Skipping pulse too close to the beginning of file')
+                continue
+            if idx > (zz.size - analysis_window_length):
+                print('Skipping pulse too close to the end of file')
                 continue
 
-            # 20241205: use a much narrower search window (25 indices; 50 us)
-            # to be consistent with DM analysis
-            window, f, f_lp, amp = recon_pulse(idx, dtt, zz_bp, dd, False, None, 40000, 40000, 25, 80)
+            # 20241205: use a much narrower search window (25 indices; 5 us)
+            # 20250211: change window length to 50000 indices and search window to 50 us
+            # to be consistent with DM search
+            # window, f, f_lp, amp = recon_pulse(idx, dtt, zz_bp, dd, False, None, 40000, 40000, 25, 80)
+            window, f, f_lp, amp = recon_pulse(idx, dtt, zz_bp, dd, 
+                                               analysis_window_length, 
+                                               prepulse_window_length, 
+                                               search_window_length, 
+                                               search_offset_length)
 
             if noise:
-                # No search, just take th middle value
+                # Uncommment the following line if no search
+                # just take th middle value
                 # amps.append(np.abs(f_lp[np.ceil(f_lp.size/2).astype(np.int64)])/1e9)
                 if np.isnan(amp):
                     pass
