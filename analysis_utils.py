@@ -298,7 +298,7 @@ def recon_pulse(idx, dtt, zz_bp, dd,
     window, pulse_idx_in_window = get_analysis_window(dd, idx, analysis_window_length)
     prepulse_window = get_prepulse_window(dd, idx, prepulse_window_length)
 
-    # FFT the bandpass z signal in the prepulse window to find
+    # FFT the bandpassed z signal in the prepulse window to find
     # the resonant frequency
     zzk = rfft(zz_bp[prepulse_window])
     ff = rfftfreq(zz_bp[prepulse_window].size, dtt)
