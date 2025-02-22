@@ -3,11 +3,12 @@ import analysis_utils as utils
 import h5py
 import os
 
-amp2kev = 7157.624533259538     # Sphere 20250103
+# amp2kev = 7157.624533259538     # Sphere 20250103
+amp2kev = 7187.368332843102     # Sphere 20241202
+
 bins = np.arange(0, 10000, 50)  # keV
 bc = 0.5 * (bins[:-1] + bins[1:])
 
-excess_thr = 1500
 noise_thr = 400  # keV/c
 chi2_thr_short = 150
 
@@ -38,9 +39,9 @@ def throw_away_doublecounts(amplitude_short, good_det_noise, idx_in_window, amp_
                 continue
 
             if np.abs(amplitude_large_pulses[i]) < np.abs(amplitude_large_pulses[i+1]):
-                ret[ *large_pulses_pos[i] ] = np.nan
+                ret[large_pulses_pos[i][0], large_pulses_pos[i][1]] = np.nan
             else:
-                ret[ *large_pulses_pos[i+1] ] = np.nan
+                ret[large_pulses_pos[i+1][0], large_pulses_pos[i+1][1]] = np.nan
     
     return ret
 
@@ -52,11 +53,13 @@ def get_pulse_time(timestamp, idx_in_window, pulse_window_idx, window_length=500
 
 def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
     # data_dir = f'/Volumes/LaCie/dm_data_processed_amp_chisquare/{sphere}/{dataset}'
-    raw_data_dir = f'/Volumes/LaCie/dm_data/{sphere}/{dataset}'
-    data_dir = f'/Users/yuhan/work/nanospheres/data/dm_data_processed_amp_chisquare/{sphere}/{dataset}'
+    # raw_data_dir = f'/Volumes/LaCie/dm_data/{sphere}/{dataset}'
+    # data_dir = f'/Users/yuhan/work/nanospheres/data/dm_data_processed_amp_chisquare/{sphere}/{dataset}'
+    raw_data_dir = fr'E:\dm_data\{sphere}\{dataset}'
+    data_dir = fr'E:\dm_data_processed_amp_chisquare\{sphere}\{dataset}'
 
-    outfile_name = f'{dataset}_summed_histograms.hdf5'
-    outfile_pulse_waveform = f'{dataset}_pulse_waveforms.hdf5'
+    outfile_name = fr'{dataset}_summed_histograms.hdf5'
+    outfile_pulse_waveform = fr'{dataset}_pulse_waveforms.hdf5'
 
     hhs_0, hhs_1, hhs_2, hhs_3 = [np.zeros((nfile, bc.size), dtype=np.int64) for i in range(4)]
     file_idx, pulse_amp, pulse_time, pulse_waveform = [], [], [], []
@@ -157,55 +160,90 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
         fout.close()
 
 if __name__ == '__main__':
-    sphere = 'sphere_20250103'
-    datasets = ['20250104_4e-8mbar_alignment0_long',
-                '20250105_2e-8mbar_alignment0_long',
-                '20250106_2e-8mbar_8e_alignment0_long',
-                '20250107_1e-8mbar_8e_alignment0_long',
-                '20250108_1e-8mbar_8e_alignment0_long',
-                '20250109_1e-8mbar_8e_alignment1_long',
-                '20250110_1e-8mbar_8e_alignment1_long',
-                '20250111_1e-8mbar_8e_alignment1_long',
-                '20250112_9e-9mbar_8e_alignment1_long',
-                '20250113_5e-8mbar_8e_alignment1_long',
-                '20250114_1e-8mbar_1e_alignment1_long',
-                '20250115_8e-9mbar_0e_alignment1_long',
-                '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
-                '20250117_8e-9mbar_0e_alignment1_long',
-                '20250118_8e-9mbar_1e_alignment1_long',
-                '20250120_8e-9mbar_1e_alignment1_long_wbackscat',
-                '20250121_8e-9mbar_1e_alignment1_long',
-                '20250122_8e-9mbar_1e_alignment1_long',
-                '20250123_7e-9mbar_1e_alignment1_long',
-                '20250124_7e-9mbar_1e_alignment1_long',
-                '20250125_7e-9mbar_1e_alignment1_long'    
-               ]
+    # sphere = 'sphere_20250103'
+    # datasets = ['20250104_4e-8mbar_alignment0_long',
+    #             '20250105_2e-8mbar_alignment0_long',
+    #             '20250106_2e-8mbar_8e_alignment0_long',
+    #             '20250107_1e-8mbar_8e_alignment0_long',
+    #             '20250108_1e-8mbar_8e_alignment0_long',
+    #             '20250109_1e-8mbar_8e_alignment1_long',
+    #             '20250110_1e-8mbar_8e_alignment1_long',
+    #             '20250111_1e-8mbar_8e_alignment1_long',
+    #             '20250112_9e-9mbar_8e_alignment1_long',
+    #             '20250113_5e-8mbar_8e_alignment1_long',
+    #             '20250114_1e-8mbar_1e_alignment1_long',
+    #             '20250115_8e-9mbar_0e_alignment1_long',
+    #             '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
+    #             '20250117_8e-9mbar_0e_alignment1_long',
+    #             '20250118_8e-9mbar_1e_alignment1_long',
+    #             '20250120_8e-9mbar_1e_alignment1_long_wbackscat',
+    #             '20250121_8e-9mbar_1e_alignment1_long',
+    #             '20250122_8e-9mbar_1e_alignment1_long',
+    #             '20250123_7e-9mbar_1e_alignment1_long',
+    #             '20250124_7e-9mbar_1e_alignment1_long',
+    #             '20250125_7e-9mbar_1e_alignment1_long'    
+    #            ]
+    # data_prefixs = ['20250104_d_',
+    #                 '20250105_d_',
+    #                 '20250106_d_',
+    #                 '20250107_d_',
+    #                 '20250108_d_',
+    #                 '20250109_d_',
+    #                 '20250110_d_',
+    #                 '20250111_d_',
+    #                 '20250112_d_',
+    #                 '20250113_d_',
+    #                 '20250114_d_',
+    #                 '20250115_d_',
+    #                 '20250116_d_',
+    #                 '20250117_d_',
+    #                 '20250118_d_',
+    #                 '20250120_d_',
+    #                 '20250121_d_',
+    #                 '20250122_d_',
+    #                 '20250123_d_',
+    #                 '20250124_d_',
+    #                 '20250125_d_',
+    #                 ]
+    # n_files = [1440, 900, 1440, 1440, 1440, 1440, 1440, 1440, 780, 1440, 1440, 1440, 1440, 1440, 1983, 1463, 1440, 1440, 1440, 1440, 1121]
 
-    data_prefixs = ['20250104_d_',
-                    '20250105_d_',
-                    '20250106_d_',
-                    '20250107_d_',
-                    '20250108_d_',
-                    '20250109_d_',
-                    '20250110_d_',
-                    '20250111_d_',
-                    '20250112_d_',
-                    '20250113_d_',
-                    '20250114_d_',
-                    '20250115_d_',
-                    '20250116_d_',
-                    '20250117_d_',
-                    '20250118_d_',
-                    '20250119_d_',
-                    '20250120_d_',
-                    '20250121_d_',
-                    '20250122_d_',
-                    '20250123_d_',
-                    '20250124_d_',
-                    '20250125_d_',
+    sphere = 'sphere_20241202'
+    datasets = ['20241202_8e-8mbar_long',
+                '20241204_2e-8mbar_8e_aftercal_long',
+                '20241205_2e-8mbar_0e_aftercal_long',
+                '20241206_1e-8mbar_0e_aftercal_long',
+                '20241207_1e-8mbar_1e_aftercal_long',
+                '20241208_1e-8mbar_1e_aftercal_long',
+                '20241210_1e-8mbar_8e_alignment1_long',
+                '20241210_1e-8mbar_8e_alignment2_long_nodrive',
+                '20241210_1e-8mbar_8e_alignment2_long_withdrive',
+                '20241211_1e-8mbar_8e_alignment2_long_nodrive',
+                '20241212_1e-8mbar_8e_alignment2_long_nodrive',
+                '20241213_1e-8mbar_0e_alignment2_long',
+                '20241214_1e-8mbar_0e_alignment2_long',
+                '20241215_9e-9mbar_0e_alignment2_long',
+                '20241216_5e-8mbar_0e_alignment2_long',
+                '20241217_6e-8mbar_0e_alignment3_long'
+                ]
+    data_prefixs = ['20241202_abcd_',
+                    '20241204_abcd_',
+                    '20241205_d_',
+                    '20241206_d_',
+                    '20241207_d_',
+                    '20241208_d_',
+                    '20241210_d_',
+                    '20241210_d_',
+                    '20241210_d_',
+                    '20241211_d_',
+                    '20241212_d_',
+                    '20241213_d_',
+                    '20241214_d_',
+                    '20241215_d_',
+                    '20241216_d_',
+                    '20241217_d_'
                     ]
-    
-    n_files = [1440, 900, 1440, 1440, 1440, 1440, 1440, 1440, 780, 1440, 1440, 1440, 1440, 1440, 1983, 1463, 1440, 1440, 1440, 1440, 1121]
+    n_files = [1440, 1440, 1440, 1440, 1440, 821, 640, 1440, 181, 1418, 917, 1169, 1565, 1440, 1164, 601]
 
+    print(f'Working on {sphere}')
     for idx, dataset in enumerate(datasets):
         get_summed_hist_from_amp(sphere, dataset, data_prefixs[idx], n_files[idx])

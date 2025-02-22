@@ -14,16 +14,22 @@ import analysis_utils as utils
 # amp2kev = 7396.062147743912  # Sphere 20250103; averaged over 8 calibration datasets
 # sigma_p = 193.80085102332893  # Sphere 20250103; averaged over 8 calibration datasets
 
-c_mv = 8.263269630174246e-08   # Sphere 20250103; calibration 20250114
-sigma_p = 176.79818534573002
-amp2kev = 7157.624533259538
+## New calibration values for Sphere 20250103
+# c_mv = 8.263269630174246e-08   # Sphere 20250103; calibration 20250114
+# amp2kev = 7157.624533259538
+# sigma_p = 176.79818534573002
+
+## New calibration values for Sphere 20241202
+amp2kev = 7187.368332843102
+sigma_p = 171.4410156651695
 sigma_p_amp = sigma_p / amp2kev
 
 window_length = 5000  # 10 ms analysis window, assume dt=2 us
 search_window_length = 25  # 50 us search window
 
-def get_normalized_template(sphere, voltage, bounds=(1000, 2000), downsampled=False):
-    pulse_shape_file = np.load(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/pulse_shape/{sphere}_pulse_shape_template_{voltage}v.npz')
+def get_normalized_template(sphere, voltage, bounds=(1250, 1750), downsampled=False):
+    pulse_shape_file = np.load(rf'C:\Users\yuhan\dm_nanospheres\data_processed\pulse_shape\{sphere}_pulse_shape_template_{voltage}v.npz')
+    # pulse_shape_file = np.load(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/pulse_shape/{sphere}_pulse_shape_template_{voltage}v.npz')
     pulse_shapes = pulse_shape_file['pulse_shape']
     pulse_shape_template = np.mean(pulse_shapes, axis=0)
 
@@ -77,15 +83,16 @@ def bad_detection_quality(zz_windowed, zz_bp_windowed):
         return True
     
 def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
-    data_dir = rf'/Volumes/LaCie/dm_data/{sphere}/{dataset}'
-    out_dir = rf'/Users/yuhan/work/nanospheres/data/dm_data_processed_chisquare/{sphere}/{dataset}'
+    # data_dir = rf'/Volumes/LaCie/dm_data/{sphere}/{dataset}'
+    # out_dir = rf'/Users/yuhan/work/nanospheres/data/dm_data_processed_chisquare/{sphere}/{dataset}'
 
-    # data_dir = rf'/Volumes/Expansion/dm_data/{sphere}/{dataset}'
-    # out_dir = rf'/Volumes/Expansion/dm_data_processed_amp_chisquare/{sphere}/{dataset}'
+    data_dir = rf'E:\dm_data\{sphere}\{dataset}'
+    out_dir = rf'E:\dm_data_processed_amp_chisquare\{sphere}\{dataset}'
 
     if not os.path.isdir(out_dir):
         os.mkdir(out_dir)
 
+    # Use short template for chi2 calculation only (20250213)
     # normalized_template_downsampled_long = get_normalized_template('sphere_20250103', voltage=20, bounds=(1000, 2000), downsampled=True)
     normalized_template_downsampled_short = get_normalized_template('sphere_20250103', voltage=20, bounds=(1250, 1750), downsampled=True)
 
@@ -125,7 +132,7 @@ def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
         amp_all         = np.empty(shape=(zz_bp_shaped.shape[0], 194), dtype=np.float64)
 
         # chisquare_long   = np.empty(shape=(zz_bp_shaped.shape[0], 194), dtype=np.float64)
-        chisquare_short   = np.empty(shape=(zz_bp_shaped.shape[0], 194), dtype=np.float64)
+        chisquare_short = np.empty(shape=(zz_bp_shaped.shape[0], 194), dtype=np.float64)
         idx_in_window   = np.empty(shape=(zz_bp_shaped.shape[0], 194), dtype=np.int16)
         noise_level_amp = np.empty(shape=zz_bp_shaped.shape[0])
         good_detection  = np.full(shape=zz_bp_shaped.shape[0], fill_value=True)
@@ -181,55 +188,76 @@ def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
         f.close()
 
 if __name__ == '__main__':
-    sphere = 'sphere_20250103'
-    datasets = ['20250104_4e-8mbar_alignment0_long',
-                '20250105_2e-8mbar_alignment0_long',
-                '20250106_2e-8mbar_8e_alignment0_long',
-                '20250107_1e-8mbar_8e_alignment0_long',
-                '20250108_1e-8mbar_8e_alignment0_long',
-                '20250109_1e-8mbar_8e_alignment1_long',
-                '20250110_1e-8mbar_8e_alignment1_long',
-                '20250111_1e-8mbar_8e_alignment1_long',
-                '20250112_9e-9mbar_8e_alignment1_long',
-                '20250113_5e-8mbar_8e_alignment1_long',
-                '20250114_1e-8mbar_1e_alignment1_long',
-                '20250115_8e-9mbar_0e_alignment1_long',
-                '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
-                '20250117_8e-9mbar_0e_alignment1_long',
-                '20250118_8e-9mbar_1e_alignment1_long',
-                '20250120_8e-9mbar_1e_alignment1_long_wbackscat',
-                '20250121_8e-9mbar_1e_alignment1_long',
-                '20250122_8e-9mbar_1e_alignment1_long',
-                '20250123_7e-9mbar_1e_alignment1_long',
-                '20250124_7e-9mbar_1e_alignment1_long',
-                '20250125_7e-9mbar_1e_alignment1_long'    
+    # sphere = 'sphere_20250103'
+    # datasets = [#'20250104_4e-8mbar_alignment0_long',
+    #             # '20250105_2e-8mbar_alignment0_long',
+    #             # '20250106_2e-8mbar_8e_alignment0_long',
+    #             # '20250107_1e-8mbar_8e_alignment0_long',
+    #             # '20250108_1e-8mbar_8e_alignment0_long',
+    #             # '20250109_1e-8mbar_8e_alignment1_long',
+    #             # '20250110_1e-8mbar_8e_alignment1_long',
+    #             # '20250111_1e-8mbar_8e_alignment1_long',
+    #             # '20250112_9e-9mbar_8e_alignment1_long',
+    #             # '20250113_5e-8mbar_8e_alignment1_long',
+    #             # '20250114_1e-8mbar_1e_alignment1_long',
+    #             # '20250115_8e-9mbar_0e_alignment1_long',
+    #             # '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
+    #             # '20250117_8e-9mbar_0e_alignment1_long',
+    #             # '20250118_8e-9mbar_1e_alignment1_long',
+    #             '20250120_8e-9mbar_1e_alignment1_long_wbackscat',
+    #             '20250121_8e-9mbar_1e_alignment1_long',
+    #             '20250122_8e-9mbar_1e_alignment1_long',
+    #             '20250123_7e-9mbar_1e_alignment1_long',
+    #             '20250124_7e-9mbar_1e_alignment1_long',
+    #             '20250125_7e-9mbar_1e_alignment1_long'    
+    #         ]
+    # data_prefixs = [# '20250104_d_',
+    #                 # '20250105_d_',
+    #                 # '20250106_d_',
+    #                 # '20250107_d_',
+    #                 # '20250108_d_',
+    #                 # '20250109_d_',
+    #                 # '20250110_d_',
+    #                 # '20250111_d_',
+    #                 # '20250112_d_',
+    #                 # '20250113_d_',
+    #                 # '20250114_d_',
+    #                 # '20250115_d_',
+    #                 # '20250116_d_',
+    #                 # '20250117_d_',
+    #                 # '20250118_d_',
+    #                 '20250120_d_',
+    #                 '20250121_d_',
+    #                 '20250122_d_',
+    #                 '20250123_d_',
+    #                 '20250124_d_',
+    #                 '20250125_d_',
+    #                 ]
+    # n_files = [# 1440, 900, 1440, 1440, 1440, 1440, 1440, 1440, 780, 1440, 1440, 1440, 1440, 1440, 1983, 
+    #            1463, 1440, 1440, 1440, 1440, 1121]
+    
+    sphere = 'sphere_20241202'
+    datasets = [
+            '20241211_1e-8mbar_8e_alignment2_long_nodrive',
+            '20241212_1e-8mbar_8e_alignment2_long_nodrive',
+            '20241213_1e-8mbar_0e_alignment2_long',
+            '20241214_1e-8mbar_0e_alignment2_long',
+            '20241215_9e-9mbar_0e_alignment2_long',
+            '20241216_5e-8mbar_0e_alignment2_long',
+            '20241217_6e-8mbar_0e_alignment3_long'
             ]
 
-    data_prefixs = ['20250104_d_',
-                    '20250105_d_',
-                    '20250106_d_',
-                    '20250107_d_',
-                    '20250108_d_',
-                    '20250109_d_',
-                    '20250110_d_',
-                    '20250111_d_',
-                    '20250112_d_',
-                    '20250113_d_',
-                    '20250114_d_',
-                    '20250115_d_',
-                    '20250116_d_',
-                    '20250117_d_',
-                    '20250118_d_',
-                    '20250119_d_',
-                    '20250120_d_',
-                    '20250121_d_',
-                    '20250122_d_',
-                    '20250123_d_',
-                    '20250124_d_',
-                    '20250125_d_',
+    data_prefixs = [
+                    '20241211_d_',
+                    '20241212_d_',
+                    '20241213_d_',
+                    '20241214_d_',
+                    '20241215_d_',
+                    '20241216_d_',
+                    '20241217_d_'
                     ]
 
-    n_files = [1440, 900, 1440, 1440, 1440, 1440, 1440, 1440, 780, 1440, 1440, 1440, 1440, 1440, 1983, 1463, 1440, 1440, 1440, 1440, 1121]
+    n_files = [1418, 917, 1169, 1565, 1440, 1164, 601]
     idx_start = 0
 
     for idx, dataset in enumerate(datasets):
