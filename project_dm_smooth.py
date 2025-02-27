@@ -113,8 +113,8 @@ def get_projected_spectrum(mphi):
             project_smooth(mphi, mx, alpha)
 
 if __name__ == "__main__":
-    mx     = float(sys.argv[1])  # DM mass in GeV
-    alpha  = float(sys.argv[2])  # Single neutron coupling
+    mx    = float(sys.argv[1])  # DM mass in GeV
+    alpha = float(sys.argv[2])  # Single neutron coupling
     mphi  = float(sys.argv[3])   # Mediator mass in eV
 
     data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
