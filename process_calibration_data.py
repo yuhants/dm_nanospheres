@@ -4,7 +4,8 @@ import os, glob
 import h5py
 import analysis_utils as utils
 
-data_dir = r'/Volumes/Expansion/pulse_calibration'
+# data_dir = r'/Volumes/Expansion/pulse_calibration'
+data_dir = r'/Volumes/LaCie/pulse_calibration'
 out_dir = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed'
 
 # sphere = 'sphere_20250103'
@@ -15,9 +16,18 @@ out_dir = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed'
 # dataset_prefixs = ['20250116_dg_8e_200ns_', '20250116_dg_8e_200ns_', '20250107_dg_8e_200ns_', '20250107_dg_8e_200ns_', 
 #                    '20250108_dg_8e_200ns_', '20250108_dg_8e_200ns_', '20250117_dg_8e_200ns_', '20250117_dg_8e_200ns_']
 
-sphere = 'sphere_20241202'
-datasets = ['20241204_8e', '20241205_8e', '20241209_8e_alignment1_1', '20241213_8e_alignment2_4', '20241213_8e_alignment2_5']
-dataset_prefixs = ['20241204_dg_8e_200ns_', '20241205_dg_8e_200ns_', '20241209_dg_8e_200ns_', '20241213_dg_8e_200ns_', '20241213_dg_8e_200ns_']
+# sphere = 'sphere_20241202'
+# datasets = ['20241204_8e', '20241205_8e', '20241209_8e_alignment1_1', '20241213_8e_alignment2_4', '20241213_8e_alignment2_5']
+# dataset_prefixs = ['20241204_dg_8e_200ns_', '20241205_dg_8e_200ns_', '20241209_dg_8e_200ns_', '20241213_dg_8e_200ns_', '20241213_dg_8e_200ns_']
+
+# sphere = 'sphere_20241221'
+# datasets = ['20241222_10e_alignment0_5e-8mbar', '20241222_10e_alignment0_5e-8mbar_1']
+# dataset_prefixs = ['20241222_dg_10e_200ns_', '20241222_dg_10e_200ns_']
+# voltages = [2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20]
+
+sphere = 'sphere_20241226'
+datasets = ['20241228_12e_alignment0_4e-8mbar_0']
+dataset_prefixs = ['20241228_dg_12e_200ns_']
 voltages = [2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20]
 
 unnormalized_amps_all = [[] for i in range(len(voltages))]
