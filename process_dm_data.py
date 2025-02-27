@@ -15,13 +15,22 @@ import analysis_utils as utils
 # sigma_p = 193.80085102332893  # Sphere 20250103; averaged over 8 calibration datasets
 
 ## New calibration values for Sphere 20250103
-# c_mv = 8.263269630174246e-08   # Sphere 20250103; calibration 20250114
-# amp2kev = 7157.624533259538
-# sigma_p = 176.79818534573002
+c_mv = 8.263269630174246e-08   # Sphere 20250103; calibration 20250114
+amp2kev = 7157.624533259538
+sigma_p = 176.79818534573002
 
 ## New calibration values for Sphere 20241202
-amp2kev = 7187.368332843102
-sigma_p = 171.4410156651695
+# amp2kev = 7187.368332843102
+# sigma_p = 171.4410156651695
+
+# Sphere 20241221
+# amp2kev = 6470.190290219283
+# sigma_p = 162.34784893238404
+
+# Sphere 20241226
+# amp2kev = 6959.135681055844
+# sigma_p = 136.24214178893865
+
 sigma_p_amp = sigma_p / amp2kev
 
 window_length = 5000  # 10 ms analysis window, assume dt=2 us
@@ -188,76 +197,99 @@ def process_dataset(sphere, dataset, data_prefix, nfile, idx_start):
         f.close()
 
 if __name__ == '__main__':
-    # sphere = 'sphere_20250103'
-    # datasets = [#'20250104_4e-8mbar_alignment0_long',
-    #             # '20250105_2e-8mbar_alignment0_long',
-    #             # '20250106_2e-8mbar_8e_alignment0_long',
-    #             # '20250107_1e-8mbar_8e_alignment0_long',
-    #             # '20250108_1e-8mbar_8e_alignment0_long',
-    #             # '20250109_1e-8mbar_8e_alignment1_long',
-    #             # '20250110_1e-8mbar_8e_alignment1_long',
-    #             # '20250111_1e-8mbar_8e_alignment1_long',
-    #             # '20250112_9e-9mbar_8e_alignment1_long',
-    #             # '20250113_5e-8mbar_8e_alignment1_long',
-    #             # '20250114_1e-8mbar_1e_alignment1_long',
-    #             # '20250115_8e-9mbar_0e_alignment1_long',
-    #             # '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
-    #             # '20250117_8e-9mbar_0e_alignment1_long',
-    #             # '20250118_8e-9mbar_1e_alignment1_long',
-    #             '20250120_8e-9mbar_1e_alignment1_long_wbackscat',
-    #             '20250121_8e-9mbar_1e_alignment1_long',
-    #             '20250122_8e-9mbar_1e_alignment1_long',
-    #             '20250123_7e-9mbar_1e_alignment1_long',
-    #             '20250124_7e-9mbar_1e_alignment1_long',
-    #             '20250125_7e-9mbar_1e_alignment1_long'    
-    #         ]
-    # data_prefixs = [# '20250104_d_',
-    #                 # '20250105_d_',
-    #                 # '20250106_d_',
-    #                 # '20250107_d_',
-    #                 # '20250108_d_',
-    #                 # '20250109_d_',
-    #                 # '20250110_d_',
-    #                 # '20250111_d_',
-    #                 # '20250112_d_',
-    #                 # '20250113_d_',
-    #                 # '20250114_d_',
-    #                 # '20250115_d_',
-    #                 # '20250116_d_',
-    #                 # '20250117_d_',
-    #                 # '20250118_d_',
-    #                 '20250120_d_',
-    #                 '20250121_d_',
-    #                 '20250122_d_',
-    #                 '20250123_d_',
-    #                 '20250124_d_',
-    #                 '20250125_d_',
-    #                 ]
-    # n_files = [# 1440, 900, 1440, 1440, 1440, 1440, 1440, 1440, 780, 1440, 1440, 1440, 1440, 1440, 1983, 
-    #            1463, 1440, 1440, 1440, 1440, 1121]
-    
-    sphere = 'sphere_20241202'
-    datasets = [
-            '20241211_1e-8mbar_8e_alignment2_long_nodrive',
-            '20241212_1e-8mbar_8e_alignment2_long_nodrive',
-            '20241213_1e-8mbar_0e_alignment2_long',
-            '20241214_1e-8mbar_0e_alignment2_long',
-            '20241215_9e-9mbar_0e_alignment2_long',
-            '20241216_5e-8mbar_0e_alignment2_long',
-            '20241217_6e-8mbar_0e_alignment3_long'
+    sphere = 'sphere_20250103'
+    datasets = ['20250103_7e-7mbar_alignment0_long',
+                #'20250104_4e-8mbar_alignment0_long',
+                # '20250105_2e-8mbar_alignment0_long',
+                # '20250106_2e-8mbar_8e_alignment0_long',
+                # '20250107_1e-8mbar_8e_alignment0_long',
+                # '20250108_1e-8mbar_8e_alignment0_long',
+                # '20250109_1e-8mbar_8e_alignment1_long',
+                # '20250110_1e-8mbar_8e_alignment1_long',
+                # '20250111_1e-8mbar_8e_alignment1_long',
+                # '20250112_9e-9mbar_8e_alignment1_long',
+                # '20250113_5e-8mbar_8e_alignment1_long',
+                # '20250114_1e-8mbar_1e_alignment1_long',
+                # '20250115_8e-9mbar_0e_alignment1_long',
+                # '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
+                # '20250117_8e-9mbar_0e_alignment1_long',
+                # '20250118_8e-9mbar_1e_alignment1_long',
+                # '20250120_8e-9mbar_1e_alignment1_long_wbackscat',
+                # '20250121_8e-9mbar_1e_alignment1_long',
+                # '20250122_8e-9mbar_1e_alignment1_long',
+                # '20250123_7e-9mbar_1e_alignment1_long',
+                # '20250124_7e-9mbar_1e_alignment1_long',
+                # '20250125_7e-9mbar_1e_alignment1_long'    
             ]
-
-    data_prefixs = [
-                    '20241211_d_',
-                    '20241212_d_',
-                    '20241213_d_',
-                    '20241214_d_',
-                    '20241215_d_',
-                    '20241216_d_',
-                    '20241217_d_'
+    data_prefixs = ['20250103_d_',
+                    # '20250104_d_',
+                    # '20250105_d_',
+                    # '20250106_d_',
+                    # '20250107_d_',
+                    # '20250108_d_',
+                    # '20250109_d_',
+                    # '20250110_d_',
+                    # '20250111_d_',
+                    # '20250112_d_',
+                    # '20250113_d_',
+                    # '20250114_d_',
+                    # '20250115_d_',
+                    # '20250116_d_',
+                    # '20250117_d_',
+                    # '20250118_d_',
+                    # '20250120_d_',
+                    # '20250121_d_',
+                    # '20250122_d_',
+                    # '20250123_d_',
+                    # '20250124_d_',
+                    # '20250125_d_',
                     ]
+    n_files = [1440]
+               # 1440, 900, 1440, 1440, 1440, 1440, 1440, 1440, 780, 1440, 1440, 1440, 1440, 1440, 1983, 
+               #1463, 1440, 1440, 1440, 1440, 1121]
+    
+    # sphere = 'sphere_20241202'
+    # datasets = [
+    #         '20241210_1e-8mbar_8e_alignment2_long_withdrive',
+    #         # '20241211_1e-8mbar_8e_alignment2_long_nodrive',
+    #         # '20241212_1e-8mbar_8e_alignment2_long_nodrive',
+    #         # '20241213_1e-8mbar_0e_alignment2_long',
+    #         # '20241214_1e-8mbar_0e_alignment2_long',
+    #         # '20241215_9e-9mbar_0e_alignment2_long',
+    #         # '20241216_5e-8mbar_0e_alignment2_long',
+    #         # '20241217_6e-8mbar_0e_alignment3_long'
+    #         ]
 
-    n_files = [1418, 917, 1169, 1565, 1440, 1164, 601]
+    # data_prefixs = [
+    #                 '20241210_d_',
+    #                 # '20241211_d_',
+    #                 # '20241212_d_',
+    #                 # '20241213_d_',
+    #                 # '20241214_d_',
+    #                 # '20241215_d_',
+    #                 # '20241216_d_',
+    #                 # '20241217_d_'
+    #                 ]
+
+    # n_files = [181]#1418, 917, 1169, 1565, 1440, 1164, 601]
+
+    # sphere = 'sphere_20241221'
+    # datasets = [
+    #         '20241222_5e-8mbar_10e_alignment0_long'
+    #         ]
+    # data_prefixs = [
+    #                 '20241222_d_',
+    #                 ]
+    # n_files = [1031]
+
+    # sphere = 'sphere_20241226'
+    # datasets = [
+    #             '20241227_6e-8mbar_alignment0_long',
+    #            ]
+    # data_prefixs = [
+    #                 '20241227_d_',
+    #                 ]
+    # n_files = [1440]
     idx_start = 0
 
     for idx, dataset in enumerate(datasets):

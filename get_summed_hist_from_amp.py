@@ -3,8 +3,8 @@ import analysis_utils as utils
 import h5py
 import os
 
-# amp2kev = 7157.624533259538     # Sphere 20250103
 amp2kev = 7187.368332843102     # Sphere 20241202
+# amp2kev = 7157.624533259538     # Sphere 20250103
 
 bins = np.arange(0, 10000, 50)  # keV
 bc = 0.5 * (bins[:-1] + bins[1:])
@@ -57,6 +57,7 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
     # data_dir = f'/Users/yuhan/work/nanospheres/data/dm_data_processed_amp_chisquare/{sphere}/{dataset}'
     raw_data_dir = fr'E:\dm_data\{sphere}\{dataset}'
     data_dir = fr'E:\dm_data_processed_amp_chisquare\{sphere}\{dataset}'
+    out_dir = fr'E:\dm_data_hist_waveform\{sphere}'
 
     outfile_name = fr'{dataset}_summed_histograms.hdf5'
     outfile_pulse_waveform = fr'{dataset}_pulse_waveforms.hdf5'
@@ -75,7 +76,6 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
 
         amplitude = f['data_processed']['amplitude'][:]
         idx_in_window = f['data_processed']['idx_in_window'][:]
-
         good_detection = f['data_processed']['good_detection'][:]
         noise_level_amp = f['data_processed']['noise_level_amp'][:]
         chisquare_short = f['data_processed']['chisquare_short'][:]
@@ -124,31 +124,31 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
             pulse_waveform.append(waveforms)
 
         # Save histograms at each step per file
-        hh_all, _ = np.histogram(amplitude * amp2kev, bins)
-        hh_det, _ = np.histogram(amplitude[good_detection] * amp2kev, bins)
-        hh_det_noise, _ = np.histogram(amplitude[good_det_noise] * amp2kev, bins)
-        hh_det_noise_chi2_short, _ = np.histogram(amplitude_short_corrected[good_det_noise] * amp2kev, bins)
+        hh_all, _ = np.histogram(np.abs(amplitude) * amp2kev, bins)
+        hh_det, _ = np.histogram(np.abs(amplitude[good_detection]) * amp2kev, bins)
+        hh_det_noise, _ = np.histogram(np.abs(amplitude[good_det_noise]) * amp2kev, bins)
+        hh_det_noise_chi2_short, _ = np.histogram(np.abs(amplitude_short_corrected[good_det_noise]) * amp2kev, bins)
 
         hhs_0[i] = hh_all
         hhs_1[i] = hh_det
         hhs_2[i] = hh_det_noise
         hhs_3[i] = hh_det_noise_chi2_short
 
-    with h5py.File(os.path.join(data_dir, outfile_name), 'w') as fout:
-        print(f'Writing file {os.path.join(data_dir, outfile_name)}')
+    with h5py.File(os.path.join(out_dir, outfile_name), 'w') as fout:
+        print(f'Writing file {os.path.join(out_dir, outfile_name)}')
 
         g = fout.create_group('summed_histograms')
         g.attrs['bc_kev'] = bc
 
-        g0 = g.create_dataset('hh_all_sum', data=hhs_0, dtype=np.int64)
-        g1 = g.create_dataset('hh_det_sum', data=hhs_1, dtype=np.int64)
-        g2 = g.create_dataset('hh_det_noise_sum', data=hhs_2, dtype=np.int64)
-        g3 = g.create_dataset('hh_det_noise_chi2_short_sum', data=hhs_3, dtype=np.int64)
+        g0 = g.create_dataset('hh_all', data=hhs_0, dtype=np.int64)
+        g1 = g.create_dataset('hh_det', data=hhs_1, dtype=np.int64)
+        g2 = g.create_dataset('hh_det_noise', data=hhs_2, dtype=np.int64)
+        g3 = g.create_dataset('hh_det_noise_chi2_short', data=hhs_3, dtype=np.int64)
 
         fout.close()
 
-    with h5py.File(os.path.join(data_dir, outfile_pulse_waveform), 'w') as fout:
-        print(f'Writing file {os.path.join(data_dir, outfile_pulse_waveform)}')
+    with h5py.File(os.path.join(out_dir, outfile_pulse_waveform), 'w') as fout:
+        print(f'Writing file {os.path.join(out_dir, outfile_pulse_waveform)}')
 
         g = fout.create_group('pulses')
 
@@ -208,24 +208,26 @@ if __name__ == '__main__':
     # n_files = [1440, 900, 1440, 1440, 1440, 1440, 1440, 1440, 780, 1440, 1440, 1440, 1440, 1440, 1983, 1463, 1440, 1440, 1440, 1440, 1121]
 
     sphere = 'sphere_20241202'
-    datasets = ['20241202_8e-8mbar_long',
+    datasets = [
+                '20241202_8e-8mbar_long',
                 '20241204_2e-8mbar_8e_aftercal_long',
                 '20241205_2e-8mbar_0e_aftercal_long',
                 '20241206_1e-8mbar_0e_aftercal_long',
                 '20241207_1e-8mbar_1e_aftercal_long',
                 '20241208_1e-8mbar_1e_aftercal_long',
                 '20241210_1e-8mbar_8e_alignment1_long',
-                '20241210_1e-8mbar_8e_alignment2_long_nodrive',
                 '20241210_1e-8mbar_8e_alignment2_long_withdrive',
+                '20241210_1e-8mbar_8e_alignment2_long_nodrive',
                 '20241211_1e-8mbar_8e_alignment2_long_nodrive',
                 '20241212_1e-8mbar_8e_alignment2_long_nodrive',
                 '20241213_1e-8mbar_0e_alignment2_long',
                 '20241214_1e-8mbar_0e_alignment2_long',
                 '20241215_9e-9mbar_0e_alignment2_long',
                 '20241216_5e-8mbar_0e_alignment2_long',
-                '20241217_6e-8mbar_0e_alignment3_long'
+                '20241217_6e-8mbar_0e_alignment3_long',
                 ]
-    data_prefixs = ['20241202_abcd_',
+    data_prefixs = [
+                    '20241202_abcd_',
                     '20241204_abcd_',
                     '20241205_d_',
                     '20241206_d_',
@@ -240,10 +242,11 @@ if __name__ == '__main__':
                     '20241214_d_',
                     '20241215_d_',
                     '20241216_d_',
-                    '20241217_d_'
+                    '20241217_d_',
                     ]
-    n_files = [1440, 1440, 1440, 1440, 1440, 821, 640, 1440, 181, 1418, 917, 1169, 1565, 1440, 1164, 601]
+    n_files = [1440, 1440, 1440, 1440, 1440, 821, 640, 181, 1440, 1418, 917, 1169, 1565, 1440, 1164, 601]
 
     print(f'Working on {sphere}')
+    print(f'amp2kev = {amp2kev:.2f}')
     for idx, dataset in enumerate(datasets):
         get_summed_hist_from_amp(sphere, dataset, data_prefixs[idx], n_files[idx])
