@@ -8,11 +8,13 @@ amp2kev = 7187.368332843102     # Sphere 20241202
 
 bins = np.arange(0, 10000, 50)  # keV
 bc = 0.5 * (bins[:-1] + bins[1:])
-
-noise_thr = 400  # keV/c
-chi2_thr_short = 150
-
 window_length = 5000
+
+noise_thr = 250  # keV/c
+a, b = 120, 2200/(6000**2)
+
+def get_chi2_threshold(amp_kev, a=120, b=2200/(6000**2)):
+    return a + b * amp_kev**2
 
 def throw_away_doublecounts(amplitude_short, good_det_noise, idx_in_window, amp_thr_kev=1000, double_count_idx_thr=7):
     ret = np.copy(amplitude_short)
@@ -52,18 +54,15 @@ def get_pulse_time(timestamp, idx_in_window, pulse_window_idx, window_length=500
     return timestamp + ret
 
 def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
-    # data_dir = f'/Volumes/LaCie/dm_data_processed_amp_chisquare/{sphere}/{dataset}'
-    # raw_data_dir = f'/Volumes/LaCie/dm_data/{sphere}/{dataset}'
-    # data_dir = f'/Users/yuhan/work/nanospheres/data/dm_data_processed_amp_chisquare/{sphere}/{dataset}'
     raw_data_dir = fr'E:\dm_data\{sphere}\{dataset}'
     data_dir = fr'E:\dm_data_processed_amp_chisquare\{sphere}\{dataset}'
     out_dir = fr'E:\dm_data_hist_waveform\{sphere}'
 
-    outfile_name = fr'{dataset}_summed_histograms.hdf5'
+    outfile_name = fr'{dataset}_all_histograms.hdf5'
     outfile_pulse_waveform = fr'{dataset}_pulse_waveforms.hdf5'
 
     hhs_0, hhs_1, hhs_2, hhs_3 = [np.zeros((nfile, bc.size), dtype=np.int64) for i in range(4)]
-    file_idx, pulse_amp, pulse_time, pulse_waveform = [], [], [], []
+    file_idx, pulse_amp, pulse_chi2, pulse_time, pulse_waveform = [], [], [], [], []
 
     for i in range(nfile):
         if i % 100 == 0:
@@ -73,7 +72,6 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
         f = h5py.File(file, 'r')
         
         timestamp = f['data_processed'].attrs['timestamp']
-
         amplitude = f['data_processed']['amplitude'][:]
         idx_in_window = f['data_processed']['idx_in_window'][:]
         good_detection = f['data_processed']['good_detection'][:]
@@ -86,7 +84,10 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
         good_det_noise = np.logical_and(good_detection, good_noise)
 
         amplitude_short = np.copy(amplitude)
-        bad_chi2_short = (chisquare_short > chi2_thr_short)
+        amplitude_short_kev = amplitude_short * amp2kev
+        chi2_thr_amp = get_chi2_threshold(np.abs(amplitude_short_kev), a, b)
+
+        bad_chi2_short = (chisquare_short > chi2_thr_amp)
         amplitude_short[bad_chi2_short] = np.nan
 
         amplitude_short_corrected = throw_away_doublecounts(amplitude_short, good_det_noise, idx_in_window, 1000, 7)
@@ -95,7 +96,7 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
         amp_thr = 1000
         pulse_window_idx = np.nonzero(np.logical_and(np.abs(amplitude_short_corrected) * amp2kev > amp_thr, np.tile(good_det_noise, (194, 1)).T))
         if pulse_window_idx[0].size == 0:
-            continue
+            pass
         else:
             f = h5py.File(f'{raw_data_dir}/{data_prefix}{i}.hdf5', 'r')
 
@@ -108,7 +109,6 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
             f.close()
 
             searched_idx_in_window = idx_in_window[pulse_window_idx]
-
             waveforms = np.empty((pulse_window_idx[0].size, 100))
 
             for idx, i_window in enumerate(pulse_window_idx[0]):
@@ -120,13 +120,14 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
 
             file_idx.append(np.full(pulse_window_idx[0].size, i))
             pulse_amp.append(amplitude[pulse_window_idx])
+            pulse_chi2.append(chisquare_short[pulse_window_idx])
             pulse_time.append(get_pulse_time(timestamp, idx_in_window, pulse_window_idx, 5000, 2e-6))
             pulse_waveform.append(waveforms)
 
         # Save histograms at each step per file
-        hh_all, _ = np.histogram(np.abs(amplitude) * amp2kev, bins)
-        hh_det, _ = np.histogram(np.abs(amplitude[good_detection]) * amp2kev, bins)
-        hh_det_noise, _ = np.histogram(np.abs(amplitude[good_det_noise]) * amp2kev, bins)
+        hh_all, _                  = np.histogram(np.abs(amplitude) * amp2kev, bins)
+        hh_det, _                  = np.histogram(np.abs(amplitude[good_detection]) * amp2kev, bins)
+        hh_det_noise, _            = np.histogram(np.abs(amplitude[good_det_noise]) * amp2kev, bins)
         hh_det_noise_chi2_short, _ = np.histogram(np.abs(amplitude_short_corrected[good_det_noise]) * amp2kev, bins)
 
         hhs_0[i] = hh_all
@@ -137,7 +138,7 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
     with h5py.File(os.path.join(out_dir, outfile_name), 'w') as fout:
         print(f'Writing file {os.path.join(out_dir, outfile_name)}')
 
-        g = fout.create_group('summed_histograms')
+        g = fout.create_group('all_histograms')
         g.attrs['bc_kev'] = bc
 
         g0 = g.create_dataset('hh_all', data=hhs_0, dtype=np.int64)
@@ -154,8 +155,9 @@ def get_summed_hist_from_amp(sphere, dataset, data_prefix, nfile):
 
         g0 = g.create_dataset('file_idx', data=np.concatenate(file_idx, axis=0), dtype=np.int32)
         g1 = g.create_dataset('pulse_amp', data=np.concatenate(pulse_amp, axis=0), dtype=np.float64)
-        g2 = g.create_dataset('pulse_time', data=np.concatenate(pulse_time, axis=0), dtype=np.float64)
-        g3 = g.create_dataset('pulse_waveform', data=np.concatenate(pulse_waveform, axis=0), dtype=np.float64)
+        g2 = g.create_dataset('pulse_chi2', data=np.concatenate(pulse_chi2, axis=0), dtype=np.float64)
+        g3 = g.create_dataset('pulse_time', data=np.concatenate(pulse_time, axis=0), dtype=np.float64)
+        g4 = g.create_dataset('pulse_waveform', data=np.concatenate(pulse_waveform, axis=0), dtype=np.float64)
 
         fout.close()
 
