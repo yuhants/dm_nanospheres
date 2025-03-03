@@ -11,7 +11,7 @@ bc = 0.5 * (bins[:-1] + bins[1:])
 window_length = 5000
 
 noise_thr = 250  # keV/c
-a, b = 120, 2200/(6000**2)
+a, b = 150, 1300/(6000**2)
 
 def get_chi2_threshold(amp_kev, a=120, b=2200/(6000**2)):
     return a + b * amp_kev**2
