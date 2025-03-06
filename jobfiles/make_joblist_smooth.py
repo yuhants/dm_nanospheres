@@ -23,19 +23,19 @@ alpha_list_fine = np.logspace(-7, -3, 157)
 alpha_list_veryfine = np.logspace(-7, -3, 625)
 
 ## For coarse overall search
-# mx_list = mx_list_coarse
-# alpha_list = alpha_list_coarse
+mx_list = mx_list_coarse[:5]
+alpha_list = alpha_list_coarse[:5]
 
 ## For finer search on the left end
 # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 2, mx_list_fine < 5)]
 # alpha_list = alpha_list_fine
 
 ## Further fine search for 0.1 and 0.01 eV on the side
-mx_list = mx_list_fine[np.logical_and(mx_list_fine > 30, mx_list_fine < 1000)]
+# mx_list = mx_list_fine[np.logical_and(mx_list_fine > 30, mx_list_fine < 1000)]
 # alpha_list = alpha_list_fine[alpha_list_fine < 1e-4]
 
 ## Further fine search for 1 eV on the side
-alpha_list = alpha_list_fine[alpha_list_fine < 1e-3]
+# alpha_list = alpha_list_fine[alpha_list_fine < 1e-3]
 
 ## Very fine search at the bottom (0.1, 0.01 eV)
 # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 4, mx_list_fine < 30)]
@@ -57,7 +57,7 @@ alpha_list = alpha_list_fine[alpha_list_fine < 1e-3]
 
 mphi_list  = [1]
 
-outfile = 'joblist_smooth_fine_side_1ev.txt'
+outfile = 'joblist_smooth_coarse_1ev.txt'
 
 print(f'Writing file {outfile}')
 

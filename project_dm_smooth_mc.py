@@ -1,11 +1,16 @@
 """
 Project the calculate DM scattering rate to the
 z axis and add a Gaussian noise
+
+THE IMPLEMENTATION IS INCORRECT
+The angular distirbution is not uniform on a sphere
+will fix later
 """
 
 import numpy as np
 import sys, os
 from scipy.signal import savgol_filter
+from scipy.signal import medfilt
 from multiprocessing import Pool
 
 def get_random_q_samples(qq, drdq, rr):
@@ -51,18 +56,19 @@ alpha_list_fine = np.logspace(-7, -3, 157)
 mx_list = mx_list_fine[np.logical_and(mx_list_fine > 30, mx_list_fine < 1000)]
 alpha_list = alpha_list_fine[alpha_list_fine < 1e-4]
 
-sigma_gaus = 200  # keV/c
-
 #### Generate Monte Carlo Gaussian noise
+# sigma_gaus = 180  # keV/c
 # n_mc = int(1e8)
-# rand_seed = 22040403
-# rng = np.random.default_rng(rand_seed)
+# rand_seeds = [34324, 6666, 88873, 9984, 1123, 322235, 4442343, 5434234, 66453453, 22040403]
 
-# rr = rng.uniform(0, 1, n_mc)
-# phiphi = rng.uniform(0, np.pi, n_mc)
-# noise_gaussian = rng.normal(0, 200, n_mc)
+# for i, rand_seed in enumerate(rand_seeds):
+#     rng = np.random.default_rng(rand_seed)
 
-# np.savez(f'/home/yt388/palmer_scratch/data/dm_rate/noise_mc.npz', rr=rr, phiphi=phiphi, noise_gaussian=noise_gaussian)
+#     rr = rng.uniform(0, 1, n_mc)
+#     phiphi = rng.uniform(0, np.pi, n_mc)
+#     noise_gaussian = rng.normal(0, sigma_gaus, n_mc)
+
+#     np.savez(f'/home/yt388/palmer_scratch/data/dm_rate/noise_mc_1e8_{i}.npz', rr=rr, phiphi=phiphi, noise_gaussian=noise_gaussian)
 
 def project_smooth(mphi, mx, alpha, outfile):
     file = f'{data_dir}/drdq_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
@@ -84,22 +90,32 @@ def project_smooth(mphi, mx, alpha, outfile):
         if np.sum(_drdq_smoothed) == 0:
             _drdq_smoothed = drdq
 
-        # Read in the MC noise
-        noise_file = '/home/yt388/palmer_scratch/data/dm_rate/noise_mc.npz'
-        noise_npz = np.load(noise_file)
-        rr, phiphi, noise_gaussian = noise_npz['rr'], noise_npz['phiphi'], noise_npz['noise_gaussian']
+        qmax = max(50 * (_qq[np.nonzero(_drdq_smoothed > 0)[0][-1]] // 50 + 2), 10000)
+        bins_sample = np.arange(0, qmax, 50)
+        bc = 0.5 * (bins_sample[1:] + bins_sample[:-1])
 
-        qq_sampled, norm = get_random_q_samples(_qq, _drdq_smoothed, rr)
-        qmax = max(50 * ((np.max(qq_sampled) // 50) + 2), 10000)
+        hh_zns = np.empty((10, bc.size), dtype=np.int64)
+        norm = None
+        for i in range(10):
+            # Read in the MC noise (1e9 samples in total)
+            noise_file = f'/home/yt388/palmer_scratch/data/dm_rate/noise_mc/noise_mc_1e8_{i}.npz'
+            noise_npz = np.load(noise_file)
+            rr, phiphi, noise_gaussian = noise_npz['rr'], noise_npz['phiphi'], noise_npz['noise_gaussian']
 
-        # hh, be   = np.histogram(qq_sampled, bins=np.arange(0, qmax, 50), density=True)
-        # hhz, be  = np.histogram(qq_sampled*np.abs(np.cos(phiphi)), bins=np.arange(0, qmax, 50), density=True)
-        hhzn, be = np.histogram(qq_sampled*np.abs(np.cos(phiphi)) + noise_gaussian, bins=np.arange(0, qmax, 50), density=True)
-        bc = 0.5 * (be[1:] + be[:-1])
+            qq_sampled, norm = get_random_q_samples(_qq, _drdq_smoothed, rr)
+
+            # hh, be   = np.histogram(qq_sampled, bins=np.arange(0, qmax, 50), density=True)
+            # hhz, be  = np.histogram(qq_sampled*np.abs(np.cos(phiphi)), bins=np.arange(0, qmax, 50), density=True)
+            hhzn, be = np.histogram(qq_sampled*np.abs(np.cos(phiphi)) + noise_gaussian, bins=bins_sample, density=True)
+            hh_zns[i] = hhzn
+
+    # All the projected rates are normalized so take the average value
+    rate_zn = np.mean(hh_zns, axis=0) * norm
+    rate_smoothed = np.nan_to_num( np.exp(savgol_filter(np.log(rate_zn), 5, 1)), nan=0)
+    rate_smoothed_med = medfilt(rate_zn, 15)
 
     print(f'Writing file {outfile}')
-    # np.savez(outfile, bc_kev=bc, drdqz=hhz*norm, drdqzn=hhzn*norm)
-    np.savez(outfile, bc_kev=bc, drdqzn=hhzn*norm)
+    np.savez(outfile, bc_kev=bc, drdqzn=rate_zn, drdqzn_smoothed=rate_smoothed, drdqzn_smoothed_med=rate_smoothed_med)
 
 def get_projected_spectrum(mphi):
     for i, mx in enumerate(mx_list):
