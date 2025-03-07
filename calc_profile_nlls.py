@@ -173,11 +173,14 @@ def nll_dm_scaled(a, sigma, xi_b, q_scale, n_scale,
     dm_contribution = np.sum(hist_dm[idx])
     ntot = np.sum(ni) - dm_contribution
 
-    # Use only the central value of pdf
-    # faster and avoid numerical issues from integration
-    # No correctiion for efficiency for background
-    joint_pdf = a * gaus_normalized(bi, 0, sigma, 1000) + (1 - a) * expo_corrected(bi, 1000, xi_b)
-    mui = ntot * joint_pdf * 50 + hist_dm[idx]
+    if ntot > 0:
+        # Use only the central value of pdf
+        # faster and avoid numerical issues from integration
+        # No correctiion for efficiency for background
+        joint_pdf = a * gaus_normalized(bi, 0, sigma, 1000) + (1 - a) * expo_corrected(bi, 1000, xi_b)
+        mui = ntot * joint_pdf * 50 + hist_dm[idx]
+    else:
+        mui = hist_dm[idx]
 
     # Nusance parameters to account for uncertainties in
     # calibration and neutron number
@@ -198,8 +201,7 @@ def nll_dm_scaled(a, sigma, xi_b, q_scale, n_scale,
     else:
         neut_term = (n_scale - 1)**2 / (2 * sigma_n**2)
 
-    return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + nll_offset
-
+    return np.sum(np.nan_to_num(mui - ni * np.log(mui, where=(mui>0)))) + gaus_term + neut_term + nll_offset
 
 def minimize_nll(drdqzn, x0_bg=None, bounds=None):
     if x0_bg is None:
