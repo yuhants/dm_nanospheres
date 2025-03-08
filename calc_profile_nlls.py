@@ -27,19 +27,19 @@ alpha_list_veryfine = np.logspace(-7, -3, 625)
 
 def load_sphere_data(sphere):
     # Very bad coding...but will be passed to the pooled nll calculation
-    global params_nodm, nll_offset, bounds_params, bc, hist, eff_coefs
+    global params_nodm_noxi, nll_offset, bounds_params, bc, hist, eff_coefs
 
     if sphere == 'sphere_20241202':
         # Params for Sphere 20241202
-        params_nodm = np.array([[0.38447462, 215.97561887, 239.31177006]])
+        params_nodm_noxi = np.array([[0.38447462, 215.97561887]])
         nll_offset = 4900399.764535
-        bounds_params = [(0.2, 1), (100, 300), (100, 500), (0.8, 1.2), (0.8, 1.2)]
+        bounds_params = [(0.2, 1), (100, 300), (0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
 
     elif sphere == 'sphere_20250103':
         # Fit params with no dark matter (Sphere 20250103)
-        params_nodm = np.array([0.94784728, 223.00764832, 145.00866937])
+        params_nodm_noxi = np.array([0.95, 223])
         nll_offset = 12101712.701790
-        bounds_params = [(0.7, 1), (100, 300), (100, 500), (0.8, 1.2), (0.8, 1.2)]
+        bounds_params = [(0.5, 1), (100, 300), (0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
 
     # Read in reconstruction histogram and signal efficiency
     file_dm = f'{data_dir}/sphere_data/{sphere}_recon_all.h5py'
@@ -203,24 +203,38 @@ def nll_dm_scaled(a, sigma, xi_b, q_scale, n_scale,
 
     return np.sum(np.nan_to_num(mui - ni * np.log(mui, where=(mui>0)))) + gaus_term + neut_term + nll_offset
 
-def minimize_nll(drdqzn, x0_bg=None, bounds=None):
-    if x0_bg is None:
-        x0_bg = params_nodm
+def minimize_nll(drdqzn, x0_bg_noxi=None, bounds=None):
+    if x0_bg_noxi is None:
+        x0_bg_noxi = params_nodm_noxi
     if bounds is None:
         bounds = bounds_params
 
+    xi_b_try = [100, 300, 500]
+    nlls_try = []
+    res_x_try = []
+
     args = (drdqzn, bc, hist, eff_coefs, nll_offset)
-    res = minimize(fun=lambda x: nll_dm_scaled(*x, *args), x0=[*x0_bg, 1, 1],
-            method='Nelder-Mead',
-            bounds=bounds,
-            options={'disp' : False,
-                    'maxiter': 50000,
-                    'maxfev': 50000,
-                    'adaptive': True,
-                    'fatol': 0.001,
-                    }
-            )
-    return res
+    for xi in xi_b_try:
+        x0_bg = [*x0_bg_noxi, xi]
+        res = minimize(fun=lambda x: nll_dm_scaled(*x, *args), x0=[*x0_bg, 1, 1],
+                method='Nelder-Mead',
+                bounds=bounds,
+                options={'disp' : False,
+                        'maxiter': 50000,
+                        'maxfev': 50000,
+                        'adaptive': True,
+                        'fatol': 0.001,
+                        }
+                )
+        if res.success:
+            nlls_try.append(res.fun)
+            res_x_try.append(res.x)
+        else:
+            nlls_try.append(np.inf)
+            res_x_try.append(np.full(5, np.nan))
+
+    min_idx = np.argmin(np.asarray(nlls_try))
+    return nlls_try[min_idx], res_x_try[min_idx]
 
 def calc_profile_nlls(mphi, dataset='coarse'):
 
@@ -244,6 +258,7 @@ def calc_profile_nlls(mphi, dataset='coarse'):
     drdqzn = drdqzn_npz['drdqzn']
 
     nlls = np.empty((drdqzn.shape[0:2]))
+    res_xs = np.empty((drdqzn.shape[0], drdqzn.shape[1], 5))
 
     for i, mx in enumerate(mx_list):
         print(fr'Working on $M_x=$ {mx:.2f} GeV')
@@ -253,11 +268,10 @@ def calc_profile_nlls(mphi, dataset='coarse'):
         res_pool = pool.starmap(minimize_nll, params)
 
         for j in range(alpha_list.size):
-            if res_pool[j].success:
-                nlls[i, j] = res_pool[j].fun
-            else:
-                nlls[i, j] = np.nan
-    return mx_list, alpha_list, nlls
+            nlls[i, j] = res_pool[j][0]
+            res_xs[i, j] = res_pool[j][1]
+
+    return mx_list, alpha_list, nlls, res_xs
 
 if __name__ == "__main__":
     ## Start calculation
@@ -269,8 +283,8 @@ if __name__ == "__main__":
     load_sphere_data(sphere)
 
     # Calculate profile NLLs for each DM parameter
-    mx_list, alpha_list, nlls_all = calc_profile_nlls(mphi, dataset)
+    mx_list, alpha_list, nlls_all, res_x_all = calc_profile_nlls(mphi, dataset)
 
     file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_{sphere}_{mphi:.0e}_{dataset}.npz'
     print(f'Writing file {file_out}')
-    np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all)
+    np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all, res_x=res_x_all)
