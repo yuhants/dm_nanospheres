@@ -16,7 +16,31 @@ alpha_list_coarse = np.logspace(-7, -3, 79)
 bins = np.arange(0, 10000, 50)  # keV
 bc = 0.5 * (bins[:-1] + bins[1:])
 
+def iter_smooth_drdq(drdq):
+    ret = np.copy(drdq)
+        
+    # Assume DM rate to be strickly decreasing
+    # Find local bumps and interpolate
+    i = 1
+    while i < drdq.size - 1:
+        if drdq[i] > drdq[i - 1]:
+
+            start = i - 1
+            while i < drdq.size - 1 and drdq[i] > drdq[start]:
+                i += 1
+            end = i if i < drdq.size - 1 else drdq.size - 1
+
+            x = np.array([start, end])
+            y = np.array([drdq[start], drdq[end]])
+            ret[start:end] = np.interp(range(start, end), x, y)
+        i += 1
+
+    return ret
+
 def get_drdqz(qq, drdq):
+    # First smooth out drdq to avoid numerical spikes
+    drdq = iter_smooth_drdq(drdq)
+
     # If the original q's are too sparse
     # resample in the log space
     # to avoid overestimating at the edge

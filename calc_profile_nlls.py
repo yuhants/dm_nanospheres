@@ -88,8 +88,12 @@ def expo_corrected(x, cutoff, xi):
     ret[x < cutoff] = 0
 
     if ret.size == 1:
+        if expo_corrected_norm == 0:
+            return 0
         return ret[0] / expo_corrected_norm
     else:
+        if expo_corrected_norm == 0:
+            return np.zeros_like(ret)
         return ret / expo_corrected_norm
 
 ## ==================== Functions not currently used ====================== ##
@@ -209,7 +213,7 @@ def minimize_nll(drdqzn, x0_bg_noxi=None, bounds=None):
     if bounds is None:
         bounds = bounds_params
 
-    xi_b_try = [100, 300, 500]
+    xi_b_try = [20, 100, 150, 300, 400, 500]
     nlls_try = []
     res_x_try = []
 
@@ -230,10 +234,13 @@ def minimize_nll(drdqzn, x0_bg_noxi=None, bounds=None):
             nlls_try.append(res.fun)
             res_x_try.append(res.x)
         else:
-            nlls_try.append(np.inf)
+            nlls_try.append(np.nan)
             res_x_try.append(np.full(5, np.nan))
+    try:
+        min_idx = np.nanargmin(np.asarray(nlls_try))
+    except ValueError:    # would raise ValueError if all elements are nan
+        return np.nan, np.full(5, np.nan)
 
-    min_idx = np.argmin(np.asarray(nlls_try))
     return nlls_try[min_idx], res_x_try[min_idx]
 
 def calc_profile_nlls(mphi, dataset='coarse'):
