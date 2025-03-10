@@ -6,15 +6,15 @@ sphere = 'sphere_20250103'
 
 # datasets = ['coarse', 'fine_left', 'veryfine_bottom', 'fine_side']
 # mphi_lists  = [[0.01, 0.1, 1, 10], [0.01, 0.1, 1, 10], [0.01, 0.1, 1], [0.01, 0.1]]
-datasets = ['coarse']
-mphi_lists  = [[0.01, 0.1, 1, 10]]
+datasets = ['coarse', 'fine_left']
+mphi_lists  = [0.01, 0.1, 1, 10]
 
-outfile = 'joblist_nlls_sphere_20250103_coarse_all.txt'
+outfile = 'joblist_nlls_sphere_20250103_all.txt'
 
 job_file = open(outfile, "wt")
 print(f'Writing file {outfile}')
 for i, dataset in enumerate(datasets):
-    for mphi in mphi_lists[i]:
+    for mphi in mphi_lists:
         # data_dir = '/home/yt388/microspheres/dm_nanospheres/data_processed'
         # outfile = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_{sphere}_{mphi:.0e}_{dataset}.npz'
         # if( os.path.isfile(outfile) ):

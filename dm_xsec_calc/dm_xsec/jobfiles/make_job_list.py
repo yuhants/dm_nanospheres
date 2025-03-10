@@ -26,8 +26,8 @@ alpha_list_veryfine = np.logspace(-7, -3, 625)
 # alpha_list = alpha_list_coarse
 
 ## For finer search on the left end
-# mx_list = mx_list_fine[np.logical_and(mx_list_fine > 2, mx_list_fine < 5)]
-# alpha_list = alpha_list_fine
+mx_list = mx_list_fine[np.logical_and(mx_list_fine > 0.1, mx_list_fine < 1)]
+alpha_list = alpha_list_coarse
 
 ## Further fine search for 0.1 and 0.01 eV on the side
 # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 30, mx_list_fine < 1000)]
@@ -58,11 +58,9 @@ alpha_list_veryfine = np.logspace(-7, -3, 625)
 # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 1, mx_list_fine < 200)]
 # alpha_list = alpha_list_fine[alpha_list_fine > 1e-6]
 
-mx_list = mx_list_coarse
-alpha_list = alpha_list_coarse
-mphi_list  = [0.01, 0.1, 1, 10]
+mphi_list  = [0.01, 0.1]
 
-job_file = open("joblist_coarse_all_10ev.txt", "wt")
+job_file = open("joblist_fine_left_0_01_0_1ev.txt", "wt")
 
 for mphi in mphi_list:
     for mx in mx_list:

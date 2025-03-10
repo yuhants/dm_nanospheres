@@ -13,6 +13,9 @@ R_um = 0.083
 mx_list_coarse = np.logspace(-1, 4, 77)
 alpha_list_coarse = np.logspace(-7, -3, 79)
 
+mx_list_fine = np.logspace(-1, 4, 153)
+alpha_list_fine = np.logspace(-7, -3, 157)
+
 bins = np.arange(0, 10000, 50)  # keV
 bc = 0.5 * (bins[:-1] + bins[1:])
 
@@ -112,6 +115,10 @@ if __name__ == '__main__':
         mx_list = mx_list_coarse
         alpha_list = alpha_list_coarse
 
+    elif dataset == 'fine_left':
+        mx_list = mx_list_fine[np.logical_and(mx_list_fine > 0.1, mx_list_fine < 1)]
+        alpha_list = alpha_list_coarse
+
     data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
 
     drdqzn_all = np.empty(shape=(mx_list.size, alpha_list.size, bc.size), dtype=np.float64)
@@ -131,7 +138,7 @@ if __name__ == '__main__':
         #     print(j, alpha)
         #     drdqzn_all[i, j] = get_final_drdqz(mphi, mx, alpha, 180)
 
-    outfile_name = f'drdqz_all_coarse_nanosphere_{R_um:.2e}_{mphi:.0e}.npz'
+    outfile_name = f'drdqz_nanosphere_{dataset}_{R_um:.2e}_{mphi:.0e}.npz'
     outfile = os.path.join(data_dir, outfile_name)
     print(f'Saving file {outfile}')
     np.savez(outfile, bc_kev=bc, drdqzn=drdqzn_all, mx_list=mx_list, alpha_list=alpha_list)

@@ -27,7 +27,7 @@ alpha_list_veryfine = np.logspace(-7, -3, 625)
 
 def load_sphere_data(sphere):
     # Very bad coding...but will be passed to the pooled nll calculation
-    global params_nodm_noxi, nll_offset, bounds_params, bc, hist, eff_coefs
+    global params_nodm_noxi, nll_offset, bounds_params, bc, hist, eff_coefs, eff_chi2
 
     if sphere == 'sphere_20241202':
         # Params for Sphere 20241202
@@ -35,11 +35,17 @@ def load_sphere_data(sphere):
         nll_offset = 4900399.764535
         bounds_params = [(0.2, 1), (100, 300), (0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
 
+        # Signal efficiency for chi2 cut
+        eff_chi2 = 0.9620145113102859
+
     elif sphere == 'sphere_20250103':
         # Fit params with no dark matter (Sphere 20250103)
         params_nodm_noxi = np.array([0.95, 223])
         nll_offset = 12101712.701790
         bounds_params = [(0.5, 1), (100, 300), (0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
+
+        # Signal efficiency for chi2 cut
+        eff_chi2 = 0.9882030178326474
 
     # Read in reconstruction histogram and signal efficiency
     file_dm = f'{data_dir}/sphere_data/{sphere}_recon_all.h5py'
@@ -161,8 +167,10 @@ def nll_dm_scaled(a, sigma, xi_b, q_scale, n_scale,
 
     # DM contribution that accounts for live time and bin width
     hist_norm = np.sum(hist) * length_search_window * (bc[1] - bc[0])
+
+    # Correct for signal efficiency (search and chi2 cut)
     eff_qq = func2(qq_scaled, *eff_coefs)
-    hist_dm = eff_qq * drdqzn_scaled * hist_norm
+    hist_dm = eff_chi2 * eff_qq * drdqzn_scaled * hist_norm
 
     idx = bc > ana_threshold
     bi = bc[idx]
@@ -249,18 +257,10 @@ def calc_profile_nlls(mphi, dataset='coarse'):
         mx_list, alpha_list = mx_list_coarse, alpha_list_coarse
     elif dataset == 'fine_left':
         # For finer search on the left end
-        mx_list = mx_list_fine[np.logical_and(mx_list_fine > 2, mx_list_fine < 5)]
-        alpha_list = alpha_list_fine
-    elif dataset == 'veryfine_bottom':
-        ## Very fine search at the bottom (1, 0.1, 0.01 eV)
-        mx_list = mx_list_fine[np.logical_and(mx_list_fine > 4, mx_list_fine < 30)]
-        alpha_list = alpha_list_veryfine[alpha_list_veryfine < 1e-6]
-    elif dataset == 'fine_side':
-        ## Further fine search for 0.1 and 0.01 eV on the side
-        mx_list = mx_list_fine[np.logical_and(mx_list_fine > 30, mx_list_fine < 1000)]
-        alpha_list = alpha_list_fine[alpha_list_fine < 1e-4]
+        mx_list = mx_list_fine[np.logical_and(mx_list_fine > 0.1, mx_list_fine < 1)]
+        alpha_list = alpha_list_coarse
 
-    rate_file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz_all_{dataset}_nanosphere_{R_um:.2e}_{mphi:.0e}.npz'
+    rate_file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz_nanosphere_{dataset}_{R_um:.2e}_{mphi:.0e}.npz'
     drdqzn_npz = np.load(rate_file)
     drdqzn = drdqzn_npz['drdqzn']
 
