@@ -40,14 +40,6 @@ def f_halo(v):
 
     return f * np.pi * v * v0**2 / (N0 * ve)
 
-def f_halo_dan(v):
-    """
-    I think this is the 1-D standard halo model but need to double check.
-    See Eq. (2) of https://link.aps.org/doi/10.1103/PhysRevD.42.3572
-    """
-    N0 = np.pi**1.5 * v0**3 * ( erf(vesc/v0) - 2/np.sqrt(np.pi) * (vesc/v0) * np.exp(-(vesc/v0)**2))
-    return 4 * np.pi * v**2 * np.exp(-v**2 / v0**2) / N0
-
 def dsig_domega_born(mx, mphi, alpha, q, R=None, point_charge=True):
     """
     Differential cross section given by Born approximation

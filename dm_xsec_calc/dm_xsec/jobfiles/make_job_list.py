@@ -3,21 +3,14 @@ import numpy as np
 
 R_um       = 0.083 
 
-#### Old parameters ####
-#######################
-# mx_list    = np.logspace(-1, 4, 40)
-# alpha_list = np.logspace(-8, -3, 80)
-
-# mx_list = np.logspace(-1, 4, 39)
-# alpha_list = np.logspace(-7, -3, 40)
-#### End of old params ####
-###########################
-
+mx_list_coarser_extended = np.logspace(4, 9, 39)
 mx_list_coarse = np.logspace(-1, 4, 77)
 mx_list_fine = np.logspace(-1, 4, 153)
 mx_list_veryfine = np.logspace(-1, 4, 609)
 
 alpha_list_coarse = np.logspace(-7, -3, 79)
+alpha_list_coarse_extended= np.logspace(-7, -1, 118)
+
 alpha_list_fine = np.logspace(-7, -3, 157)
 alpha_list_veryfine = np.logspace(-7, -3, 625)
 
@@ -26,7 +19,11 @@ alpha_list_veryfine = np.logspace(-7, -3, 625)
 # alpha_list = alpha_list_coarse
 
 ## For finer search on the left end
-mx_list = mx_list_fine[np.logical_and(mx_list_fine > 0.1, mx_list_fine < 1)]
+# mx_list = mx_list_veryfine[np.logical_and(mx_list_veryfine > 0.1, mx_list_veryfine < 1)]
+# alpha_list = alpha_list_coarse_extended
+
+## Coarser extended search on the right end
+mx_list = mx_list_coarser_extended[mx_list_coarser_extended < 1e8]
 alpha_list = alpha_list_coarse
 
 ## Further fine search for 0.1 and 0.01 eV on the side
@@ -60,7 +57,7 @@ alpha_list = alpha_list_coarse
 
 mphi_list  = [0.01, 0.1]
 
-job_file = open("joblist_fine_left_0_01_0_1ev.txt", "wt")
+job_file = open("joblist_coarse_extended_0_01_0_1eV.txt", "wt")
 
 for mphi in mphi_list:
     for mx in mx_list:

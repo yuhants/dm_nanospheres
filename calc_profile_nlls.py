@@ -31,7 +31,7 @@ def load_sphere_data(sphere):
 
     if sphere == 'sphere_20241202':
         # Params for Sphere 20241202
-        params_nodm_noxi = np.array([[0.38447462, 215.97561887]])
+        params_nodm_noxi = np.array([0.38, 215])
         nll_offset = 4900399.764535
         bounds_params = [(0.2, 1), (100, 300), (0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
 
@@ -155,7 +155,7 @@ def expo_corrected(x, cutoff, xi):
 ## ==================== End of functions not currently used =================== ##
 
 def nll_dm_scaled(a, sigma, xi_b, q_scale, n_scale,
-                  drdqzn, bc, hist, eff_coefs, nll_offset):
+                  drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2):
     # DM scattering rate has already resampled to the same bins
     # Rescale DM model to account for uncertainties in
     # E field and neutron number
@@ -225,7 +225,7 @@ def minimize_nll(drdqzn, x0_bg_noxi=None, bounds=None):
     nlls_try = []
     res_x_try = []
 
-    args = (drdqzn, bc, hist, eff_coefs, nll_offset)
+    args = (drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2)
     for xi in xi_b_try:
         x0_bg = [*x0_bg_noxi, xi]
         res = minimize(fun=lambda x: nll_dm_scaled(*x, *args), x0=[*x0_bg, 1, 1],
@@ -275,6 +275,10 @@ def calc_profile_nlls(mphi, dataset='coarse'):
         res_pool = pool.starmap(minimize_nll, params)
 
         for j in range(alpha_list.size):
+            # nll, res_x = minimize_nll(drdqzn[i, j])
+            # nlls[i, j] = nll
+            # res_xs[i, j] = res_x
+
             nlls[i, j] = res_pool[j][0]
             res_xs[i, j] = res_pool[j][1]
 
