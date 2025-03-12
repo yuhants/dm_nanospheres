@@ -10,10 +10,12 @@ from multiprocessing import Pool
 
 R_um = 0.083
 
+mx_list_coarser_extended = np.logspace(4, 9, 39)
 mx_list_coarse = np.logspace(-1, 4, 77)
-alpha_list_coarse = np.logspace(-7, -3, 79)
-
 mx_list_fine = np.logspace(-1, 4, 153)
+
+alpha_list_coarse = np.logspace(-7, -3, 79)
+alpha_list_coarse_extended= np.logspace(-7, -1, 118)
 alpha_list_fine = np.logspace(-7, -3, 157)
 
 bins = np.arange(0, 10000, 50)  # keV
@@ -49,8 +51,10 @@ def get_drdqz(qq, drdq):
     # to avoid overestimating at the edge
     if (qq[1] - qq[0] > 25):
         qq_old, drdq_old = qq, drdq
-        qq = np.arange(start=25, stop=np.max(qq_old), step=25)
-        drdq = np.exp(np.interp(qq, qq_old, np.log(drdq_old)))
+
+        good_idx = drdq_old > 0
+        qq = np.arange(start=25, stop=np.max(qq_old[good_idx]), step=25)
+        drdq = np.exp(np.interp(qq, qq_old[good_idx], np.log(drdq_old[good_idx])))
 
     qmax = 10000
 
@@ -98,6 +102,9 @@ def get_final_drdqz(mphi, mx, alpha, sigma_kev, return_bc=False):
     qq = drdq_npz['q_kev']
     drdq = drdq_npz['drdq_hz_kev']
 
+    if np.sum(drdq > 0) < 2:
+        return np.zeros_like(bc)
+
     _qq, _drdqz = get_drdqz(qq, drdq)
     _qq, _drdqz_smeared = smear_drdqz_gauss(_qq, _drdqz, sigma_kev)
     drdqz_smeared_resampled = np.interp(bc, _qq, _drdqz_smeared)
@@ -117,7 +124,16 @@ if __name__ == '__main__':
 
     elif dataset == 'fine_left':
         mx_list = mx_list_fine[np.logical_and(mx_list_fine > 0.1, mx_list_fine < 1)]
+        alpha_list = alpha_list_coarse_extended
+
+    elif dataset == 'coarse_extended_right':
+        # The calculated rate doesn't make sense after idx 20
+        mx_list = mx_list_coarser_extended[mx_list_coarser_extended < 1e8]
         alpha_list = alpha_list_coarse
+
+    elif dataset == 'coarse_right':
+        mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 1e2, mx_list_coarse < 1e3)]
+        alpha_list = alpha_list_coarse_extended
 
     data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
 

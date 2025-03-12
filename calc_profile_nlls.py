@@ -15,15 +15,13 @@ length_search_window = 5e-5  # We perform search every 50 us
 data_dir = '/home/yt388/microspheres/dm_nanospheres/data_processed'
 rate_dir = '/home/yt388/palmer_scratch/data/dm_rate'
 
-## Coarse search over a larger range
+mx_list_coarser_extended = np.logspace(4, 9, 39)
 mx_list_coarse = np.logspace(-1, 4, 77)
-alpha_list_coarse = np.logspace(-7, -3, 79)
-
 mx_list_fine = np.logspace(-1, 4, 153)
-alpha_list_fine = np.logspace(-7, -3, 157)
 
-mx_list_veryfine = np.logspace(-1, 4, 609)
-alpha_list_veryfine = np.logspace(-7, -3, 625)
+alpha_list_coarse = np.logspace(-7, -3, 79)
+alpha_list_coarse_extended= np.logspace(-7, -1, 118)
+alpha_list_fine = np.logspace(-7, -3, 157)
 
 def load_sphere_data(sphere):
     # Very bad coding...but will be passed to the pooled nll calculation
@@ -258,6 +256,13 @@ def calc_profile_nlls(mphi, dataset='coarse'):
     elif dataset == 'fine_left':
         # For finer search on the left end
         mx_list = mx_list_fine[np.logical_and(mx_list_fine > 0.1, mx_list_fine < 1)]
+        alpha_list = alpha_list_coarse_extended
+    elif dataset == 'coarse_right':
+        mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 1e2, mx_list_coarse < 1e3)]
+        alpha_list = alpha_list_coarse_extended
+    elif dataset == 'coarse_extended_right':
+        # The calculated rate doesn't make sense after idx 20
+        mx_list = mx_list_coarser_extended[mx_list_coarser_extended < 1e8]
         alpha_list = alpha_list_coarse
 
     rate_file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz_nanosphere_{dataset}_{R_um:.2e}_{mphi:.0e}.npz'

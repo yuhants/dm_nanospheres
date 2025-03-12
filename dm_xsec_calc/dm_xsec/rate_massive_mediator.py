@@ -16,7 +16,7 @@ mAMU  = 1.66e-27 # Neutron mass, kg
 nvels = 200
 nb    = 2000     # Number of impact parameters to calculate
 nq    = 20000    # Number of momentum transfer to sample
-qmin  = 10000    # Lowest momenturm transfer considered
+qmin  = 10000    # Lowest momenturm transfer considered (eV)
 
 ## DM parameters
 rhoDM = 0.3e9    # dark matter mass density, eV/cm^3
@@ -307,7 +307,12 @@ def run_nugget_calc(R_um, M_X_in, alpha_n_in, m_phi):
     # Modified 20230723 to accomodate low momentum threshold cases
     # pmax = np.min([2.5 * vesc * M_X, 10 * alpha / (R * vmin)])
 
-    pmax = np.max((2.5 * vesc * M_X, 10e6))
+    # pmax = np.max((2.5 * vesc * M_X, 10e6))
+
+    # Modified 20250311 for nanosphere DM analysis
+    # Ignore dR/dq larger than 10 MeV/c for heavier dark matter
+    pmax = np.min((2.5 * vesc * M_X, 10e6))
+
     q_lin  = np.linspace(qmin, pmax, nq)
     dsdq   = np.empty(shape=(nvels, nq))
 

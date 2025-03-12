@@ -3,9 +3,9 @@ import numpy as np
 
 R_um       = 0.083
 mphi_list  = [10, 1, 0.1, 0.01]
-datasets = ['coarse', 'fine_left']
+datasets = ['fine_left']
 
-outfile = 'joblist_smooth_all.txt'
+outfile = 'joblist_smooth_all_250311.txt'
 
 print(f'Writing file {outfile}')
 job_file = open(outfile, "wt")
