@@ -265,7 +265,10 @@ def calc_profile_nlls(mphi, dataset='coarse'):
         mx_list = mx_list_coarser_extended[mx_list_coarser_extended < 1e8]
         alpha_list = alpha_list_coarse
 
-    rate_file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz_nanosphere_{dataset}_{R_um:.2e}_{mphi:.0e}.npz'
+    if mphi == 0:
+        rate_file = f'{rate_dir}/massless_mediator/drdqz_nanosphere_{R_um:.2e}_{dataset}_massless.npz'
+    else:
+        rate_file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz_nanosphere_{R_um:.2e}_{dataset}_{mphi:.0e}.npz'
     drdqzn_npz = np.load(rate_file)
     drdqzn = drdqzn_npz['drdqzn']
 
@@ -301,6 +304,9 @@ if __name__ == "__main__":
     # Calculate profile NLLs for each DM parameter
     mx_list, alpha_list, nlls_all, res_x_all = calc_profile_nlls(mphi, dataset)
 
-    file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_{sphere}_{mphi:.0e}_{dataset}.npz'
+    if mphi == 0:
+        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_{sphere}_massless_{dataset}.npz'
+    else:
+        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_{sphere}_{mphi:.0e}_{dataset}.npz'
     print(f'Writing file {file_out}')
     np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all, res_x=res_x_all)

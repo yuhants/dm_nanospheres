@@ -17,6 +17,10 @@ vesc = 1.815e-3  # galactic escape velocity
 v0 = 7.34e-4     # v0 parameter from Zurek group paper
 ve = 8.172e-4    # ve parameter from Zurek group paper
 
+nvels = 200      # Number of velocities to include in integration
+nq    = 20000    # Number of momentum transfer to sample
+qmin  = 10000    # Lowest momenturm transfer considered (eV)
+
 def f_halo(v):
     """
     DM velocity distribution in the Earth frame from Zurek group paper
@@ -100,12 +104,13 @@ def dR_dq(mx, mphi, alpha, q, vlist, R):
     drdq, drdq_out = np.empty_like(q), np.empty_like(q)
     for i in range(q.size):
         drdq[i] = np.trapz( int_vec * dsigdq.T[i], x=vlist )
-        drdq_out[i] = np.trapz( int_vec * dsigdq_out.T[i], x=vlist )
+        # drdq_out[i] = np.trapz( int_vec * dsigdq_out.T[i], x=vlist )
         
-    conv_fac = hbarc**2 * 1e9 * 3e10 * 1e-8 * 3600  # natural units -> um^2/GeV, c [cm/s], um^2/cm^2, s/hr
-    
-    # Counts/hour/GeV
-    return drdq * conv_fac, drdq_out * conv_fac
+    # conv_fac = hbarc**2 * 1e9 * 3e10 * 1e-8 * 3600  # natural units -> um^2/GeV, c [cm/s], um^2/cm^2, s/hr
+    conv_fac = hbarc**2 * 1e3 * 3e10 * 1e-8
+
+    # keV; Differential count (Hz/keV/c)
+    return q/1e3, drdq * conv_fac
 
 def calc_event_rate(R_um, mx_gev, alpha_t):
     R = R_um / hbarc       # Sphere radius, eV^-1
@@ -114,26 +119,26 @@ def calc_event_rate(R_um, mx_gev, alpha_t):
     mx = mx_gev * 1e9      # DM mass, eV
     alpha = alpha_t * N_T  # Total coupling
 
-    if R_um < 1:
-        q = np.logspace(3, 10, 1000) # eV
-    else:
-        q = np.logspace(5, 10, 1000)
+    # if R_um < 1:
+    #     q = np.logspace(3, 10, 1000) # eV
+    # else:
+    #     q = np.logspace(5, 10, 1000)
+    pmax = np.min((2.5 * vesc * mx, 10e6))
+    q  = np.linspace(qmin, pmax, nq)
 
-    nvels = 2000
     vlist = np.linspace(vmin, vesc, nvels)
 
-    drdq, drdq_out = dR_dq(mx, 0, alpha, q, vlist, R)
+    q_kev, drdq = dR_dq(mx, 0, alpha, q, vlist, R)
 
-    # GeV; Counts/hour/GeV
-    return q/1e9, drdq, drdq_out
+    # keV; Counts/s/kev
+    return q_kev, drdq
 
 if __name__ == "__main__":
-    npts = 20    # Number of pts in parameter space
-
-    # outdir = r"C:\Users\yuhan\work\microspheres\code\impulse\data\massless_mediator"
     outdir = r"/home/yt388/palmer_scratch/data/massless_mediator"
     if(not os.path.isdir(outdir)):
         os.mkdir(outdir)
+
+    # npts = 20    # Number of pts in parameter space
 
     # R_um = 7.5    # Sphere radius, um
     # mx_gev = np.logspace(0, 12, npts)    # DM mass in GeV
@@ -147,10 +152,18 @@ if __name__ == "__main__":
     # mx_gev = np.logspace(-4, 10, npts)
     # alpha_t = np.logspace(-12, -4, npts)
 
-    R_um = 0.0075   # nanospheres; 7.5 nm
-    mx_gev = np.logspace(-6, 1, npts)
-    alpha_t = np.logspace(-10, -4, npts)
+    # R_um = 0.0075   # nanospheres; 7.5 nm
+    # mx_gev = np.logspace(-6, 1, npts)
+    # alpha_t = np.logspace(-10, -4, npts)
     
+    R_um = 0.083
+    mx_list_coarser_extended = np.logspace(4, 9, 39)
+    mx_list_coarse = np.logspace(-1, 4, 77)
+    alpha_list_coarse = np.logspace(-7, -3, 79)
+
+    mx_list = mx_list_coarser_extended
+    alpha_list = alpha_list_coarse
+
     if R_um < 0.5:
         sphere_type = 'nanosphere'
     else:
@@ -158,8 +171,8 @@ if __name__ == "__main__":
 
     print(f'Sphere radius = {R_um:.3f} um')
 
-    for i, mx in enumerate(mx_gev):
-        for j, alpha in enumerate(alpha_t):
-            print(f'Working on ( M_x = {mx:.3e} GeV, alpha_t = {alpha:.3e} )')
-            qq, drdq, drdq_out = calc_event_rate(R_um, mx, alpha)
-            np.savez(outdir + f'/drdq_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}.npz', mx_gev=mx, alpha_t=alpha, q=qq, drdq=drdq, drdq_out=drdq_out)
+    for i, mx in enumerate(mx_list):
+        for j, alpha in enumerate(alpha_list):
+            print(f'Working on M_x = {mx:.3e} GeV, alpha_n = {alpha:.3e}')
+            qq, drdq = calc_event_rate(R_um, mx, alpha)
+            np.savez(outdir + f'/drdq_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz', mx_gev=mx, alpha_n=alpha, q_kev=qq, drdq_hz_kev=drdq)

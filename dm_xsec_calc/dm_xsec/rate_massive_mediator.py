@@ -345,7 +345,7 @@ def run_nugget_calc(R_um, M_X_in, alpha_n_in, m_phi):
         theta     = b_theta_pooled[idx][2]
         dsdq[idx] = dsig_dq(p, b, theta, q_lin)
 
-    # GeV; Counts/s/kev
+    # keV; Counts/s/kev
     q_kev, drdq = dR_dq(M_X, q_lin, dsdq, vlist)
     
     ## For debugging purposes

@@ -43,20 +43,22 @@ def iter_smooth_drdq(drdq):
     return ret
 
 def get_drdqz(qq, drdq):
-    # First smooth out drdq to avoid numerical spikes
     drdq = iter_smooth_drdq(drdq)
 
-    # If the original q's are too sparse
-    # resample in the log space
-    # to avoid overestimating at the edge
-    if (qq[1] - qq[0] > 25):
+    qmax = 10000
+    if (qq[1] - qq[0] > 25 and np.max(qq) > qmax):
         qq_old, drdq_old = qq, drdq
 
         good_idx = drdq_old > 0
+            
         qq = np.arange(start=25, stop=np.max(qq_old[good_idx]), step=25)
         drdq = np.exp(np.interp(qq, qq_old[good_idx], np.log(drdq_old[good_idx])))
 
-    qmax = 10000
+    elif (qq[1] - qq[0] < 10 and np.max(qq) < qmax):
+        qq_old, drdq_old = qq, drdq            
+        qq = np.arange(start=1, stop=qmax, step=1)
+
+        drdq = np.exp(np.interp(qq, qq_old, np.log(drdq_old), right=-np.inf))
 
     qq_out = qq[qq < qmax]
     ret = np.empty_like(drdq[qq < qmax])
@@ -87,7 +89,7 @@ def smear_drdqz_gauss(qq, drdqz, sigma_kev=180):
         padded_drdqz = np.pad(drdqz, (pad_len, 0), mode='symmetric')
     else:
         padded_drdqz = np.pad(drdqz, (pad_len, 0), mode='reflect')
-    padded_drdqz = np.pad(padded_drdqz, (0, pad_len), mode='edge')
+    padded_drdqz = np.pad(padded_drdqz, (0, pad_len), mode='constant', constant_values=0)
 
     convolved = np.convolve(padded_drdqz, gauss_kernel, mode='valid')
     idx_start = (convolved.size - drdqz.size) // 2
@@ -96,7 +98,10 @@ def smear_drdqz_gauss(qq, drdqz, sigma_kev=180):
     return qq, ret
 
 def get_final_drdqz(mphi, mx, alpha, sigma_kev, return_bc=False):
-    file = f'{data_dir}/drdq_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+    if mphi == 0:
+        file = f'{data_dir}/drdq_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
+    else:
+        file = f'{data_dir}/drdq_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
     drdq_npz = np.load(file)
 
     qq = drdq_npz['q_kev']
@@ -127,7 +132,6 @@ if __name__ == '__main__':
         alpha_list = alpha_list_coarse_extended
 
     elif dataset == 'coarse_extended_right':
-        # The calculated rate doesn't make sense after idx 20
         mx_list = mx_list_coarser_extended[mx_list_coarser_extended < 1e8]
         alpha_list = alpha_list_coarse
 
@@ -135,7 +139,10 @@ if __name__ == '__main__':
         mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 1e2, mx_list_coarse < 1e3)]
         alpha_list = alpha_list_coarse_extended
 
-    data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
+    if mphi == 0:
+        data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/massless_mediator'
+    else:
+        data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
 
     drdqzn_all = np.empty(shape=(mx_list.size, alpha_list.size, bc.size), dtype=np.float64)
     for i, mx in enumerate(mx_list):
@@ -154,7 +161,10 @@ if __name__ == '__main__':
         #     print(j, alpha)
         #     drdqzn_all[i, j] = get_final_drdqz(mphi, mx, alpha, 180)
 
-    outfile_name = f'drdqz_nanosphere_{dataset}_{R_um:.2e}_{mphi:.0e}.npz'
+    if mphi == 0:
+        outfile_name = f'drdqz_nanosphere_{R_um:.2e}_{dataset}_massless.npz'
+    else:
+        outfile_name = f'drdqz_nanosphere_{R_um:.2e}_{dataset}_{mphi:.0e}.npz'
     outfile = os.path.join(data_dir, outfile_name)
     print(f'Saving file {outfile}')
     np.savez(outfile, bc_kev=bc, drdqzn=drdqzn_all, mx_list=mx_list, alpha_list=alpha_list)

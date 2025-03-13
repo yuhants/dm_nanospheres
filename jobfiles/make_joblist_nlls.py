@@ -3,13 +3,13 @@ import numpy as np
 
 spheres = ['sphere_20241202', 'sphere_20250103']
 
-# datasets = ['coarse']
-# mphi_lists  = [[0.01, 0.1, 1, 10]]
+datasets = ['coarse', 'coarse_extended_right']
+mphi_lists  = [[0], [0]]
 
-datasets = ['coarse_extended_right']
-mphi_lists  = [[0.1, 0.01]]
+# datasets = ['coarse_extended_right']
+# mphi_lists  = [[0.1, 0.01]]
 
-outfile = 'joblist_nlls_all_250311.txt'
+outfile = 'joblist_nlls_massless_250312.txt'
 
 job_file = open(outfile, "wt")
 print(f'Writing file {outfile}')
