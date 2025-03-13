@@ -9,7 +9,7 @@ from multiprocessing import Pool
 
 R_um = 0.083
 
-ana_threshold = 1000.        # Analysis threhsold in keV/c
+ana_threshold = 1500.        # Analysis threhsold in keV/c
 length_search_window = 5e-5  # We perform search every 50 us
 
 data_dir = '/home/yt388/microspheres/dm_nanospheres/data_processed'
@@ -29,18 +29,16 @@ def load_sphere_data(sphere):
 
     if sphere == 'sphere_20241202':
         # Params for Sphere 20241202
-        params_nodm_noxi = np.array([0.38, 215])
-        nll_offset = 4900399.764535
-        bounds_params = [(0.2, 1), (100, 300), (0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
+        nll_offset = 269225.577261
+        bounds_params = [(0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
 
         # Signal efficiency for chi2 cut
         eff_chi2 = 0.9620145113102859
 
     elif sphere == 'sphere_20250103':
         # Fit params with no dark matter (Sphere 20250103)
-        params_nodm_noxi = np.array([0.95, 223])
-        nll_offset = 12101712.701790
-        bounds_params = [(0.5, 1), (100, 300), (0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
+        nll_offset = 6357.498234
+        bounds_params = [(0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
 
         # Signal efficiency for chi2 cut
         eff_chi2 = 0.9882030178326474
@@ -61,21 +59,6 @@ def load_sphere_data(sphere):
 
 def func2(x, z, f):
     return 0.5 * erf((x - z) * f) + 0.5
-
-def gaus(x, mu, sigma):
-    return (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-1 * (x - mu)**2 / (2 * sigma**2))
-
-def gaus_normalized(x, mu, sigma, cutoff=1000):
-    # xx = np.linspace(0, 50000, 5000)
-    # func_val = gaus(xx, mu, sigma)
-    # norm = np.trapz(func_val, xx)
-    norm = 1 - (0.5 + 0.5 * erf((cutoff - mu)/(np.sqrt(2)*sigma)))
-
-    x = np.asarray(x)
-    if x.size == 1:
-        return gaus(x, mu, sigma)[0] / norm
-    else:
-        return gaus(x, mu, sigma) / norm
 
 def expo_corrected(x, cutoff, xi):
     # Re-normalize exponential after applying efficiency correction 
@@ -100,59 +83,8 @@ def expo_corrected(x, cutoff, xi):
             return np.zeros_like(ret)
         return ret / expo_corrected_norm
 
-## ==================== Functions not currently used ====================== ##
-# def half_gaus_mod(x, mu, m, n):
-#     xx = np.linspace(0, 50000, 50000)
-#     sigma = m * xx + n
-#     _norm = np.trapz((1 / (np.sqrt(2 * np.pi) * sigma)) * np.exp(-1 * (xx - mu)**2 / (2 * sigma**2)), xx)
-
-#     sigma_x = m * x + n
-#     return (1 / (np.sqrt(2 * np.pi) * sigma_x)) * np.exp(-1 * (x - mu)**2 / (2 * sigma_x**2)) / _norm
-
-# def crystal_ball_rev(x, alpha, n, mu, sigma):
-#     # Modified from https://arxiv.org/pdf/1603.08591
-#     # and https://en.wikipedia.org/wiki/Crystal_Ball_function
-
-#     x = np.asarray(x)
-#     ret = np.empty_like(x)
-
-#     A = np.power(n / np.abs(alpha), n) * np.exp(-1 * alpha**2 / 2)
-#     B = n / np.abs(alpha) - np.abs(alpha)
-
-#     # Flip the direction to get the tail on the positive side
-#     idx_gaus = ((x - mu) / sigma) < alpha
-#     idx_other = ((x - mu) / sigma) > alpha
-
-#     # Flip `B - ...` to `B + ...` to reverse the power law tail 
-#     ret[idx_gaus] = np.exp(-1 * (x[idx_gaus] - mu)**2 / (2 * sigma**2))
-#     ret[idx_other] = A * np.power((B + (x[idx_other] - mu) / sigma), (-1 * n))
-
-#     return ret
-
-# def crystal_ball_rev_normalized(x, alpha, n, mu, sigma):
-#     xx = np.linspace(0, 50000, 5000)
-#     func_val = crystal_ball_rev(xx, alpha, n, mu, sigma)
-#     norm = np.trapz(func_val, xx)
-
-#     x = np.asarray(x)
-#     if x.size == 1:
-#         return crystal_ball_rev(x, alpha, n, mu, sigma)[0] / norm
-#     else:
-#         return crystal_ball_rev(x, alpha, n, mu, sigma) / norm
-
-# def read_dm_rate(mphi, mx, alpha):
-#     R_um       = 0.083
-#     file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
-#     drdq_npz = np.load(file)
-
-#     qq = drdq_npz['bc_kev']
-#     drdqzn = drdq_npz['drdqzn']
-    
-#     return qq, drdqzn
-## ==================== End of functions not currently used =================== ##
-
-def nll_dm_scaled(a, sigma, xi_b, q_scale, n_scale,
-                  drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2):
+def nll_dm_scaled_tail_only(xi_b, q_scale, n_scale,
+                            drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2):
     # DM scattering rate has already resampled to the same bins
     # Rescale DM model to account for uncertainties in
     # E field and neutron number
@@ -186,7 +118,7 @@ def nll_dm_scaled(a, sigma, xi_b, q_scale, n_scale,
         # Use only the central value of pdf
         # faster and avoid numerical issues from integration
         # No correctiion for efficiency for background
-        joint_pdf = a * gaus_normalized(bi, 0, sigma, 1000) + (1 - a) * expo_corrected(bi, 1000, xi_b)
+        joint_pdf = expo_corrected(bi, ana_threshold, xi_b)
         mui = ntot * joint_pdf * 50 + hist_dm[idx]
     else:
         mui = hist_dm[idx]
@@ -212,9 +144,7 @@ def nll_dm_scaled(a, sigma, xi_b, q_scale, n_scale,
 
     return np.sum(np.nan_to_num(mui - ni * np.log(mui, where=(mui>0)))) + gaus_term + neut_term + nll_offset
 
-def minimize_nll(drdqzn, x0_bg_noxi=None, bounds=None):
-    if x0_bg_noxi is None:
-        x0_bg_noxi = params_nodm_noxi
+def minimize_nll_tail_only(drdqzn, bounds=None):
     if bounds is None:
         bounds = bounds_params
 
@@ -224,8 +154,8 @@ def minimize_nll(drdqzn, x0_bg_noxi=None, bounds=None):
 
     args = (drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2)
     for xi in xi_b_try:
-        x0_bg = [*x0_bg_noxi, xi]
-        res = minimize(fun=lambda x: nll_dm_scaled(*x, *args), x0=[*x0_bg, 1, 1],
+        x0_bg = [xi]
+        res = minimize(fun=lambda x: nll_dm_scaled_tail_only(*x, *args), x0=[*x0_bg, 1, 1],
                 method='Nelder-Mead',
                 bounds=bounds,
                 options={'disp' : False,
@@ -240,11 +170,11 @@ def minimize_nll(drdqzn, x0_bg_noxi=None, bounds=None):
             res_x_try.append(res.x)
         else:
             nlls_try.append(np.nan)
-            res_x_try.append(np.full(5, np.nan))
+            res_x_try.append(np.full(3, np.nan))
     try:
         min_idx = np.nanargmin(np.asarray(nlls_try))
     except ValueError:    # would raise ValueError if all elements are nan
-        return np.nan, np.full(5, np.nan)
+        return np.nan, np.full(3, np.nan)
 
     return nlls_try[min_idx], res_x_try[min_idx]
 
@@ -272,20 +202,16 @@ def calc_profile_nlls(mphi, dataset='coarse'):
     drdqzn = drdqzn_npz['drdqzn']
 
     nlls = np.empty((drdqzn.shape[0:2]))
-    res_xs = np.empty((drdqzn.shape[0], drdqzn.shape[1], 5))
+    res_xs = np.empty((drdqzn.shape[0], drdqzn.shape[1], 3))
 
     for i, mx in enumerate(mx_list):
         print(fr'Working on $M_x=$ {mx:.2f} GeV')
         
         pool = Pool(32)
         params = [ [drdqzn[i, j]] for j in range(alpha_list.size) ]
-        res_pool = pool.starmap(minimize_nll, params)
+        res_pool = pool.starmap(minimize_nll_tail_only, params)
 
         for j in range(alpha_list.size):
-            # nll, res_x = minimize_nll(drdqzn[i, j])
-            # nlls[i, j] = nll
-            # res_xs[i, j] = res_x
-
             nlls[i, j] = res_pool[j][0]
             res_xs[i, j] = res_pool[j][1]
 
@@ -304,8 +230,8 @@ if __name__ == "__main__":
     mx_list, alpha_list, nlls_all, res_x_all = calc_profile_nlls(mphi, dataset)
 
     if mphi == 0:
-        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_{sphere}_massless_{dataset}.npz'
+        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_tail_only_{sphere}_massless_{dataset}.npz'
     else:
-        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_{sphere}_{mphi:.0e}_{dataset}.npz'
+        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_tail_only_{sphere}_{mphi:.0e}_{dataset}.npz'
     print(f'Writing file {file_out}')
     np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all, res_x=res_x_all)
