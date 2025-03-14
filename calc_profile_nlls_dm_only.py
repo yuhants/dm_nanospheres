@@ -8,8 +8,6 @@ from scipy.optimize import minimize
 from multiprocessing import Pool
 
 R_um = 0.083
-
-ana_threshold = 1500.        # Analysis threhsold in keV/c
 length_search_window = 5e-5  # We perform search every 50 us
 
 data_dir = '/home/yt388/microspheres/dm_nanospheres/data_processed'
@@ -25,23 +23,25 @@ alpha_list_fine = np.logspace(-7, -3, 157)
 
 def load_sphere_data(sphere):
     # Very bad coding...but will be passed to the pooled nll calculation
-    global params_nodm_noxi, nll_offset, bounds_params, bc, hist, eff_coefs, eff_chi2
+    global nll_offset, bounds_params, bc, hist, eff_coefs, eff_chi2, ana_threshold
 
     if sphere == 'sphere_20241202':
         # Params for Sphere 20241202
-        nll_offset = 269225.577261
-        bounds_params = [(0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
+        nll_offset = 0
+        bounds_params = [(0.8, 1.2), (0.8, 1.2)]
 
         # Signal efficiency for chi2 cut
         eff_chi2 = 0.9620145113102859
+        ana_threshold = 3500.        # Analysis threhsold in keV/c
 
     elif sphere == 'sphere_20250103':
         # Fit params with no dark matter (Sphere 20250103)
-        nll_offset = 6357.498234
-        bounds_params = [(0.1, 1000), (0.8, 1.2), (0.8, 1.2)]
+        nll_offset = 0
+        bounds_params = [(0.8, 1.2), (0.8, 1.2)]
 
         # Signal efficiency for chi2 cut
         eff_chi2 = 0.9882030178326474
+        ana_threshold = 2500.        # Analysis threhsold in keV/c
 
     # Read in reconstruction histogram and signal efficiency
     file_dm = f'{data_dir}/sphere_data/{sphere}_recon_all.h5py'
@@ -60,31 +60,9 @@ def load_sphere_data(sphere):
 def func2(x, z, f):
     return 0.5 * erf((x - z) * f) + 0.5
 
-def expo_corrected(x, cutoff, xi):
-    # Re-normalize exponential after applying efficiency correction 
-    # and truncate from below
-    xx = np.linspace(0, 50000, 5000)
 
-    expo_eff_truncated = np.exp(-1 * (xx) / xi) / xi
-    expo_eff_truncated[xx < cutoff] = 0
-
-    expo_corrected_norm = np.trapz(expo_eff_truncated, xx)
-
-    x = np.asarray(x)
-    ret = np.exp(-1 * (x) / xi) / xi
-    ret[x < cutoff] = 0
-
-    if ret.size == 1:
-        if expo_corrected_norm == 0:
-            return 0
-        return ret[0] / expo_corrected_norm
-    else:
-        if expo_corrected_norm == 0:
-            return np.zeros_like(ret)
-        return ret / expo_corrected_norm
-
-def nll_dm_scaled_tail_only(xi_b, q_scale, n_scale,
-                            drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2):
+def nll_dm_scaled_dm_only(q_scale, n_scale,
+                          drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2):
     # DM scattering rate has already resampled to the same bins
     # Rescale DM model to account for uncertainties in
     # E field and neutron number
@@ -114,14 +92,8 @@ def nll_dm_scaled_tail_only(xi_b, q_scale, n_scale,
     dm_contribution = np.sum(hist_dm[idx])
     ntot = np.sum(ni) - dm_contribution
 
-    if ntot > 0:
-        # Use only the central value of pdf
-        # faster and avoid numerical issues from integration
-        # No correctiion for efficiency for background
-        joint_pdf = expo_corrected(bi, ana_threshold, xi_b)
-        mui = ntot * joint_pdf * 50 + hist_dm[idx]
-    else:
-        mui = hist_dm[idx]
+    # Assume everything above threshold is contributed by the DM
+    mui = hist_dm[idx]
     mui[ mui < 1e-30 ] = 1e-30  # set a very small value so the log doesn't overflow
 
     # Nusance parameters to account for uncertainties in
@@ -145,39 +117,28 @@ def nll_dm_scaled_tail_only(xi_b, q_scale, n_scale,
 
     return np.sum(np.nan_to_num(mui - ni * np.log(mui))) + gaus_term + neut_term + nll_offset
 
-def minimize_nll_tail_only(drdqzn, bounds=None):
+def minimize_nll_dm_only(drdqzn, bounds=None):
     if bounds is None:
         bounds = bounds_params
 
-    xi_b_try = [20, 100, 150, 300, 400, 500]
-    nlls_try = []
-    res_x_try = []
-
     args = (drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2)
-    for xi in xi_b_try:
-        x0_bg = [xi]
-        res = minimize(fun=lambda x: nll_dm_scaled_tail_only(*x, *args), x0=[*x0_bg, 1, 1],
-                method='Nelder-Mead',
-                bounds=bounds,
-                options={'disp' : False,
-                        'maxiter': 50000,
-                        'maxfev': 50000,
-                        'adaptive': True,
-                        'fatol': 0.001,
-                        }
-                )
-        if res.success:
-            nlls_try.append(res.fun)
-            res_x_try.append(res.x)
-        else:
-            nlls_try.append(np.nan)
-            res_x_try.append(np.full(3, np.nan))
-    try:
-        min_idx = np.nanargmin(np.asarray(nlls_try))
-    except ValueError:    # would raise ValueError if all elements are nan
-        return np.nan, np.full(3, np.nan)
 
-    return nlls_try[min_idx], res_x_try[min_idx]
+    res = minimize(fun=lambda x: nll_dm_scaled_dm_only(*x, *args), x0=[1, 1],
+            method='Nelder-Mead',
+            bounds=bounds,
+            options={'disp' : False,
+                    'maxiter': 50000,
+                    'maxfev': 50000,
+                    'adaptive': True,
+                    'fatol': 0.001,
+                    }
+            )
+
+    if res.success:
+        return res.fun, res.x
+    else:
+        return np.nan, np.full(2, np.nan)
+        
 
 def calc_profile_nlls(mphi, dataset='coarse'):
 
@@ -203,14 +164,14 @@ def calc_profile_nlls(mphi, dataset='coarse'):
     drdqzn = drdqzn_npz['drdqzn']
 
     nlls = np.empty((drdqzn.shape[0:2]))
-    res_xs = np.empty((drdqzn.shape[0], drdqzn.shape[1], 3))
+    res_xs = np.empty((drdqzn.shape[0], drdqzn.shape[1], 2))
 
     for i, mx in enumerate(mx_list):
         print(fr'Working on $M_x=$ {mx:.2f} GeV')
         
         pool = Pool(32)
         params = [ [drdqzn[i, j]] for j in range(alpha_list.size) ]
-        res_pool = pool.starmap(minimize_nll_tail_only, params)
+        res_pool = pool.starmap(minimize_nll_dm_only, params)
 
         for j in range(alpha_list.size):
             nlls[i, j] = res_pool[j][0]
@@ -231,8 +192,8 @@ if __name__ == "__main__":
     mx_list, alpha_list, nlls_all, res_x_all = calc_profile_nlls(mphi, dataset)
 
     if mphi == 0:
-        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_tail_only_{sphere}_massless_{dataset}.npz'
+        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_dm_only_{sphere}_massless_{dataset}.npz'
     else:
-        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_tail_only_{sphere}_{mphi:.0e}_{dataset}.npz'
+        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_dm_only_{sphere}_{mphi:.0e}_{dataset}.npz'
     print(f'Writing file {file_out}')
     np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all, res_x=res_x_all)
