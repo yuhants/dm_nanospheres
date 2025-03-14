@@ -15,20 +15,24 @@ alpha_list_fine = np.logspace(-7, -3, 157)
 alpha_list_veryfine = np.logspace(-7, -3, 625)
 
 ## For coarse overall search
-# mx_list = mx_list_coarse
-# alpha_list = alpha_list_coarse
+mx_list = mx_list_coarse
+alpha_list = alpha_list_coarse
 
 ## Coarser extended search on the right end (0.1, 0.01 eV)
 # mx_list = mx_list_coarser_extended[mx_list_coarser_extended < 1e8]
 # alpha_list = alpha_list_coarse
 
 ## Coarse search on the right end (10 eV)
-mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 50, mx_list_coarse < 150)]
-alpha_list = alpha_list_coarse_extended[alpha_list_coarse_extended > 1e-3]
+# mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 50, mx_list_coarse < 150)]
+# alpha_list = alpha_list_coarse
+# alpha_list = alpha_list_coarse_extended[alpha_list_coarse_extended > 1e-3]
+
+# mx_list = mx_list_coarse[mx_list_coarse < 50]
+# alpha_list = alpha_list_coarse
 
 ## Coarse search on the left end
-mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 0.1, mx_list_coarse < 1)]
-alpha_list = alpha_list_coarse_extended[alpha_list_coarse_extended > 1e-3]
+# mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 0.1, mx_list_coarse < 1)]
+# alpha_list = alpha_list_coarse_extended
 
 ## For finer search on the left end
 # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 0.1, mx_list_fine < 1)]
@@ -63,18 +67,18 @@ alpha_list = alpha_list_coarse_extended[alpha_list_coarse_extended > 1e-3]
 # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 1, mx_list_fine < 200)]
 # alpha_list = alpha_list_fine[alpha_list_fine > 1e-6]
 
-mphi_list  = [10, 1, 0.1, 0.01]
+mphi_list  = [0.1]
 
-job_file = open("joblist_coarse_extended_alpha_left_all.txt", "wt")
+job_file = open("joblist_coarse_0_1ev.txt", "wt")
 
 for mphi in mphi_list:
     for mx in mx_list:
         for alpha in alpha_list:
-            # outdir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
-            # outfile = outdir + f'/drdq_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
-            # if( os.path.isfile(outfile) ):
-            #      print("Skipping: ", outfile)
-            #      continue
+            outdir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
+            outfile = outdir + f'/drdq_25mevthr_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+            if( os.path.isfile(outfile) ):
+                print("Skipping: ", outfile)
+                continue
 
             job_str = f'module load miniconda; conda activate microsphere; python ../rate_massive_mediator.py {R_um} {mx} {alpha} {mphi}\n'
             job_file.write( job_str )

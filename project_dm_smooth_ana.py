@@ -15,7 +15,7 @@ mx_list_coarse = np.logspace(-1, 4, 77)
 mx_list_fine = np.logspace(-1, 4, 153)
 
 alpha_list_coarse = np.logspace(-7, -3, 79)
-alpha_list_coarse_extended= np.logspace(-7, -1, 118)
+alpha_list_coarse_extended= np.logspace(-7, 1, 157)
 alpha_list_fine = np.logspace(-7, -3, 157)
 
 bins = np.arange(0, 10000, 50)  # keV
@@ -127,16 +127,16 @@ if __name__ == '__main__':
         mx_list = mx_list_coarse
         alpha_list = alpha_list_coarse
 
-    elif dataset == 'fine_left':
-        mx_list = mx_list_fine[np.logical_and(mx_list_fine > 0.1, mx_list_fine < 1)]
-        alpha_list = alpha_list_coarse_extended
-
     elif dataset == 'coarse_extended_right':
         mx_list = mx_list_coarser_extended[mx_list_coarser_extended < 1e8]
         alpha_list = alpha_list_coarse
 
-    elif dataset == 'coarse_right':
-        mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 1e2, mx_list_coarse < 1e3)]
+    elif dataset == 'coarse_extended_alpha_left':
+        mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 0.1, mx_list_coarse < 1)]
+        alpha_list = alpha_list_coarse_extended
+        
+    elif dataset == 'coarse_extended_alpha_right':
+        mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 50, mx_list_coarse < 150)]
         alpha_list = alpha_list_coarse_extended
 
     if mphi == 0:

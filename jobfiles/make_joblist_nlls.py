@@ -2,14 +2,14 @@ import os
 import numpy as np
 
 tail_only = False
-dm_only = False
+dm_only = True
 
 spheres = ['sphere_20241202', 'sphere_20250103']
 
-datasets = ['coarse', 'coarse_extended_right']
-mphi_lists  = [[10, 1, 0.1, 0.01, 0], [0.1, 0.01, 0]]
+datasets = ['coarse_extended_alpha_left', 'coarse_extended_alpha_right']
+mphi_lists  = [[0, 0.01, 0.1, 1, 10], [10]]
 
-outfile = 'joblist_nlls_all_250313.txt'
+outfile = 'joblist_nlls_extended_250314.txt'
 
 job_file = open(outfile, "wt")
 print(f'Writing file {outfile}')

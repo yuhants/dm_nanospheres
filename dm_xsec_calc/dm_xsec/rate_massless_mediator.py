@@ -20,6 +20,7 @@ ve = 8.172e-4    # ve parameter from Zurek group paper
 nvels = 200      # Number of velocities to include in integration
 nq    = 20000    # Number of momentum transfer to sample
 qmin  = 10000    # Lowest momenturm transfer considered (eV)
+q_ana_thr = 25e6 # The maximum momentum transfer to analyze
 
 def f_halo(v):
     """
@@ -101,7 +102,8 @@ def dR_dq(mx, mphi, alpha, q, vlist, R):
         
     int_vec = rhoDM / mx * vlist * f_halo(vlist)
     
-    drdq, drdq_out = np.empty_like(q), np.empty_like(q)
+    # drdq, drdq_out = np.empty_like(q), np.empty_like(q)
+    drdq = np.empty_like(q)
     for i in range(q.size):
         drdq[i] = np.trapz( int_vec * dsigdq.T[i], x=vlist )
         # drdq_out[i] = np.trapz( int_vec * dsigdq_out.T[i], x=vlist )
@@ -123,7 +125,7 @@ def calc_event_rate(R_um, mx_gev, alpha_t):
     #     q = np.logspace(3, 10, 1000) # eV
     # else:
     #     q = np.logspace(5, 10, 1000)
-    pmax = np.min((2.5 * vesc * mx, 10e6))
+    pmax = np.min((2.5 * vesc * mx, q_ana_thr))
     q  = np.linspace(qmin, pmax, nq)
 
     vlist = np.linspace(vmin, vesc, nvels)
@@ -134,7 +136,7 @@ def calc_event_rate(R_um, mx_gev, alpha_t):
     return q_kev, drdq
 
 if __name__ == "__main__":
-    outdir = r"/home/yt388/palmer_scratch/data/massless_mediator"
+    outdir = r"/home/yt388/palmer_scratch/data/dm_rate/massless_mediator"
     if(not os.path.isdir(outdir)):
         os.mkdir(outdir)
 
@@ -159,10 +161,15 @@ if __name__ == "__main__":
     R_um = 0.083
     mx_list_coarser_extended = np.logspace(4, 9, 39)
     mx_list_coarse = np.logspace(-1, 4, 77)
+    
     alpha_list_coarse = np.logspace(-7, -3, 79)
+    alpha_list_coarse_extended= np.logspace(-7, 1, 157)
 
     mx_list = mx_list_coarser_extended
     alpha_list = alpha_list_coarse
+
+    # mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 0.1, mx_list_coarse < 1)]
+    # alpha_list = alpha_list_coarse_extended
 
     if R_um < 0.5:
         sphere_type = 'nanosphere'
@@ -173,6 +180,14 @@ if __name__ == "__main__":
 
     for i, mx in enumerate(mx_list):
         for j, alpha in enumerate(alpha_list):
+            if q_ana_thr == 25e6:
+                outfile = outdir + f'/drdq_25mevthr_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
+            else:
+                outfile = outdir + f'/drdq_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
+            if( os.path.isfile(outfile) ):
+                print("Skipping: ", outfile)
+                continue
+
             print(f'Working on M_x = {mx:.3e} GeV, alpha_n = {alpha:.3e}')
             qq, drdq = calc_event_rate(R_um, mx, alpha)
-            np.savez(outdir + f'/drdq_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz', mx_gev=mx, alpha_n=alpha, q_kev=qq, drdq_hz_kev=drdq)
+            np.savez(outfile, mx_gev=mx, alpha_n=alpha, q_kev=qq, drdq_hz_kev=drdq)
