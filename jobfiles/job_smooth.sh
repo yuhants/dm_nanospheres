@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J project_smooth_coarse_extended_left_0
+#SBATCH -J project_smooth_coarse_extended_right_10
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
@@ -10,5 +10,5 @@
 
 module load miniconda
 conda activate microsphere
-python ../project_dm_smooth_ana.py 0 coarse_extended_alpha_left
+python ../project_dm_smooth_ana.py 10 coarse_extended_alpha_right
 

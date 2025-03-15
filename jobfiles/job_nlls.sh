@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J nanosphere_20250103_nll_coarse_0_01
+#SBATCH -J nanosphere_20241202_nll_coarse_extended_alpha_right_10
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
@@ -10,5 +10,5 @@
 
 module load miniconda
 conda activate microsphere
-python ../calc_profile_nlls.py sphere_20250103 0.01 coarse
+python ../calc_profile_nlls.py sphere_20241202 10 coarse_extended_alpha_right
 

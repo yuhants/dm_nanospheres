@@ -7,6 +7,8 @@ from scipy.optimize import minimize
 
 from multiprocessing import Pool
 
+qmax = 25000
+
 R_um = 0.083
 length_search_window = 5e-5  # We perform search every 50 us
 
@@ -60,9 +62,14 @@ def load_sphere_data(sphere):
 def func2(x, z, f):
     return 0.5 * erf((x - z) * f) + 0.5
 
-
 def nll_dm_scaled_dm_only(q_scale, n_scale,
                           drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2):
+    if qmax != 10000:
+        old_size = bc.size
+        bins = np.arange(0, qmax, 50)  # keV
+        bc = 0.5 * (bins[:-1] + bins[1:])
+        hist = np.pad(hist, (0, bc.size-old_size), mode='constant', constant_values=0)
+
     # DM scattering rate has already resampled to the same bins
     # Rescale DM model to account for uncertainties in
     # E field and neutron number
@@ -158,10 +165,19 @@ def calc_profile_nlls(mphi, dataset='coarse'):
         mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 50, mx_list_coarse < 150)]
         alpha_list = alpha_list_coarse_extended
 
-    if mphi == 0:
-        rate_file = f'{rate_dir}/massless_mediator/drdqz_nanosphere_{R_um:.2e}_{dataset}_massless.npz'
+    elif dataset == 'coarse_10ev_left':
+        mx_list = mx_list_coarse[mx_list_coarse < 50]
+        alpha_list = alpha_list_coarse
+
+    if qmax == 25000:
+        prefix = '_25mevthr'
     else:
-        rate_file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz_nanosphere_{R_um:.2e}_{dataset}_{mphi:.0e}.npz'
+        prefix = ''
+
+    if mphi == 0:
+        rate_file = f'{rate_dir}/massless_mediator/drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_massless.npz'
+    else:
+        rate_file = f'{rate_dir}/mphi_{mphi:.0e}/drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_{mphi:.0e}.npz'
     drdqzn_npz = np.load(rate_file)
     drdqzn = drdqzn_npz['drdqzn']
 
@@ -193,9 +209,14 @@ if __name__ == "__main__":
     # Calculate profile NLLs for each DM parameter
     mx_list, alpha_list, nlls_all, res_x_all = calc_profile_nlls(mphi, dataset)
 
-    if mphi == 0:
-        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_dm_only_{sphere}_massless_{dataset}.npz'
+    if qmax == 25000:
+        prefix = '_25mevthr'
     else:
-        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_dm_only_{sphere}_{mphi:.0e}_{dataset}.npz'
+        prefix = ''
+
+    if mphi == 0:
+        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_dm_only{prefix}_{sphere}_massless_{dataset}.npz'
+    else:
+        file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_dm_only{prefix}_{sphere}_{mphi:.0e}_{dataset}.npz'
     print(f'Writing file {file_out}')
     np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all, res_x=res_x_all)

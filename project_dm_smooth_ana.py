@@ -9,6 +9,7 @@ import analysis_utils as utils
 from multiprocessing import Pool
 
 R_um = 0.083
+qmax = 25000
 
 mx_list_coarser_extended = np.logspace(4, 9, 39)
 mx_list_coarse = np.logspace(-1, 4, 77)
@@ -18,8 +19,12 @@ alpha_list_coarse = np.logspace(-7, -3, 79)
 alpha_list_coarse_extended= np.logspace(-7, 1, 157)
 alpha_list_fine = np.logspace(-7, -3, 157)
 
-bins = np.arange(0, 10000, 50)  # keV
-bc = 0.5 * (bins[:-1] + bins[1:])
+if qmax == 25000:
+    bins = np.arange(0, qmax, 50)  # keV
+    bc = 0.5 * (bins[:-1] + bins[1:])
+else:
+    bins = np.arange(0, 10000, 50)  # keV
+    bc = 0.5 * (bins[:-1] + bins[1:])
 
 def iter_smooth_drdq(drdq):
     ret = np.copy(drdq)
@@ -45,20 +50,17 @@ def iter_smooth_drdq(drdq):
 def get_drdqz(qq, drdq):
     drdq = iter_smooth_drdq(drdq)
 
-    qmax = 10000
     if (qq[1] - qq[0] > 25 and np.max(qq) > qmax):
         qq_old, drdq_old = qq, drdq
-
         good_idx = drdq_old > 0
-            
         qq = np.arange(start=25, stop=np.max(qq_old[good_idx]), step=25)
         drdq = np.exp(np.interp(qq, qq_old[good_idx], np.log(drdq_old[good_idx])))
 
     elif (qq[1] - qq[0] < 10 and np.max(qq) < qmax):
-        qq_old, drdq_old = qq, drdq            
-        qq = np.arange(start=1, stop=qmax, step=1)
-
-        drdq = np.exp(np.interp(qq, qq_old, np.log(drdq_old), right=-np.inf))
+        qq_old, drdq_old = qq, drdq
+        good_idx = drdq_old > 0
+        qq = np.arange(start=5, stop=qmax, step=5)
+        drdq = np.exp(np.interp(qq, qq_old[good_idx], np.log(drdq_old[good_idx]), right=-np.inf))
 
     qq_out = qq[qq < qmax]
     ret = np.empty_like(drdq[qq < qmax])
@@ -139,6 +141,10 @@ if __name__ == '__main__':
         mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 50, mx_list_coarse < 150)]
         alpha_list = alpha_list_coarse_extended
 
+    elif dataset == 'coarse_10ev_left':
+        mx_list = mx_list_coarse[mx_list_coarse < 50]
+        alpha_list = alpha_list_coarse
+
     if mphi == 0:
         data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/massless_mediator'
     else:
@@ -161,10 +167,15 @@ if __name__ == '__main__':
         #     print(j, alpha)
         #     drdqzn_all[i, j] = get_final_drdqz(mphi, mx, alpha, 180)
 
-    if mphi == 0:
-        outfile_name = f'drdqz_nanosphere_{R_um:.2e}_{dataset}_massless.npz'
+    if qmax == 25000:
+        prefix = '_25mevthr'
     else:
-        outfile_name = f'drdqz_nanosphere_{R_um:.2e}_{dataset}_{mphi:.0e}.npz'
+        prefix = ''
+
+    if mphi == 0:
+        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_massless.npz'
+    else:
+        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_{mphi:.0e}.npz'
     outfile = os.path.join(data_dir, outfile_name)
     print(f'Saving file {outfile}')
     np.savez(outfile, bc_kev=bc, drdqzn=drdqzn_all, mx_list=mx_list, alpha_list=alpha_list)

@@ -67,9 +67,9 @@ alpha_list = alpha_list_coarse
 # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 1, mx_list_fine < 200)]
 # alpha_list = alpha_list_fine[alpha_list_fine > 1e-6]
 
-mphi_list  = [0.1]
+mphi_list  = [0.01]
 
-job_file = open("joblist_coarse_0_1ev.txt", "wt")
+job_file = open("joblist_coarse_0_01ev_25mevthr.txt", "wt")
 
 for mphi in mphi_list:
     for mx in mx_list:
