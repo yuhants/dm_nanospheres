@@ -25,8 +25,8 @@ vesc  = 1.815e-3 # galactic escape velocity
 v0    = 7.34e-4  # v0 parameter from Zurek group paper
 ve    = 8.172e-4 # ve parameter from Zurek group paper
 
-# The maximum momentum transfer to analyze
-q_ana_thr = 25e6
+# The maximum momentum transfer to calculate (eV)
+qmax_calc = 100e6
 
 ## Functions
 def f_halo(v):
@@ -316,10 +316,9 @@ def run_nugget_calc(R_um, M_X_in, alpha_n_in, m_phi):
     # Ignore dR/dq larger than 10 MeV/c for heavier dark matter
     # Modified 20250314 to get more features for the 10 eV cases
     # and possible re-run the analysis
-    if q_ana_thr == 25e6:
-        pmax = np.min((2.5 * vesc * M_X, 25e6))
-    else:
-        pmax = np.min((2.5 * vesc * M_X, 10e6))
+    # Modified 20250316 - calculate up to 100 MeV to avoid distortion of
+    # differential rate below the 10 MeV analysis threshold
+    pmax = np.min((2.5 * vesc * M_X, qmax_calc))
 
     q_lin  = np.linspace(qmin, pmax, nq)
     dsdq   = np.empty(shape=(nvels, nq))
@@ -361,8 +360,10 @@ def run_nugget_calc(R_um, M_X_in, alpha_n_in, m_phi):
     ## eV; dsigdqdv 
     # np.savez(outdir + f'/dsdqdv_{sphere_type}_{M_X_in:.5e}_{alpha_n:.5e}_{m_phi:.0e}.npz', mx_gev=M_X_in, alpha_n=alpha_n_in, q=q_lin, dsdqdv=dsdq, v=vlist) 
 
-    if q_ana_thr == 25e6:
+    if qmax_calc == 25e6:
         file_name = f'/drdq_25mevthr_{sphere_type}_{R_um:.2e}_{M_X_in:.5e}_{alpha_n:.5e}_{m_phi:.0e}.npz'
+    elif qmax_calc == 100e6:
+        file_name = f'/drdq_100mevthr_{sphere_type}_{R_um:.2e}_{M_X_in:.5e}_{alpha_n:.5e}_{m_phi:.0e}.npz'
     else:
         file_name = f'/drdq_{sphere_type}_{R_um:.2e}_{M_X_in:.5e}_{alpha_n:.5e}_{m_phi:.0e}.npz'
     np.savez(outdir+file_name, mx_gev=M_X_in, alpha_n=alpha_n_in, mphi_ev=m_phi, q_kev=q_kev, drdq_hz_kev=drdq)

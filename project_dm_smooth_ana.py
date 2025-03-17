@@ -22,9 +22,12 @@ alpha_list_fine = np.logspace(-7, -3, 157)
 if qmax == 25000:
     bins = np.arange(0, qmax, 50)  # keV
     bc = 0.5 * (bins[:-1] + bins[1:])
+    prefix = '_25mevthr'
 else:
     bins = np.arange(0, 10000, 50)  # keV
     bc = 0.5 * (bins[:-1] + bins[1:])
+    prefix = ''
+
 
 def iter_smooth_drdq(drdq):
     ret = np.copy(drdq)
@@ -101,9 +104,9 @@ def smear_drdqz_gauss(qq, drdqz, sigma_kev=180):
 
 def get_final_drdqz(mphi, mx, alpha, sigma_kev, return_bc=False):
     if mphi == 0:
-        file = f'{data_dir}/drdq_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
+        file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
     else:
-        file = f'{data_dir}/drdq_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+        file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
     drdq_npz = np.load(file)
 
     qq = drdq_npz['q_kev']
@@ -166,11 +169,6 @@ if __name__ == '__main__':
         # for j, alpha in enumerate(alpha_list):
         #     print(j, alpha)
         #     drdqzn_all[i, j] = get_final_drdqz(mphi, mx, alpha, 180)
-
-    if qmax == 25000:
-        prefix = '_25mevthr'
-    else:
-        prefix = ''
 
     if mphi == 0:
         outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_massless.npz'

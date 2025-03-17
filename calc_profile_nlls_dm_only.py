@@ -7,7 +7,8 @@ from scipy.optimize import minimize
 
 from multiprocessing import Pool
 
-qmax = 25000
+qmax_calc = 25000
+qmax_ana  = 10000
 
 R_um = 0.083
 length_search_window = 5e-5  # We perform search every 50 us
@@ -64,20 +65,22 @@ def func2(x, z, f):
 
 def nll_dm_scaled_dm_only(q_scale, n_scale,
                           drdqzn, bc, hist, eff_coefs, nll_offset, eff_chi2):
-    if qmax != 10000:
+    # If the max q in analysis is not 10 MeV, zero pad the histogram
+    if qmax_ana != 10000:
         old_size = bc.size
         bins = np.arange(0, qmax, 50)  # keV
         bc = 0.5 * (bins[:-1] + bins[1:])
         hist = np.pad(hist, (0, bc.size-old_size), mode='constant', constant_values=0)
 
-    # DM scattering rate has already resampled to the same bins
+    # DM scattering rate has already resampled to the same bin width
     # Rescale DM model to account for uncertainties in
     # E field and neutron number
     # Multiply `drdqzn` by `q_scale` to account for normalization
     # against the scaled bin width
     # Assume dr/dq scales with n_neutron**2
+    drdqzn_in_range = drdqzn[:bc.size]
     qq_scaled = bc * q_scale
-    drdqzn_scaled = np.interp(qq_scaled, bc, drdqzn*q_scale, left=0, right=0) * n_scale**2
+    drdqzn_scaled = np.interp(qq_scaled, bc, drdqzn_in_range*q_scale, left=0, right=0) * n_scale**2
 
     # DM contribution that accounts for live time and bin width
     hist_norm = np.sum(hist) * length_search_window * (bc[1] - bc[0])
@@ -146,7 +149,6 @@ def minimize_nll_dm_only(drdqzn, bounds=None):
     else:
         return np.nan, np.full(2, np.nan)
         
-
 def calc_profile_nlls(mphi, dataset='coarse'):
 
     if dataset == 'coarse':
@@ -169,11 +171,7 @@ def calc_profile_nlls(mphi, dataset='coarse'):
         mx_list = mx_list_coarse[mx_list_coarse < 50]
         alpha_list = alpha_list_coarse
 
-    if qmax == 25000:
-        prefix = '_25mevthr'
-    else:
-        prefix = ''
-
+    prefix = '_25mevthr' if qmax_calc == 25000 else ''
     if mphi == 0:
         rate_file = f'{rate_dir}/massless_mediator/drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_massless.npz'
     else:
@@ -209,14 +207,11 @@ if __name__ == "__main__":
     # Calculate profile NLLs for each DM parameter
     mx_list, alpha_list, nlls_all, res_x_all = calc_profile_nlls(mphi, dataset)
 
-    if qmax == 25000:
-        prefix = '_25mevthr'
-    else:
-        prefix = ''
-
+    prefix = '_25mevthr' if qmax_calc == 25000 else ''
     if mphi == 0:
         file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_dm_only{prefix}_{sphere}_massless_{dataset}.npz'
     else:
         file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_dm_only{prefix}_{sphere}_{mphi:.0e}_{dataset}.npz'
+
     print(f'Writing file {file_out}')
     np.savez(file_out, mx=mx_list, alpha=alpha_list, nll=nlls_all, res_x=res_x_all)

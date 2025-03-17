@@ -20,7 +20,8 @@ ve = 8.172e-4    # ve parameter from Zurek group paper
 nvels = 200      # Number of velocities to include in integration
 nq    = 20000    # Number of momentum transfer to sample
 qmin  = 10000    # Lowest momenturm transfer considered (eV)
-q_ana_thr = 25e6 # The maximum momentum transfer to analyze
+
+qmax_calc = 100e6 # The maximum momentum transfer to analyze
 
 def f_halo(v):
     """
@@ -78,7 +79,7 @@ def dsig_dq(dsigdomega, mx, alpha, q, vlist, R):
         # dsigdq[q < q_thr] = 0
 
         # Cut off unphysical large-q scattering
-        # This is necessary for get a realistic estimate
+        # This is necessary to get a realistic estimate
         # because Coulomb scattering xsec diverges
         dsigdq[q > 2 * p] = 0
         ss[i] = dsigdq
@@ -125,7 +126,7 @@ def calc_event_rate(R_um, mx_gev, alpha_t):
     #     q = np.logspace(3, 10, 1000) # eV
     # else:
     #     q = np.logspace(5, 10, 1000)
-    pmax = np.min((2.5 * vesc * mx, q_ana_thr))
+    pmax = np.min((2.5 * vesc * mx, qmax_calc))
     q  = np.linspace(qmin, pmax, nq)
 
     vlist = np.linspace(vmin, vesc, nvels)
@@ -165,7 +166,8 @@ if __name__ == "__main__":
     alpha_list_coarse = np.logspace(-7, -3, 79)
     alpha_list_coarse_extended= np.logspace(-7, 1, 157)
 
-    mx_list = mx_list_coarser_extended
+    mx_list = mx_list_coarser_extended[np.logical_and(mx_list_coarser_extended >1e4, mx_list_coarser_extended < 1e8)]
+    # mx_list = mx_list_coarse
     alpha_list = alpha_list_coarse
 
     # mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 0.1, mx_list_coarse < 1)]
@@ -180,14 +182,17 @@ if __name__ == "__main__":
 
     for i, mx in enumerate(mx_list):
         for j, alpha in enumerate(alpha_list):
-            if q_ana_thr == 25e6:
+            if qmax_calc == 25e6:
                 outfile = outdir + f'/drdq_25mevthr_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
+            elif qmax_calc == 100e6:
+                outfile = outdir + f'/drdq_100mevthr_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
             else:
                 outfile = outdir + f'/drdq_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
             if( os.path.isfile(outfile) ):
                 print("Skipping: ", outfile)
                 continue
 
-            print(f'Working on M_x = {mx:.3e} GeV, alpha_n = {alpha:.3e}')
+            # print(f'Working on M_x = {mx:.3e} GeV, alpha_n = {alpha:.3e}')
             qq, drdq = calc_event_rate(R_um, mx, alpha)
+            print(f'Saving file {outfile}')
             np.savez(outfile, mx_gev=mx, alpha_n=alpha, q_kev=qq, drdq_hz_kev=drdq)
