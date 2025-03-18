@@ -6,10 +6,10 @@ dm_only = True
 
 spheres = ['sphere_20241202', 'sphere_20250103']
 
-datasets = ['coarse', 'coarse_extended_right']
-mphi_lists  = [ [0, 0.1, 1, 10], [0, 0.1]]
+datasets = ['coarse', 'coarse_extended_right', 'coarse_extended_alpha_right']
+mphi_lists  = [ [0, 0.01, 0.1, 1, 10], [0, 0.01, 0.1], [10]]
 
-outfile = 'joblist_nlls_25mevthr_250316.txt'
+outfile = 'joblist_nlls_100mevthr_250317.txt'
 
 job_file = open(outfile, "wt")
 print(f'Writing file {outfile}')

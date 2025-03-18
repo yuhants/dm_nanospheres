@@ -10,6 +10,10 @@ from multiprocessing import Pool
 qmax_calc = 25000
 qmax_ana  = 10000
 
+# Newest case use calculated rate up to 100 MeV, but
+# only smooth up to 25 MeV
+prefix = '_100mevthr' if qmax_calc == 25000 else ''
+
 R_um = 0.083
 length_search_window = 5e-5  # We perform search every 50 us
 
@@ -164,14 +168,13 @@ def calc_profile_nlls(mphi, dataset='coarse'):
         alpha_list = alpha_list_coarse_extended
         
     elif dataset == 'coarse_extended_alpha_right':
-        mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 50, mx_list_coarse < 150)]
+        mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 50, mx_list_coarse < 500)]
         alpha_list = alpha_list_coarse_extended
 
     elif dataset == 'coarse_10ev_left':
         mx_list = mx_list_coarse[mx_list_coarse < 50]
         alpha_list = alpha_list_coarse
 
-    prefix = '_25mevthr' if qmax_calc == 25000 else ''
     if mphi == 0:
         rate_file = f'{rate_dir}/massless_mediator/drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_massless.npz'
     else:
@@ -207,7 +210,6 @@ if __name__ == "__main__":
     # Calculate profile NLLs for each DM parameter
     mx_list, alpha_list, nlls_all, res_x_all = calc_profile_nlls(mphi, dataset)
 
-    prefix = '_25mevthr' if qmax_calc == 25000 else ''
     if mphi == 0:
         file_out = f'{data_dir}/profile_nlls/{sphere}/profile_nlls_dm_only{prefix}_{sphere}_massless_{dataset}.npz'
     else:
