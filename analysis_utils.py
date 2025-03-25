@@ -491,7 +491,7 @@ def get_area_driven_peak(ffd, ppd, passband=(88700, 89300), noise_floor=None, pl
     return v2_drive
 
 def get_c_mv(data_files_ordered, vp2p, omegad, passband, charge=3, n_chunk=10):
-    m = 2000 * (83.5e-9**3) * (4 / 3) * np.pi  # sphere mass
+    m = 2000 * (83e-9**3) * (4 / 3) * np.pi  # sphere mass
     
     ffss, ppss = [], []
     for file in data_files_ordered:
@@ -511,7 +511,7 @@ def get_c_mv(data_files_ordered, vp2p, omegad, passband, charge=3, n_chunk=10):
         
     c_cals = []
     for i, vpp in enumerate(vp2p):
-        fd0 = (vpp / 2) * 120 * charge * 1.6e-19
+        fd0 = (vpp / 2) * 108 * charge * 1.6e-19
 
         c_cal = []
         for j, ff in enumerate(ffss[i]):
