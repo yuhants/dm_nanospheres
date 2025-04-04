@@ -5,7 +5,7 @@ import analysis_utils as utils
 
 window_length = 5000
 
-# amp2kev = 7187.368332843102     # Sphere 20241202
+# amp2kev = 5945.245097647231     # Sphere 20241202
 # sphere = 'sphere_20241202'
 # datasets = [
 #             '20241202_8e-8mbar_long',
@@ -45,19 +45,19 @@ window_length = 5000
 #                 ]
 # n_files = [1440, 1440, 1440, 1440, 1440, 821, 640, 181, 1440, 1418, 917, 1169, 1565, 1440, 1164, 601]
 
-amp2kev = 7157.624533259538     # Sphere 20250103
+amp2kev = 5923.2059527417405     # Sphere 20250103
 sphere = 'sphere_20250103'
 datasets = [
-            # '20250104_4e-8mbar_alignment0_long',
-            # '20250105_2e-8mbar_alignment0_long',
-            # '20250106_2e-8mbar_8e_alignment0_long',
-            # '20250107_1e-8mbar_8e_alignment0_long',
-            # '20250108_1e-8mbar_8e_alignment0_long',
-            # '20250109_1e-8mbar_8e_alignment1_long',
-            # '20250110_1e-8mbar_8e_alignment1_long',
-            # '20250111_1e-8mbar_8e_alignment1_long',
-            # '20250112_9e-9mbar_8e_alignment1_long',
-            # '20250113_5e-8mbar_8e_alignment1_long',
+            '20250104_4e-8mbar_alignment0_long',
+            '20250105_2e-8mbar_alignment0_long',
+            '20250106_2e-8mbar_8e_alignment0_long',
+            '20250107_1e-8mbar_8e_alignment0_long',
+            '20250108_1e-8mbar_8e_alignment0_long',
+            '20250109_1e-8mbar_8e_alignment1_long',
+            '20250110_1e-8mbar_8e_alignment1_long',
+            '20250111_1e-8mbar_8e_alignment1_long',
+            '20250112_9e-9mbar_8e_alignment1_long',
+            '20250113_5e-8mbar_8e_alignment1_long',
             '20250114_1e-8mbar_1e_alignment1_long',
             '20250115_8e-9mbar_0e_alignment1_long',
             '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
@@ -71,16 +71,16 @@ datasets = [
             '20250125_7e-9mbar_1e_alignment1_long'    
         ]
 data_prefixs = [
-                # '20250104_d_',
-                # '20250105_d_',
-                # '20250106_d_',
-                # '20250107_d_',
-                # '20250108_d_',
-                # '20250109_d_',
-                # '20250110_d_',
-                # '20250111_d_',
-                # '20250112_d_',
-                # '20250113_d_',
+                '20250104_d_',
+                '20250105_d_',
+                '20250106_d_',
+                '20250107_d_',
+                '20250108_d_',
+                '20250109_d_',
+                '20250110_d_',
+                '20250111_d_',
+                '20250112_d_',
+                '20250113_d_',
                 '20250114_d_',
                 '20250115_d_',
                 '20250116_d_',
@@ -93,9 +93,8 @@ data_prefixs = [
                 '20250124_d_',
                 '20250125_d_',
                 ]
-n_files = [1440, 1440, 1440, 1440, 1983, 1463, 1440, 1440, 1440, 1440, 1121]
-# n_files = [1440, 900, 1440, 1440, 1440, 1440, 1440, 1440, 780, 1440, 1440, 1440, 1440, 1440, 1983, 
-#            1463, 1440, 1440, 1440, 1440, 1121]
+n_files = [1440, 900, 1440, 1440, 1440, 1440, 1440, 1440, 780, 1440, 1440, 1440, 1440, 1440, 1983, 
+           1463, 1440, 1440, 1440, 1440, 1121]
 
 def get_noise_level_hist(sphere, dataset, data_prefix, n_files):
     data_dir = rf'E:\dm_data_processed_amp_chisquare\{sphere}\{dataset}'
@@ -121,7 +120,7 @@ def get_noise_level_hist(sphere, dataset, data_prefix, n_files):
     print(f'Saving file {outfile}')
     np.savez(outfile, bins=bins, hh_noise_kev=hh_ret)
 
-def get_amp_chi2_hist(sphere, dataset, data_prefix, n_files, noise_thr=250):
+def get_amp_chi2_hist(sphere, dataset, data_prefix, n_files, noise_thr=200):
     data_dir = rf'E:\dm_data_processed_amp_chisquare\{sphere}\{dataset}'
 
     bins_amp  = np.arange(0, 10000, 50)
@@ -161,7 +160,7 @@ def get_pulse_time(timestamp, idx_in_window, pulse_window_idx, window_length=500
     ret = (pulse_window_idx[0] * window_length + pulse_idx_in_window) * dtt
     return timestamp + ret
 
-def get_large_pulses(sphere, dataset, data_prefix, n_files, noise_thr=250, amp_thr_kev=2000):
+def get_large_pulses(sphere, dataset, data_prefix, n_files, noise_thr=200, amp_thr_kev=2000):
     raw_data_dir = fr'E:\dm_data\{sphere}\{dataset}'
     data_dir = rf'E:\dm_data_processed_amp_chisquare\{sphere}\{dataset}'
     outfile = fr'{dataset}_large_pulse_waveforms.hdf5'
@@ -215,19 +214,21 @@ def get_large_pulses(sphere, dataset, data_prefix, n_files, noise_thr=250, amp_t
 
     with h5py.File(os.path.join(data_dir, outfile), 'w') as fout:
         print(f'Writing file {os.path.join(data_dir, outfile)}')
-
         g = fout.create_group('pulses')
 
-        g0 = g.create_dataset('file_idx', data=np.concatenate(file_idx, axis=0), dtype=np.int32)
-        g1 = g.create_dataset('pulse_amp', data=np.concatenate(pulse_amp, axis=0), dtype=np.float64)
-        g2 = g.create_dataset('pulse_chi2', data=np.concatenate(pulse_chi2, axis=0), dtype=np.float64)
-        g3 = g.create_dataset('pulse_time', data=np.concatenate(pulse_time, axis=0), dtype=np.float64)
-        g4 = g.create_dataset('pulse_waveform', data=np.concatenate(pulse_waveform, axis=0), dtype=np.float64)
+        if len(file_idx) == 0:
+            print('No large pulses')
+        else:
+            g0 = g.create_dataset('file_idx', data=np.concatenate(file_idx, axis=0), dtype=np.int32)
+            g1 = g.create_dataset('pulse_amp', data=np.concatenate(pulse_amp, axis=0), dtype=np.float64)
+            g2 = g.create_dataset('pulse_chi2', data=np.concatenate(pulse_chi2, axis=0), dtype=np.float64)
+            g3 = g.create_dataset('pulse_time', data=np.concatenate(pulse_time, axis=0), dtype=np.float64)
+            g4 = g.create_dataset('pulse_waveform', data=np.concatenate(pulse_waveform, axis=0), dtype=np.float64)
 
         fout.close()
 
 if __name__ == '__main__':
     for j, dataset in enumerate(datasets):
         # get_noise_level_hist(sphere, dataset, data_prefixs[j], n_files[j])
-        # get_amp_chi2_hist(sphere, dataset, data_prefixs[j], n_files[j], 250)
-        get_large_pulses(sphere, dataset, data_prefixs[j], n_files[j], noise_thr=250, amp_thr_kev=2000)
+        get_amp_chi2_hist(sphere, dataset, data_prefixs[j], n_files[j], 200)
+        get_large_pulses(sphere, dataset, data_prefixs[j], n_files[j], noise_thr=200, amp_thr_kev=2000)

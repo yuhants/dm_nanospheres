@@ -6,30 +6,33 @@ import h5py
 from scipy.signal import decimate
 import analysis_utils as utils
 
-# amp2kev = 7381.747090660193  # Sphere 20241202; averaged over 5 calibration datasets
-# amp2kev = 6927.379154444802  # Sphere 20241219; calibration 20241220
-# amp2kev = 6844.611961407297  # Sphere 20241221; calibration 20241222
-# amp2kev =  7034.799462287863  # Sphere 20241226; calibration 20241228
-
-# amp2kev = 7396.062147743912  # Sphere 20250103; averaged over 8 calibration datasets
-# sigma_p = 193.80085102332893  # Sphere 20250103; averaged over 8 calibration datasets
-
-## New calibration values for Sphere 20250103
-c_mv = 8.263269630174246e-08   # Sphere 20250103; calibration 20250114
-amp2kev = 7157.624533259538
-sigma_p = 176.79818534573002
-
-## New calibration values for Sphere 20241202
+#### Old (incorrect) calibration factors assuming an =======
+#### incorrect electric field (keep here for record) =======
+## Old (incorrect) calibration values for Sphere 20250103
+# amp2kev = 7157.624533259538
+# sigma_p = 176.79818534573002
+## Old (incorrect) calibration values for Sphere 20241202
 # amp2kev = 7187.368332843102
 # sigma_p = 171.4410156651695
-
-# Sphere 20241221
+## Sphere 20241221
 # amp2kev = 6470.190290219283
 # sigma_p = 162.34784893238404
-
-# Sphere 20241226
+## Sphere 20241226
 # amp2kev = 6959.135681055844
 # sigma_p = 136.24214178893865
+#### End of incorrect calibraiton factors ==================
+
+#### Note added 20250402
+# The saved analyzed data are processed using the old calibration factors
+# NOT the correct values listed below
+# there is a tiny difference in chi2 because of binning (`sigma_p/amp2kev`)
+# but we will ignore that small and unphysical difference in the calculated chi2
+# and refrain from re-processing the entire DM search dataset
+
+# amp2kev, sigma_p = 5945.245097647231, 148.3093981742833   # Sphere 20241202
+amp2kev, sigma_p = 5923.2059527417405, 146.88560114966003 # Sphere 20250103
+# amp2kev, sigma_p = 5353.659646347421, 140.30416104319391  # Sphere 20241221
+# amp2kev, sigma_p = 5766.901999580749, 118.528433330351    # Sphere 20241226
 
 sigma_p_amp = sigma_p / amp2kev
 
