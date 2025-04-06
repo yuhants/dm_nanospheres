@@ -338,6 +338,7 @@ def recon_pulse(idx, dtt, zz_bp, dd,
 
 def get_unnormalized_amps(data_files, 
                           noise=False,
+                          no_search=False,
                           positive_pulse=True,
                           passband=(30000, 80000),
                           analysis_window_length=50000,
@@ -374,7 +375,6 @@ def get_unnormalized_amps(data_files,
             # 20241205: use a much narrower search window (25 indices; 5 us)
             # 20250211: change window length to 50000 indices and search window to 50 us
             # to be consistent with DM search
-            # window, f, f_lp, amp = recon_pulse(idx, dtt, zz_bp, dd, False, None, 40000, 40000, 25, 80)
             window, f, f_lp, amp = recon_pulse(idx, dtt, zz_bp, dd, 
                                                analysis_window_length, 
                                                prepulse_window_length, 
@@ -382,11 +382,11 @@ def get_unnormalized_amps(data_files,
                                                search_offset_length)
 
             if noise:
-                # Uncommment the following line if no search
-                # just take th middle value
-                # amps.append(np.abs(f_lp[np.ceil(f_lp.size/2).astype(np.int64)])/1e9)
                 if np.isnan(amp):
                     pass
+                elif no_search:
+                    # If no search, just take th middle value
+                    amps.append(np.abs(f_lp[np.ceil(f_lp.size/2).astype(np.int64)])/1e9)
                 else:
                     amps.append(amp)
             else:
