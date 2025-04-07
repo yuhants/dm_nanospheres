@@ -2,10 +2,10 @@ import os
 import numpy as np
 
 R_um       = 0.083
-datasets = ['coarse_extended_alpha_right']
-mphi_lists  = [[10]]
+datasets = ['coarse', 'coarse_extended_right']
+mphi_lists  = [[10, 1, 0.1, 0], [0.1, 0]]
 
-outfile = 'joblist_smooth_100mevthr_remain_250317.txt'
+outfile = 'joblist_smooth_all_20250407.txt'
 
 print(f'Writing file {outfile}')
 job_file = open(outfile, "wt")

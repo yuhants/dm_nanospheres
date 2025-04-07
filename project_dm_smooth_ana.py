@@ -11,6 +11,7 @@ from multiprocessing import Pool
 R_um = 0.083
 qmax_calc = 100000
 qmax_out = 25000
+sigma_kev = 150
 
 mx_list_coarser_extended = np.logspace(4, 9, 39)
 mx_list_coarse = np.logspace(-1, 4, 77)
@@ -166,7 +167,7 @@ if __name__ == '__main__':
         params = list(np.vstack((np.full(n_alpha, mphi), 
                                  np.full(n_alpha, mx), 
                                  alpha_list,
-                                 np.full(n_alpha, 180))).T)
+                                 np.full(n_alpha, sigma_kev))).T)
 
         res = pool.starmap(get_final_drdqz, params)
         drdqzn_all[i] = np.asarray(res)
@@ -176,9 +177,9 @@ if __name__ == '__main__':
         #     drdqzn_all[i, j] = get_final_drdqz(mphi, mx, alpha, 180)
 
     if mphi == 0:
-        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_massless.npz'
+        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_150kevsigma_massless.npz'
     else:
-        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_{mphi:.0e}.npz'
+        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_150kevsigma_{mphi:.0e}.npz'
     outfile = os.path.join(data_dir, outfile_name)
     print(f'Saving file {outfile}')
     np.savez(outfile, bc_kev=bc, drdqzn=drdqzn_all, mx_list=mx_list, alpha_list=alpha_list)
