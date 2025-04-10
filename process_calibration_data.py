@@ -4,13 +4,16 @@ import os, glob
 import h5py
 import analysis_utils as utils
 
-# data_dir = r'/Volumes/Expansion/pulse_calibration'
-data_dir = r'/Volumes/LaCie/pulse_calibration'
-out_dir = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed'
+data_dir = r'E:\pulse_calibration'
+out_dir = r'C:\Users\yuhan\dm_nanospheres\data_processed\sphere_data'
+# data_dir = r'/Volumes/LaCie/pulse_calibration'
+# out_dir = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed'
 
 sphere = 'sphere_20250406'
-datasets = ['20250408_m28e_alignment0_4e-8mbar_trapping_0', '20250408_m28e_alignment0_4e-8mbar_trapping_1', '20250408_m28e_alignment0_4e-8mbar_trapping_2']
-dataset_prefixs = ['20250408_dg_m28e_200ns_', '20250408_dg_m28e_200ns_', '20250408_dg_m28e_200ns_']
+datasets = ['20250410_m31e_alignment1_3e-8mbar_trapping_0', '20250410_m31e_alignment1_3e-8mbar_trapping_1', '20250410_m31e_alignment1_3e-8mbar_trapping_2', '20250410_m31e_alignment1_3e-8mbar_trapping_3']
+dataset_prefixs = ['20250410_dg_m31e_200ns_', '20250410_dg_m31e_200ns_', '20250410_dg_m31e_200ns_', '20250410_dg_m31e_200ns_']
+# datasets = ['20250408_m28e_alignment0_4e-8mbar_trapping_0', '20250408_m28e_alignment0_4e-8mbar_trapping_1', '20250408_m28e_alignment0_4e-8mbar_trapping_2']
+# dataset_prefixs = ['20250408_dg_m28e_200ns_', '20250408_dg_m28e_200ns_', '20250408_dg_m28e_200ns_']
 
 # sphere = 'sphere_20250103'
 # For Sphere 20250103, exclude two calibration datasets (20240109*)
@@ -86,7 +89,7 @@ for i in range(len(voltages)):
 unnormalized_amps_noise_flattened = np.concatenate(unnormalized_amps_noise)
 unnormalized_amps_noise_nosearch_flattened = np.concatenate(unnormalized_amps_noise_nosearch)
 
-outfile_name = f'{sphere}_calibration_unnormalized_amps.h5py'
+outfile_name = f'{sphere}_calibration_unnormalized_amps_20240410.h5py'
 print(f'Writing file {outfile_name}')
 with h5py.File(os.path.join(out_dir, outfile_name), 'w') as fout:
     g = fout.create_group('processed_amplitudes')
