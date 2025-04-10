@@ -8,13 +8,17 @@ import analysis_utils as utils
 data_dir = r'/Volumes/LaCie/pulse_calibration'
 out_dir = '/Users/yuhan/work/nanospheres/data/pulse_calibration_processed'
 
-sphere = 'sphere_20250103'
+sphere = 'sphere_20250406'
+datasets = ['20250408_m28e_alignment0_4e-8mbar_trapping_0', '20250408_m28e_alignment0_4e-8mbar_trapping_1', '20250408_m28e_alignment0_4e-8mbar_trapping_2']
+dataset_prefixs = ['20250408_dg_m28e_200ns_', '20250408_dg_m28e_200ns_', '20250408_dg_m28e_200ns_']
+
+# sphere = 'sphere_20250103'
 # For Sphere 20250103, exclude two calibration datasets (20240109*)
 # because they have unusually low amplitudes; the charge could be off
-datasets = ['20250106_8e_alignment0_2e-8mbar_0', '20250106_8e_alignment0_2e-8mbar_1', '20250107_8e_alignment0_1e-8mbar_0', '20250107_8e_alignment0_1e-8mbar_1', 
-               '20250108_8e_alignment0_1e-8mbar_0', '20250108_8e_alignment0_1e-8mbar_1', '20250117_8e_alignment1_8e-9mbar_0', '20250117_8e_alignment1_8e-9mbar_1']
-dataset_prefixs = ['20250116_dg_8e_200ns_', '20250116_dg_8e_200ns_', '20250107_dg_8e_200ns_', '20250107_dg_8e_200ns_', 
-                   '20250108_dg_8e_200ns_', '20250108_dg_8e_200ns_', '20250117_dg_8e_200ns_', '20250117_dg_8e_200ns_']
+# datasets = ['20250106_8e_alignment0_2e-8mbar_0', '20250106_8e_alignment0_2e-8mbar_1', '20250107_8e_alignment0_1e-8mbar_0', '20250107_8e_alignment0_1e-8mbar_1', 
+#                '20250108_8e_alignment0_1e-8mbar_0', '20250108_8e_alignment0_1e-8mbar_1', '20250117_8e_alignment1_8e-9mbar_0', '20250117_8e_alignment1_8e-9mbar_1']
+# dataset_prefixs = ['20250116_dg_8e_200ns_', '20250116_dg_8e_200ns_', '20250107_dg_8e_200ns_', '20250107_dg_8e_200ns_', 
+#                    '20250108_dg_8e_200ns_', '20250108_dg_8e_200ns_', '20250117_dg_8e_200ns_', '20250117_dg_8e_200ns_']
 
 # sphere = 'sphere_20241202'
 # datasets = ['20241204_8e', '20241205_8e', '20241209_8e_alignment1_1', '20241213_8e_alignment2_4', '20241213_8e_alignment2_5']
