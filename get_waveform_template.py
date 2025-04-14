@@ -2,7 +2,7 @@ import numpy as np
 import analysis_utils as utils
 
 
-def get_pulse_shape(f_lp, amp, length=1500):
+def get_pulse_shape(zz_bp_in_window, f_lp, amp, length=1500):
     f_lp_scaled = f_lp / 1e9
     pulse_idx_in_win = np.argmin(np.abs(np.abs(f_lp_scaled) - amp))
 
@@ -12,25 +12,30 @@ def get_pulse_shape(f_lp, amp, length=1500):
         polarity = -1
 
     ret = polarity * f_lp_scaled[pulse_idx_in_win - length : pulse_idx_in_win + length]
-
+    zz_ret = zz_bp_in_window[pulse_idx_in_win - length : pulse_idx_in_win + length]
     # Get 50 us around the maximum amplitude
-    return ret
+    return zz_ret, ret
 
-sphere = 'sphere_20241202'
-datasets = ['20241204_8e', '20241205_8e', '20241209_8e_alignment1_1', '20241213_8e_alignment2_4', '20241213_8e_alignment2_5']
+# The prefix says 31e but we assume 128e in the analysis
+sphere = 'sphere_20250406'
+datasets = ['20250410_m128e_alignment1_3e-8mbar_trapping_4', '20250410_m128e_alignment1_3e-8mbar_trapping_5', '20250410_m128e_alignment1_3e-8mbar_trapping_6', '20250410_m128e_alignment1_3e-8mbar_trapping_7']
+prefixs = ['20250410_dg_m31e_200ns_', '20250410_dg_m31e_200ns_', '20250410_dg_m31e_200ns_', '20250410_dg_m31e_200ns_']
+
+# sphere = 'sphere_20241202'
+# datasets = ['20241204_8e', '20241205_8e', '20241209_8e_alignment1_1', '20241213_8e_alignment2_4', '20241213_8e_alignment2_5']
 
 # sphere = 'sphere_20250103'
 # datasets = ['20250106_8e_alignment0_2e-8mbar_0', '20250106_8e_alignment0_2e-8mbar_1', '20250107_8e_alignment0_1e-8mbar_0', '20250107_8e_alignment0_1e-8mbar_1', 
 #             '20250108_8e_alignment0_1e-8mbar_0', '20250108_8e_alignment0_1e-8mbar_1', '20250117_8e_alignment1_8e-9mbar_0', '20250117_8e_alignment1_8e-9mbar_1']
 
-voltages = [20, 10, 12.5, 15, 17.5]
+voltages = [17.5, 15, 12.5, 10, 7.5, 5, 2.5]
 nfiles = 10
 
 for v in voltages:
     print(v)
 
-    pulse_shapes = []
-    for dataset in datasets:
+    zz_pulses, pulse_shapes = [], []
+    for j, dataset in enumerate(datasets):
         print(f'Working on {dataset}')
 
         for i in range(nfiles):
@@ -38,7 +43,8 @@ for v in voltages:
             if date == '20250106':
                 date = '20250116'  # because of an error in naming the files...
 
-            data_file = rf'/Volumes/LaCie/pulse_calibration/{sphere}/{dataset}/{date}_dg_8e_200ns_{v}v_{i}.hdf5'
+            # data_file = rf'/Volumes/LaCie/pulse_calibration/{sphere}/{dataset}/{date}_dg_8e_200ns_{v}v_{i}.hdf5'
+            data_file = rf'E:\pulse_calibration\{sphere}\{dataset}\{prefixs[j]}{v}v_{i}.hdf5'
 
             dtt, nn = utils.load_timestreams(data_file, ['D', 'G'])
             fs = int(np.ceil(1/dtt))
@@ -53,15 +59,19 @@ for v in voltages:
                 window, f, f_lp, amp = utils.recon_pulse(drive_idx, dtt, zz_bp, dd, 50000, 50000, 250, 20)
                 if window is None:
                     continue
-                pulse_shape = get_pulse_shape(f_lp, amp, 1500)
+                zz_pulse, pulse_shape = get_pulse_shape(zz_bp[window], f_lp, amp, 1500)
 
                 if pulse_shape.size != 3000:
                     print('Skipping pulse near the end of file')
                     continue
+
+                zz_pulses.append(zz_pulse)
                 pulse_shapes.append(pulse_shape)
+    zz_pulses = np.asarray(zz_pulses)
     pulse_shapes = np.asarray(pulse_shapes)
 
-    outdir = r'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/pulse_shape'
-    outfile = f'{outdir}/{sphere}_pulse_shape_template_{v}v.npz'
+    outdir = r'C:\Users\yuhan\dm_nanospheres\data_processed\pulse_shape'
+    # outdir = r'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/pulse_shape'
+    outfile = f'{outdir}/{sphere}_largepulse_shape_template_{v}v.npz'
     print(f'Writing file {outfile}')
-    np.savez(outfile, pulse_shape=pulse_shapes)
+    np.savez(outfile, zz_pulse=zz_pulses, pulse_shape=pulse_shapes)
