@@ -19,8 +19,8 @@ yale_colors = ['#00356b', '#286dc0', '#63aaff', '#4a4a4a']
 c = 299792458    # m / s
 SI2ev = (1 / 1.6e-19) * c
 
-m = 2000 * (83.5e-9)**3 * 4 * np.pi / 3
-hbar = 6.626e-34
+m = 2000 * (83e-9)**3 * 4 * np.pi / 3
+hbar = 1.054571817e-34
 kb = 1.380649e-23
 
 #### File processing
@@ -484,13 +484,11 @@ def get_area_driven_peak(ffd, ppd, passband=(88700, 89300), noise_floor=None, pl
         ax.set_xlabel('Frequency (Hz)')
         ax.set_ylabel('Spectral density ($V^2 / Hz$)')
         ax.set_yscale('log')
-
-    if plot:
         plt.show()
 
     return v2_drive
 
-def get_c_mv(data_files_ordered, vp2p, omegad, passband, charge=3, n_chunk=10, efield=106):
+def get_c_mv(data_files_ordered, vp2p, omegad, passband, charge=3, n_chunk=10, efield=106, return_psds=False):
     m = 2000 * (83e-9**3) * (4 / 3) * np.pi  # sphere mass
     
     ffss, ppss = [], []
@@ -516,7 +514,7 @@ def get_c_mv(data_files_ordered, vp2p, omegad, passband, charge=3, n_chunk=10, e
         c_cal = []
         for j, ff in enumerate(ffss[i]):
             pp = ppss[i][j]
-            v2_drive = get_area_driven_peak(ff, pp, passband=passband, plot=False)
+            v2_drive = get_area_driven_peak(ff, pp, passband=passband, noise_floor=0, plot=False)
 
             idx_band = np.logical_and(ff > 30000, ff < 80000)
             omega0 = 2 * np.pi * ff[idx_band][np.argmax(pp[idx_band])]
@@ -525,7 +523,12 @@ def get_c_mv(data_files_ordered, vp2p, omegad, passband, charge=3, n_chunk=10, e
             c_cal.append(v2_drive / z2_drive)
         c_cals.append(c_cal)
     
-    return np.sqrt(1 / np.asarray(c_cals))
+    c_mvs = np.sqrt(1 / np.asarray(c_cals))
+
+    if return_psds:
+        return c_mvs, ffss, ppss
+
+    return c_mvs
 
 ## After processing
 def load_histograms(data_dir, data_prefix, n_file):
