@@ -11,7 +11,8 @@ from multiprocessing import Pool
 R_um = 0.083
 qmax_calc = 100000
 qmax_out = 25000
-sigma_kev = 150
+# sigma_kev = 150
+a, b = 1.31662664e+02, 6.33417842e-07
 
 mx_list_coarser_extended = np.logspace(4, 9, 39)
 mx_list_coarse = np.logspace(-1, 4, 77)
@@ -86,11 +87,11 @@ def get_drdqz(qq, drdq):
 
     return qq_out, ret
 
-def smear_drdqz_gauss(qq, drdqz, sigma_kev=180):
+def smear_drdqz_gauss(qq, drdqz, sigma_kev):
     """Convolve spectrum with a Gaussian kernel"""
     dq = qq[1] - qq[0]
-    qq_gauss = np.arange(-1000, 1000, dq)
-    gauss_kernel = utils.gauss(qq_gauss, A=1, mu=0, sigma=180)
+    qq_gauss = np.arange(-2000, 2000, dq)
+    gauss_kernel = utils.gauss(qq_gauss, A=1, mu=0, sigma=sigma_kev)
 
     # Pad the array to minimize edge effect
     # to get the rising tail when q -> 0
@@ -103,26 +104,60 @@ def smear_drdqz_gauss(qq, drdqz, sigma_kev=180):
     padded_drdqz = np.pad(padded_drdqz, (0, pad_len), mode='constant', constant_values=0)
 
     convolved = np.convolve(padded_drdqz, gauss_kernel, mode='valid')
+
     idx_start = (convolved.size - drdqz.size) // 2
     ret = convolved[idx_start : idx_start + drdqz.size] / np.sum(gauss_kernel)
 
     return qq, ret
 
-def get_final_drdqz(mphi, mx, alpha, sigma_kev, return_bc=False):
+def sigma_q_kev(q, a, b):
+    return a + b * q**2
+
+def smear_drdqz_amp_gauss(qq, drdqz, a, b):
+    """Convolve spectrum with a Gaussian kernel that has an amplitude-dependent 
+    width a + b * x^2 (in keV/c)"""
+    smeared_drdqz = np.empty_like(drdqz)
+    dq = qq[1] - qq[0]
+
+    qq_gauss = np.arange(-2000, 2000, dq)
+
+    # Pad the array to minimize edge effect
+    # to get the rising tail when q -> 0
+    # then pad with mirror image
+    pad_len = qq_gauss.size
+    if qq[0] >= dq:
+        padded_drdqz = np.pad(drdqz, (pad_len, 0), mode='symmetric')
+    else:
+        padded_drdqz = np.pad(drdqz, (pad_len, 0), mode='reflect')
+    padded_drdqz = np.pad(padded_drdqz, (0, pad_len), mode='constant', constant_values=0)
+
+    sigma_q = sigma_q_kev(qq, a, b)
+    for i, qi in enumerate(qq):
+        sigma = sigma_q[i]
+        gauss_kernel = utils.gauss(qq_gauss, A=1, mu=0, sigma=sigma)
+
+        drdqz_to_convolve = padded_drdqz[pad_len//2+i : pad_len//2+i+qq_gauss.size]
+        smeared_drdqz[i] = np.sum(drdqz_to_convolve * gauss_kernel) / np.sum(gauss_kernel)
+    
+    return qq, smeared_drdqz
+
+def get_final_drdqz(mphi, mx, alpha, a, b, return_bc=False):
     if mphi == 0:
         file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
     else:
         file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
-    drdq_npz = np.load(file)
 
+    drdq_npz = np.load(file)
     qq = drdq_npz['q_kev']
     drdq = drdq_npz['drdq_hz_kev']
 
     if np.sum(drdq > 0) < 2:
         return np.zeros_like(bc)
 
+    # Modified 20250419: now do smearing with amplitude-dependent sigma
     _qq, _drdqz = get_drdqz(qq, drdq)
-    _qq, _drdqz_smeared = smear_drdqz_gauss(_qq, _drdqz, sigma_kev)
+    # _qq, _drdqz_smeared = smear_drdqz_gauss(_qq, _drdqz, sigma_kev)
+    _qq, _drdqz_smeared = smear_drdqz_amp_gauss(_qq, _drdqz, a, b)
     drdqz_smeared_resampled = np.interp(bc, _qq, _drdqz_smeared)
 
     if return_bc:
@@ -162,12 +197,13 @@ if __name__ == '__main__':
     drdqzn_all = np.empty(shape=(mx_list.size, alpha_list.size, bc.size), dtype=np.float64)
     for i, mx in enumerate(mx_list):
 
-        pool = Pool(32)
+        pool = Pool(16)
         n_alpha = alpha_list.size
         params = list(np.vstack((np.full(n_alpha, mphi), 
                                  np.full(n_alpha, mx), 
                                  alpha_list,
-                                 np.full(n_alpha, sigma_kev))).T)
+                                 np.full(n_alpha, a),
+                                 np.full(n_alpha, b))).T)
 
         res = pool.starmap(get_final_drdqz, params)
         drdqzn_all[i] = np.asarray(res)
@@ -177,9 +213,11 @@ if __name__ == '__main__':
         #     drdqzn_all[i, j] = get_final_drdqz(mphi, mx, alpha, 180)
 
     if mphi == 0:
-        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_150kevsigma_massless.npz'
+        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_massless.npz'
     else:
-        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_150kevsigma_{mphi:.0e}.npz'
-    outfile = os.path.join(data_dir, outfile_name)
+        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
+    
+    out_dir = r'/home/yt388/microspheres/dm_nanospheres/data_processed/dm_rate'
+    outfile = os.path.join(out_dir, outfile_name)
     print(f'Saving file {outfile}')
     np.savez(outfile, bc_kev=bc, drdqzn=drdqzn_all, mx_list=mx_list, alpha_list=alpha_list)
