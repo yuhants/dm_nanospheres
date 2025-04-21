@@ -154,26 +154,45 @@ def optimum_interval(q_events, qq, drdqzn, exposure, cl=0.95):
     return uloutput, endpoint0, endpoint1
 
 if __name__ == '__main__':
-    sphere = 'sphere_20241202'
-    dataset = 'coarse'
-    mphi_list = [0, 0.1, 1, 10]
-    # dataset = 'coarse_extended_right'
-    # mphi_list = [0, 0.1]
+    # sphere = 'sphere_20241202'
+    # sphere = 'sphere_20250103'
+    sphere = 'sphere_combined'
 
-    if sphere == 'sphere_20241202':
-        amp2kev = amp2kev_sphere_20241202
-        exposure = exposure_sphere_20241202
-    elif sphere == 'sphere_20250103':
-        amp2kev = amp2kev_sphere_20250103
-        exposure = exposure_sphere_20250103
+    # dataset = 'coarse'
+    # mphi_list = [0, 0.1, 1, 10]
 
-    file = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/{sphere}_unbinned_amps.h5py')
-    amps = file['unbinned_amps']['amplitude'][:]
-    file.close()
+    dataset = 'coarse_extended_right'
+    mphi_list = [0, 0.1]
 
-    amps_kev = np.abs(amps * amp2kev)
-    qmin, qmax = 2500, np.max(amps_kev)  # For Sphere 20241202
-    # qmin, qmax = 2000, np.max(amps_kev)  # For Sphere 20250103
+    # qmin, qmax = 2500, 10000  # For Sphere 20241202
+    qmin, qmax = 2000, 10000  # For Sphere 20250103 and combined dataset
+
+    if sphere == 'sphere_20241202' or sphere == 'sphere_20250103':
+        if sphere == 'sphere_20241202':
+            amp2kev = amp2kev_sphere_20241202
+            exposure = exposure_sphere_20241202
+        elif sphere == 'sphere_20250103':
+            amp2kev = amp2kev_sphere_20250103
+            exposure = exposure_sphere_20250103
+
+        file = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/{sphere}_unbinned_amps.h5py')
+        amps = file['unbinned_amps']['amplitude'][:]
+        file.close()
+        amps_kev = np.abs(amps * amp2kev)
+
+    elif sphere == 'sphere_combined':
+        exposure = exposure_sphere_20241202 + exposure_sphere_20250103
+
+        file0 = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/sphere_20241202_unbinned_amps.h5py')
+        file1 = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/sphere_20250103_unbinned_amps.h5py')
+
+        amps0 = file0['unbinned_amps']['amplitude'][:]
+        amps1 = file0['unbinned_amps']['amplitude'][:]
+        file0.close()
+        file1.close()
+        amps_kev_0 = np.abs(amps0 * amp2kev_sphere_20241202)
+        amps_kev_1 = np.abs(amps1 * amp2kev_sphere_20250103)
+        amps_kev = np.concatenate([amps_kev_0, amps_kev_1])
 
     for mphi in mphi_list:
         print(f'Working on mphi = {mphi} eV')
@@ -198,6 +217,9 @@ if __name__ == '__main__':
             mu = np.empty_like(alpha)
 
             for i_alpha in range(alpha.size):
+                # Efficiency corrected DM rate
+                # No need to correct for reconstruction efficiency because it is 1
+                # above the minimum analysis threshold here
                 drdqzn_mx_alpha = drdqzn[i_mx, i_alpha] * chi2_cut_eff
 
                 u, e0, e1 = optimum_interval(amps_kev[amps_kev > qmin], q_kev, drdqzn_mx_alpha, exposure, cl=0.95)
@@ -206,7 +228,7 @@ if __name__ == '__main__':
                 q_idx = np.logical_and(q_kev > qmin, q_kev < qmax)
                 mu[i_alpha] = np.trapz(drdqzn_mx_alpha[q_idx] * exposure, q_kev[q_idx])
 
-            alpha_lim[i_mx] = np.interp(0, mu - uu, alpha)
+            alpha_lim[i_mx] = np.interp(0, mu - uu, alpha, left=1e6, right=1e6)
 
         outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}.npz'
         print(f'Saving file {outfile}')
