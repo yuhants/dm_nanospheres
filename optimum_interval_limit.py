@@ -155,14 +155,14 @@ def optimum_interval(q_events, qq, drdqzn, exposure, cl=0.95):
 
 if __name__ == '__main__':
     # sphere = 'sphere_20241202'
-    # sphere = 'sphere_20250103'
-    sphere = 'sphere_combined'
+    sphere = 'sphere_20250103'
+    # sphere = 'sphere_combined'
 
-    # dataset = 'coarse'
-    # mphi_list = [0, 0.1, 1, 10]
+    dataset = 'coarse'
+    mphi_list = [0, 0.1, 1, 10]
 
-    dataset = 'coarse_extended_right'
-    mphi_list = [0, 0.1]
+    # dataset = 'coarse_extended_right'
+    # mphi_list = [0, 0.1]
 
     # qmin, qmax = 2500, 10000  # For Sphere 20241202
     qmin, qmax = 2000, 10000  # For Sphere 20250103 and combined dataset
