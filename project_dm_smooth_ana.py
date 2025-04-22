@@ -174,7 +174,7 @@ if __name__ == '__main__':
         alpha_list = alpha_list_coarse
 
     elif dataset == 'coarse_extended_right':
-        mx_list = mx_list_coarser_extended[mx_list_coarser_extended < 1e8]
+        mx_list = mx_list_coarser_extended[np.logical_and(mx_list_coarser_extended > 1e4, mx_list_coarser_extended < 1e8)]
         alpha_list = alpha_list_coarse
 
     elif dataset == 'coarse_extended_alpha_left':
