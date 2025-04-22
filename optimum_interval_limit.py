@@ -39,8 +39,7 @@ def _working_directory(path):
     finally:
         os.chdir(prev_cwd)
 
-
-def upper(fc, cl=0.9):
+def upper(fc, cl=0.95):
     """
     Fortran wrapper function for Steve Yellin's Optimum Interval code `Upper.f`. In this case,
     it calls a version of `UpperLim.f` that allows a larger range of confidence levels.
@@ -115,6 +114,44 @@ def upper(fc, cl=0.9):
 
     return ulout, endpoints[0], endpoints[1]
 
+def get_fc(q_events, qq, drdqzn, exposure):
+    q_events = np.sort(q_events)
+
+    q_low = np.min(q_events)
+    q_high = np.max(q_events)
+
+    q_interp = np.linspace(q_low, q_high, 1000)
+
+    rate = np.interp(q_interp, qq, drdqzn) * exposure
+    
+    integ_rate = integrate.cumulative_trapezoid(rate, x=q_interp, initial=0)
+    tot_rate = integ_rate[-1]
+
+    x_val_fcn = interpolate.interp1d(
+        q_interp,
+        integ_rate,
+        kind="linear",
+        bounds_error=False,
+        fill_value=(0, tot_rate),
+    )
+
+    x_vals = x_val_fcn(q_events)
+
+    if tot_rate != 0:
+        fc = x_vals/tot_rate
+        fc[fc > 1] = 1
+
+        cdf_max = 1 - 1e-6
+        possiblewimp = fc <= cdf_max
+        fc = fc[possiblewimp]
+
+        if len(fc) == 0:
+            fc = np.asarray([0, 1])
+    else:
+        fc = None
+
+    return fc
+
 def optimum_interval(q_events, qq, drdqzn, exposure, cl=0.95):
     q_events = np.sort(q_events)
 
@@ -153,19 +190,58 @@ def optimum_interval(q_events, qq, drdqzn, exposure, cl=0.95):
 
     return uloutput, endpoint0, endpoint1
 
+def upper_combined(fcs, cl=0.95):
+    file_path = os.path.dirname(os.path.realpath(__file__))
+
+    fc_0, fc_1 = fcs[0], fcs[1]
+    if fc_0 is None or fc_1 is None:
+        return None
+
+    method = 4
+    nexp = 2
+    maxp1 = max(fc_0.size, fc_1.size) + 1
+    nevts = np.array([fc_0.size, fc_1.size])
+    mu = np.array([1, 1])
+    icode = 0
+
+    # make sure fc starts with 0 and ends with 1
+    fc_in = np.full((nexp, maxp1+1), np.nan)
+    fc_in[0, 0] = 0
+    fc_in[1, 0] = 0
+
+    fc_in[0][1 : 1+fc_0.size] = fc_0
+    fc_in[1][1 : 1+fc_1.size] = fc_1
+
+    fc_in[0][1+fc_0.size] = 1
+    fc_in[0][1+fc_1.size] = 1
+    fc_in = fc_in.T
+
+    with _working_directory(f"{file_path}/upper/"):
+        ulout = _upper.upper(
+            method=method,
+            cl=cl,
+            nexp=nexp,
+            maxp1=maxp1,
+            nevts=nevts,
+            mu=mu,
+            fc=fc_in,
+            icode=icode,
+        )
+    return ulout
+
 if __name__ == '__main__':
     # sphere = 'sphere_20241202'
-    sphere = 'sphere_20250103'
-    # sphere = 'sphere_combined'
+    # sphere = 'sphere_20250103'
+    sphere = 'sphere_combined'
 
-    dataset = 'coarse'
-    mphi_list = [0, 0.1, 1, 10]
+    minlim = False
 
-    # dataset = 'coarse_extended_right'
-    # mphi_list = [0, 0.1]
+    datasets = ['coarse', 'coarse_extended_right']
+    mphi_lists = [[0, 0.1, 1, 10], [1, 0, 0.1]]
 
     # qmin, qmax = 2500, 10000  # For Sphere 20241202
-    qmin, qmax = 2000, 10000  # For Sphere 20250103 and combined dataset
+    # qmin, qmax = 2000, 10000  # For Sphere 20250103 and combined dataset (minimum limit)
+    qmin, qmax = 3000, 10000  # For combined dataset (simple merging)
 
     if sphere == 'sphere_20241202' or sphere == 'sphere_20250103':
         if sphere == 'sphere_20241202':
@@ -190,46 +266,54 @@ if __name__ == '__main__':
         amps1 = file0['unbinned_amps']['amplitude'][:]
         file0.close()
         file1.close()
+
         amps_kev_0 = np.abs(amps0 * amp2kev_sphere_20241202)
         amps_kev_1 = np.abs(amps1 * amp2kev_sphere_20250103)
         amps_kev = np.concatenate([amps_kev_0, amps_kev_1])
 
-    for mphi in mphi_list:
-        print(f'Working on mphi = {mphi} eV')
+    for i, dataset in enumerate(datasets):
+        for mphi in mphi_lists[i]:
+            print(f'Working on mphi = {mphi} eV')
 
-        if mphi == 0:
-            mphi_prefix = 'massless'
-        else:
-            mphi_prefix = f'{mphi:.0e}'
-        drdqzn_file = rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/drdqz_100mevthr_nanosphere_8.30e-02_{dataset}_ampdepsigma_{mphi_prefix}.npz'
-        drdqzn_npz = np.load(drdqzn_file)
+            if mphi == 0:
+                mphi_prefix = 'massless'
+            else:
+                mphi_prefix = f'{mphi:.0e}'
+            drdqzn_file = rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/drdqz_100mevthr_nanosphere_8.30e-02_{dataset}_ampdepsigma_{mphi_prefix}.npz'
+            drdqzn_npz = np.load(drdqzn_file)
 
-        q_kev = drdqzn_npz['bc_kev']
-        drdqzn = drdqzn_npz['drdqzn']
-        mx = drdqzn_npz['mx_list']
-        alpha = drdqzn_npz['alpha_list']
+            q_kev = drdqzn_npz['bc_kev']
+            drdqzn = drdqzn_npz['drdqzn']
+            mx = drdqzn_npz['mx_list']
+            alpha = drdqzn_npz['alpha_list']
 
-        alpha_lim = np.full_like(mx, fill_value=np.nan)
-        i_mx = 0
+            alpha_lim = np.full_like(mx, fill_value=np.nan)
+            i_mx = 0
 
-        for i_mx, _mx in enumerate(mx):
-            uu = np.empty_like(alpha)
-            mu = np.empty_like(alpha)
+            for i_mx, _mx in enumerate(mx):
+                uu = np.empty_like(alpha)
+                mu = np.empty_like(alpha)
 
-            for i_alpha in range(alpha.size):
-                # Efficiency corrected DM rate
-                # No need to correct for reconstruction efficiency because it is 1
-                # above the minimum analysis threshold here
-                drdqzn_mx_alpha = drdqzn[i_mx, i_alpha] * chi2_cut_eff
+                for i_alpha in range(alpha.size):
+                    # Efficiency corrected DM rate
+                    # No need to correct for reconstruction efficiency because it is 1
+                    # above the minimum analysis threshold here
+                    drdqzn_mx_alpha = drdqzn[i_mx, i_alpha] * chi2_cut_eff
 
-                u, e0, e1 = optimum_interval(amps_kev[amps_kev > qmin], q_kev, drdqzn_mx_alpha, exposure, cl=0.95)
-                uu[i_alpha] = u
+                    if sphere == 'sphere_combined' and minlim is True:
+                        fc_0 = get_fc(amps_kev_0[amps_kev_0 > qmin], q_kev, drdqzn_mx_alpha, exposure_sphere_20241202)
+                        fc_1 = get_fc(amps_kev_1[amps_kev_1 > qmin], q_kev, drdqzn_mx_alpha, exposure_sphere_20250103)
+                        u = upper_combined(fcs=[fc_0, fc_1], cl=0.95)
+                    else:
+                        u, e0, e1 = optimum_interval(amps_kev[amps_kev > qmin], q_kev, drdqzn_mx_alpha, exposure, cl=0.95)
 
-                q_idx = np.logical_and(q_kev > qmin, q_kev < qmax)
-                mu[i_alpha] = np.trapz(drdqzn_mx_alpha[q_idx] * exposure, q_kev[q_idx])
+                    uu[i_alpha] = u
 
-            alpha_lim[i_mx] = np.interp(0, mu - uu, alpha, left=1e6, right=1e6)
+                    q_idx = np.logical_and(q_kev > qmin, q_kev < qmax)
+                    mu[i_alpha] = np.trapz(drdqzn_mx_alpha[q_idx] * exposure, q_kev[q_idx])
 
-        outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}.npz'
-        print(f'Saving file {outfile}')
-        np.savez(outfile, mx_gev=mx, alpha_lim=alpha_lim)
+                alpha_lim[i_mx] = np.interp(0, mu - uu, alpha, left=1e6, right=1e6)
+
+            outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}.npz'
+            print(f'Saving file {outfile}')
+            np.savez(outfile, mx_gev=mx, alpha_lim=alpha_lim)
