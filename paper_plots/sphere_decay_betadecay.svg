@@ -29,13 +29,13 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="3.016583"
-     inkscape:cx="357.19223"
-     inkscape:cy="422.16641"
-     inkscape:window-width="1920"
-     inkscape:window-height="1027"
-     inkscape:window-x="1470"
-     inkscape:window-y="25"
-     inkscape:window-maximized="0"
+     inkscape:cx="352.55121"
+     inkscape:cy="431.11693"
+     inkscape:window-width="1470"
+     inkscape:window-height="891"
+     inkscape:window-x="0"
+     inkscape:window-y="37"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer1" /><defs
      id="defs2"><rect
        x="127.29635"
@@ -494,7 +494,7 @@
        id="path34968"
        sodipodi:nodetypes="cc" /><g
        id="g509"
-       transform="matrix(0.17468964,0,0,0.17194624,80.25145,114.73596)"><g
+       transform="matrix(0.24341433,0,0,0.23959164,80.188497,114.01662)"><g
          fill="#000000"
          fill-opacity="1"
          id="g466"><use
@@ -627,9 +627,9 @@
        style="font-size:4px;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue, Normal';text-align:center;white-space:pre;shape-inside:url(#rect2555);display:inline;fill:#000000;stroke:#e4e4f7;stroke-width:0.377953"><tspan
          x="132.02366"
          y="323.66711"
-         id="tspan17764"><tspan
+         id="tspan1581"><tspan
            style="stroke:none"
-           id="tspan17762">a</tspan></tspan></text><path
+           id="tspan1579">a</tspan></tspan></text><path
        style="fill:url(#radialGradient26935);fill-opacity:1;stroke:none;stroke-width:0.207195;stroke-dasharray:none;stroke-opacity:1"
        d="m 100.07629,103.10791 c 12.06776,19.52784 23.82746,0 23.82746,0 v 19.68356 c -11.77522,-19.82041 -24.191349,0 -24.191349,0"
        id="path26800"
@@ -838,7 +838,7 @@
        style="font-size:4px;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue, Normal';text-align:center;white-space:pre;shape-inside:url(#rect2555-7);display:inline;fill:#000000;stroke:none;stroke-width:0.377953"><tspan
          x="131.91166"
          y="323.66711"
-         id="tspan17766">b
+         id="tspan1583">b
 </tspan></text></g><script
      id="mesh_polyfill"
      type="text/javascript">

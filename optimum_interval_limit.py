@@ -241,7 +241,7 @@ if __name__ == '__main__':
 
     # qmin, qmax = 2500, 10000  # For Sphere 20241202
     # qmin, qmax = 2000, 10000  # For Sphere 20250103 and combined dataset (minimum limit)
-    qmin, qmax = 3000, 10000  # For combined dataset (simple merging)
+    qmin, qmax = 1250, 10000  # For combined dataset (simple merging)
 
     if sphere == 'sphere_20241202' or sphere == 'sphere_20250103':
         if sphere == 'sphere_20241202':
@@ -263,7 +263,7 @@ if __name__ == '__main__':
         file1 = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/sphere_20250103_unbinned_amps.h5py')
 
         amps0 = file0['unbinned_amps']['amplitude'][:]
-        amps1 = file0['unbinned_amps']['amplitude'][:]
+        amps1 = file1['unbinned_amps']['amplitude'][:]
         file0.close()
         file1.close()
 
@@ -314,6 +314,9 @@ if __name__ == '__main__':
 
                 alpha_lim[i_mx] = np.interp(0, mu - uu, alpha, left=1e6, right=1e6)
 
-            outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}.npz'
+            if minlim:
+                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_minlim_{sphere}_{dataset}_{mphi_prefix}.npz'
+            else:
+                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}_1_25mevthr.npz'
             print(f'Saving file {outfile}')
             np.savez(outfile, mx_gev=mx, alpha_lim=alpha_lim)
