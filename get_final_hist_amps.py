@@ -77,10 +77,12 @@ bc = 0.5 * (bins[:-1] + bins[1:])
 
 # Write the summed histograms
 hist_all_0 = np.sum(np.asarray([ np.sum(hhs_all_0[i], axis=0) for i in range(len(datasets_0))]), axis=0)
+hist_det_0 = np.sum(np.asarray([ np.sum(hhs_det_0[i], axis=0) for i in range(len(datasets_0))]), axis=0)
 hist_det_noise_0 = np.sum(np.asarray([ np.sum(hhs_det_noise_0[i], axis=0) for i in range(len(datasets_0))]), axis=0)
 hist_det_noise_chi2_0 = np.sum(np.asarray([ np.sum(hhs_det_noise_chi2_short_0[i], axis=0) for i in range(len(datasets_0))]), axis=0)
 
 hist_all_1 = np.sum(np.asarray([ np.sum(hhs_all_1[i], axis=0) for i in range(len(datasets_1))]), axis=0)
+hist_det_1 = np.sum(np.asarray([ np.sum(hhs_det_1[i], axis=0) for i in range(len(datasets_1))]), axis=0)
 hist_det_noise_1 = np.sum(np.asarray([ np.sum(hhs_det_noise_1[i], axis=0) for i in range(len(datasets_1))]), axis=0)
 hist_det_noise_chi2_1 = np.sum(np.asarray([ np.sum(hhs_det_noise_chi2_short_1[i], axis=0) for i in range(len(datasets_1))]), axis=0)
 
@@ -93,6 +95,7 @@ with h5py.File(os.path.join(out_dir, outfile_name), 'w') as fout:
     d.attrs['unit'] = 'keV'
 
     d = g.create_dataset('hist_all', data=(hist_all_0), dtype=np.int64)
+    d = g.create_dataset('hist_det', data=(hist_det_0), dtype=np.int64)
     d = g.create_dataset('hist_det_noise', data=(hist_det_noise_0), dtype=np.int64)
     d = g.create_dataset('hist_det_noise_chi2', data=(hist_det_noise_chi2_0), dtype=np.int64)
     d.attrs['unit'] = 'count/50keV'
@@ -108,6 +111,7 @@ with h5py.File(os.path.join(out_dir, outfile_name), 'w') as fout:
     d.attrs['unit'] = 'keV'
 
     d = g.create_dataset('hist_all', data=(hist_all_1), dtype=np.int64)
+    d = g.create_dataset('hist_det', data=(hist_det_1), dtype=np.int64)
     d = g.create_dataset('hist_det_noise', data=(hist_det_noise_1), dtype=np.int64)
     d = g.create_dataset('hist_det_noise_chi2', data=(hist_det_noise_chi2_1), dtype=np.int64)
     d.attrs['unit'] = 'count/50keV'
