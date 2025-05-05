@@ -1,7 +1,7 @@
 import sys, os
 import numpy as np
 
-from rate_massless_mediator import *
+from rate_massless_mediator_pointcharge import *
 
 def dR_dq_born(mx, mphi, alpha, q, vlist, R):
     dsigdomega = dsig_domega_born(mx, mphi, alpha, q, R, point_charge=False)

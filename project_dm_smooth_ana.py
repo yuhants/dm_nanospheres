@@ -11,6 +11,8 @@ from multiprocessing import Pool
 R_um = 0.083
 qmax_calc = 100000
 qmax_out = 25000
+
+# Now do amplitude-dependent convolution
 # sigma_kev = 150
 a, b = 1.31662664e+02, 6.33417842e-07
 
@@ -131,6 +133,7 @@ def smear_drdqz_amp_gauss(qq, drdqz, a, b):
         padded_drdqz = np.pad(drdqz, (pad_len, 0), mode='reflect')
     padded_drdqz = np.pad(padded_drdqz, (0, pad_len), mode='constant', constant_values=0)
 
+    # Generate sigmas for different amplitudes
     sigma_q = sigma_q_kev(qq, a, b)
     for i, qi in enumerate(qq):
         sigma = sigma_q[i]
@@ -142,10 +145,12 @@ def smear_drdqz_amp_gauss(qq, drdqz, a, b):
     return qq, smeared_drdqz
 
 def get_final_drdqz(mphi, mx, alpha, a, b, return_bc=False):
-    if mphi == 0:
-        file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
-    else:
-        file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+
+    file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+    # if mphi == 0:
+    #     file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless.npz'
+    # else:
+    #     file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
 
     drdq_npz = np.load(file)
     qq = drdq_npz['q_kev']
@@ -189,10 +194,11 @@ if __name__ == '__main__':
         mx_list = mx_list_coarse[mx_list_coarse < 50]
         alpha_list = alpha_list_coarse
 
-    if mphi == 0:
-        data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/massless_mediator'
-    else:
-        data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
+    data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
+    # if mphi == 0:
+    #     data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/massless_mediator'
+    # else:
+    #     data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
 
     drdqzn_all = np.empty(shape=(mx_list.size, alpha_list.size, bc.size), dtype=np.float64)
     for i, mx in enumerate(mx_list):
@@ -212,10 +218,11 @@ if __name__ == '__main__':
         #     print(j, alpha)
         #     drdqzn_all[i, j] = get_final_drdqz(mphi, mx, alpha, 180)
 
-    if mphi == 0:
-        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_massless.npz'
-    else:
-        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
+    outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
+    # if mphi == 0:
+    #     outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_massless.npz'
+    # else:
+    #     outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
     
     out_dir = r'/home/yt388/microspheres/dm_nanospheres/data_processed/dm_rate'
     outfile = os.path.join(out_dir, outfile_name)
