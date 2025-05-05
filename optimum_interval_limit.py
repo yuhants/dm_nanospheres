@@ -15,8 +15,9 @@ import upper as _upper
 amp2kev_sphere_20241202 = 5945.245097647231
 amp2kev_sphere_20250103 = 5923.2059527417405
 
-exposure_sphere_20241202 = 872973.9943
-exposure_sphere_20250103 = 1393792.6217   # s
+# Update 20250505: not doing anti-coincidence cut
+exposure_sphere_20241202 = 947860.623
+exposure_sphere_20250103 = 1476235.3273   # s
 
 chi2_cut_eff = 0.9538018099684543
 
@@ -233,7 +234,6 @@ if __name__ == '__main__':
     # sphere = 'sphere_20241202'
     # sphere = 'sphere_20250103'
     sphere = 'sphere_combined'
-
     minlim = False
 
     datasets = ['coarse', 'coarse_extended_right']
@@ -275,10 +275,7 @@ if __name__ == '__main__':
         for mphi in mphi_lists[i]:
             print(f'Working on mphi = {mphi} eV')
 
-            if mphi == 0:
-                mphi_prefix = 'massless'
-            else:
-                mphi_prefix = f'{mphi:.0e}'
+            mphi_prefix = f'{mphi:.0e}'
             drdqzn_file = rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/drdqz_100mevthr_nanosphere_8.30e-02_{dataset}_ampdepsigma_{mphi_prefix}.npz'
             drdqzn_npz = np.load(drdqzn_file)
 
