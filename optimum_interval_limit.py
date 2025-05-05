@@ -232,8 +232,8 @@ def upper_combined(fcs, cl=0.95):
 
 if __name__ == '__main__':
     # sphere = 'sphere_20241202'
-    # sphere = 'sphere_20250103'
-    sphere = 'sphere_combined'
+    sphere = 'sphere_20250103'
+    # sphere = 'sphere_combined'
     minlim = False
 
     datasets = ['coarse', 'coarse_extended_right']

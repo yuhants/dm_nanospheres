@@ -151,7 +151,10 @@ def fit_z_peak(ff, pp, peak_func=log_voigt, passband=(60000, 70000), p0=[2e9, 62
 #### Plotting
 def load_plotting_setting():
     # colors=['#fe9f6d', '#de4968', '#8c2981', '#3b0f70', '#000004']
-    colors = plt.colormaps.get_cmap('tab20b').resampled(6).colors
+    # colors = plt.colormaps.get_cmap('tab20b').resampled(6).colors
+    cmap = plt.colormaps.get_cmap('viridis')
+    colors = cmap(np.linspace(0, 0.9, 8))
+
     default_cycler = cycler(color=colors)
     
     params = {'figure.figsize': (7, 5),
