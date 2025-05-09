@@ -153,7 +153,7 @@ def load_plotting_setting():
     # colors=['#fe9f6d', '#de4968', '#8c2981', '#3b0f70', '#000004']
     # colors = plt.colormaps.get_cmap('tab20b').resampled(6).colors
     cmap = plt.colormaps.get_cmap('viridis')
-    colors = cmap(np.linspace(0, 0.9, 8))
+    colors = cmap(np.linspace(0, 0.95, 5))
 
     default_cycler = cycler(color=colors)
     

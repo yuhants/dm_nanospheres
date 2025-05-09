@@ -232,8 +232,8 @@ def upper_combined(fcs, cl=0.95):
 
 if __name__ == '__main__':
     # sphere = 'sphere_20241202'
-    sphere = 'sphere_20250103'
-    # sphere = 'sphere_combined'
+    # sphere = 'sphere_20250103'
+    sphere = 'sphere_combined'
     minlim = False
 
     datasets = ['coarse', 'coarse_extended_right']
@@ -314,6 +314,6 @@ if __name__ == '__main__':
             if minlim:
                 outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_minlim_{sphere}_{dataset}_{mphi_prefix}.npz'
             else:
-                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}_1_25mevthr.npz'
+                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}_1mevthr.npz'
             print(f'Saving file {outfile}')
             np.savez(outfile, mx_gev=mx, alpha_lim=alpha_lim)
