@@ -13,7 +13,7 @@ rho_T = 2.0e3   # Sphere density, kg/m^3
 mAMU = 1.66e-27 # Neutron mass
 
 # Thermal DM parameters
-nx         = 1         # DM number density (assumed to be 1 eV^-3)
+nx         = 1         # DM number density (assumed to be 1 cm^-3)
 t_thermal  = 300       # K
 vesc_earth = 3.729e-5  # Earth escape velocity
 
@@ -113,19 +113,15 @@ def calc_event_rate(R_um, mx_gev, alpha_t):
     return q_kev, drdq
 
 if __name__ == "__main__":
-    # outdir = r"/home/yt388/palmer_scratch/data/dm_rate/massless_mediator"
-    outdir = r"/Users/yuhan/work/nanospheres/data/dm_rate/thermal_dm/massless_mediator_pointcharge"
+    outdir = r"/home/yt388/palmer_scratch/data/dm_rate/thermalized_dm/massless_mediator_pointcharge"
+    # outdir = r"/Users/yuhan/work/nanospheres/data/dm_rate/thermal_dm/massless_mediator_pointcharge"
     if(not os.path.isdir(outdir)):
         os.mkdir(outdir)
     
     R_um = 0.083
-    # mx_list_coarser_extended = np.logspace(4, 9, 39)
-    # mx_list_coarse = np.logspace(-1, 4, 77)
-    
-    # alpha_list_coarse = np.logspace(-7, -3, 79)
-    # alpha_list_coarse_extended= np.logspace(-7, 1, 157)
-    mx_list = np.logspace(-1, 8, 40)
-    alpha_list = np.logspace(-13, -1, 40)
+
+    mx_list = np.logspace(1, 8, 80)
+    alpha_list = np.logspace(-12, -4, 80)
 
     if R_um < 0.5:
         sphere_type = 'nanosphere'
@@ -137,13 +133,13 @@ if __name__ == "__main__":
     for i, mx in enumerate(mx_list):
         for j, alpha in enumerate(alpha_list):
             if qmax_calc == 100e6:
-                outfile = outdir + f'/drdq_100mevthr_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless_pointcharge.npz'
+                outfile = outdir + f'/drdq_100mevthr_thermaldm_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless_pointcharge.npz'
             else:
                 raise('Check calculation!')
             
-            # if( os.path.isfile(outfile) ):
-            #     print("Skipping: ", outfile)
-            #     continue
+            if( os.path.isfile(outfile) ):
+                print("Skipping: ", outfile)
+                continue
 
             # print(f'Working on M_x = {mx:.3e} GeV, alpha_n = {alpha:.3e}')
             qq, drdq = calc_event_rate(R_um, mx, alpha)
