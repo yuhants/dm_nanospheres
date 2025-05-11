@@ -236,12 +236,12 @@ if __name__ == '__main__':
     sphere = 'sphere_combined'
     minlim = False
 
-    datasets = ['coarse', 'coarse_extended_right']
-    mphi_lists = [[0, 0.1, 1, 10], [1, 0, 0.1]]
+    datasets = ['thermalized_dm']
+    mphi_lists = [[0, 0.1, 1, 10]]
+    # datasets = ['coarse', 'coarse_extended_right']
+    # mphi_lists = [[0, 0.1, 1, 10], [1, 0, 0.1]]
 
-    # qmin, qmax = 2500, 10000  # For Sphere 20241202
-    # qmin, qmax = 2000, 10000  # For Sphere 20250103 and combined dataset (minimum limit)
-    qmin, qmax = 1250, 10000  # For combined dataset (simple merging)
+    qmin, qmax = 1250, 10000
 
     if sphere == 'sphere_20241202' or sphere == 'sphere_20250103':
         if sphere == 'sphere_20241202':
@@ -276,7 +276,11 @@ if __name__ == '__main__':
             print(f'Working on mphi = {mphi} eV')
 
             mphi_prefix = f'{mphi:.0e}'
-            drdqzn_file = rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/drdqz_100mevthr_nanosphere_8.30e-02_{dataset}_ampdepsigma_{mphi_prefix}.npz'
+            if dataset != 'thermalized_dm':
+                drdqzn_file = rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/drdqz_100mevthr_nanosphere_8.30e-02_{dataset}_ampdepsigma_{mphi_prefix}.npz'
+            else:
+                drdqzn_file = rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/thermalized_dm/drdqz_100mevthr_thermaldm_nanosphere_8.30e-02_{dataset}_ampdepsigma_{mphi_prefix}.npz'
+
             drdqzn_npz = np.load(drdqzn_file)
 
             q_kev = drdqzn_npz['bc_kev']
@@ -314,6 +318,6 @@ if __name__ == '__main__':
             if minlim:
                 outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_minlim_{sphere}_{dataset}_{mphi_prefix}.npz'
             else:
-                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}_1mevthr.npz'
+                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}.npz'
             print(f'Saving file {outfile}')
             np.savez(outfile, mx_gev=mx, alpha_lim=alpha_lim)
