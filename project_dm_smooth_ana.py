@@ -26,7 +26,8 @@ alpha_list_coarse_extended= np.logspace(-7, 1, 157)
 alpha_list_fine = np.logspace(-7, -3, 157)
 
 mx_list_thermal = np.logspace(1, 8, 80)
-alpha_list_thermal = np.logspace(-12, -4, 80)
+alpha_list_extended = np.logspace(-12, 4, 159)
+alpha_list_thermal = alpha_list_extended[alpha_list_extended<1e-2]
 
 if qmax_calc == 100000:
     prefix = '_100mevthr'
