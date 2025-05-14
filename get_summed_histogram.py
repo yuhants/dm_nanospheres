@@ -39,6 +39,26 @@ def get_summed_hist(sphere, dataset):
         fout.close()
 
 if __name__ == '__main__':
+    sphere = 'sphere_20241202'
+    datasets = [
+                '20241202_8e-8mbar_long',
+                '20241204_2e-8mbar_8e_aftercal_long',
+                '20241205_2e-8mbar_0e_aftercal_long',
+                '20241206_1e-8mbar_0e_aftercal_long',
+                '20241207_1e-8mbar_1e_aftercal_long',
+                '20241208_1e-8mbar_1e_aftercal_long',
+                '20241210_1e-8mbar_8e_alignment1_long',
+                '20241210_1e-8mbar_8e_alignment2_long_withdrive',
+                '20241210_1e-8mbar_8e_alignment2_long_nodrive',
+                '20241211_1e-8mbar_8e_alignment2_long_nodrive',
+                '20241212_1e-8mbar_8e_alignment2_long_nodrive',
+                '20241213_1e-8mbar_0e_alignment2_long',
+                '20241214_1e-8mbar_0e_alignment2_long',
+                '20241215_9e-9mbar_0e_alignment2_long',
+                '20241216_5e-8mbar_0e_alignment2_long',
+                '20241217_6e-8mbar_0e_alignment3_long',
+                ]
+
     # sphere = 'sphere_20250103'
     # datasets = ['20250104_4e-8mbar_alignment0_long',
     #             '20250105_2e-8mbar_alignment0_long',
@@ -63,8 +83,8 @@ if __name__ == '__main__':
     #             '20250125_7e-9mbar_1e_alignment1_long'    
     #         ]
 
-    sphere = 'sphere_20241221'
-    datasets = ['20241222_5e-8mbar_10e_alignment0_long']
+    # sphere = 'sphere_20241221'
+    # datasets = ['20241222_5e-8mbar_10e_alignment0_long']
 
     # sphere = 'sphere_20241226'
     # datasets = ['20241227_6e-8mbar_alignment0_long']
