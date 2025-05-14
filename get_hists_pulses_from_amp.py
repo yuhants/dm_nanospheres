@@ -3,47 +3,60 @@ import analysis_utils as utils
 import h5py
 import os
 
-amp2kev = 5945.245097647231     # Sphere 20241202
+# amp2kev = 5945.245097647231     # Sphere 20241202
 # amp2kev = 5923.2059527417405    # Sphere 20250103
 
-sphere = 'sphere_20241202'
-datasets = [
-            '20241202_8e-8mbar_long',
-            '20241204_2e-8mbar_8e_aftercal_long',
-            '20241205_2e-8mbar_0e_aftercal_long',
-            '20241206_1e-8mbar_0e_aftercal_long',
-            '20241207_1e-8mbar_1e_aftercal_long',
-            '20241208_1e-8mbar_1e_aftercal_long',
-            '20241210_1e-8mbar_8e_alignment1_long',
-            '20241210_1e-8mbar_8e_alignment2_long_withdrive',
-            '20241210_1e-8mbar_8e_alignment2_long_nodrive',
-            '20241211_1e-8mbar_8e_alignment2_long_nodrive',
-            '20241212_1e-8mbar_8e_alignment2_long_nodrive',
-            '20241213_1e-8mbar_0e_alignment2_long',
-            '20241214_1e-8mbar_0e_alignment2_long',
-            '20241215_9e-9mbar_0e_alignment2_long',
-            '20241216_5e-8mbar_0e_alignment2_long',
-            '20241217_6e-8mbar_0e_alignment3_long',
-            ]
-data_prefixs = [
-                '20241202_abcd_',
-                '20241204_abcd_',
-                '20241205_d_',
-                '20241206_d_',
-                '20241207_d_',
-                '20241208_d_',
-                '20241210_d_',
-                '20241210_d_',
-                '20241210_d_',
-                '20241211_d_',
-                '20241212_d_',
-                '20241213_d_',
-                '20241214_d_',
-                '20241215_d_',
-                '20241216_d_',
-                '20241217_d_',
-                ]
-n_files = [1440, 1440, 1440, 1440, 1440, 821, 640, 181, 1440, 1418, 917, 1169, 1565, 1440, 1164, 601]
+# amp2kev = 5353.659646347421     # Sphere 20241221
+amp2kev = 5766.901999580749     # Sphere 20241226
+
+# sphere = 'sphere_20241221'
+# datasets = ['20241222_5e-8mbar_10e_alignment0_long']
+# data_prefixs = ['20241222_d_']
+# n_files = [1031]
+
+sphere = 'sphere_20241226'
+datasets = ['20241227_6e-8mbar_alignment0_long']
+data_prefixs = ['20241227_d_']
+n_files = [1440]
+
+# sphere = 'sphere_20241202'
+# datasets = [
+#             '20241202_8e-8mbar_long',
+#             '20241204_2e-8mbar_8e_aftercal_long',
+#             '20241205_2e-8mbar_0e_aftercal_long',
+#             '20241206_1e-8mbar_0e_aftercal_long',
+#             '20241207_1e-8mbar_1e_aftercal_long',
+#             '20241208_1e-8mbar_1e_aftercal_long',
+#             '20241210_1e-8mbar_8e_alignment1_long',
+#             '20241210_1e-8mbar_8e_alignment2_long_withdrive',
+#             '20241210_1e-8mbar_8e_alignment2_long_nodrive',
+#             '20241211_1e-8mbar_8e_alignment2_long_nodrive',
+#             '20241212_1e-8mbar_8e_alignment2_long_nodrive',
+#             '20241213_1e-8mbar_0e_alignment2_long',
+#             '20241214_1e-8mbar_0e_alignment2_long',
+#             '20241215_9e-9mbar_0e_alignment2_long',
+#             '20241216_5e-8mbar_0e_alignment2_long',
+#             '20241217_6e-8mbar_0e_alignment3_long',
+#             ]
+# data_prefixs = [
+#                 '20241202_abcd_',
+#                 '20241204_abcd_',
+#                 '20241205_d_',
+#                 '20241206_d_',
+#                 '20241207_d_',
+#                 '20241208_d_',
+#                 '20241210_d_',
+#                 '20241210_d_',
+#                 '20241210_d_',
+#                 '20241211_d_',
+#                 '20241212_d_',
+#                 '20241213_d_',
+#                 '20241214_d_',
+#                 '20241215_d_',
+#                 '20241216_d_',
+#                 '20241217_d_',
+#                 ]
+# n_files = [1440, 1440, 1440, 1440, 1440, 821, 640, 181, 1440, 1418, 917, 1169, 1565, 1440, 1164, 601]
 
 # sphere = 'sphere_20250103'
 # datasets = ['20250104_4e-8mbar_alignment0_long',
