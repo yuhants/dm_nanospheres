@@ -3,64 +3,71 @@ import analysis_utils as utils
 import h5py
 import os
 
-def get_summed_hist(sphere, dataset, data_prefix, nfile):
-    data_dir = f'/Users/yuhan/work/nanospheres/data/dm_data_processed/{sphere}/{dataset}'
+bins = np.arange(0, 10000, 50)  # keV
+bc = 0.5 * (bins[:-1] + bins[1:])
+
+def get_summed_hist(sphere, dataset):
+    out_dir = r'C:\Users\yuhan\dm_nanospheres\data_processed\sphere_data\for_background'
     outfile_name = f'{dataset}_summed_histograms.hdf5'
 
-    excess_thr = 1600
-    noise_thr = 400
+    data_dir = fr'E:\dm_data_hist_waveform\{sphere}'
+    histfile_name = f'{dataset}_all_histograms.hdf5'
 
-    hists = utils.load_data_hists(data_dir, data_prefix, nfile, excess_thr, noise_thr)
+    _file = h5py.File(os.path.join(data_dir, histfile_name), 'r')
+    hh_all = _file['all_histograms']['hh_all'][:]
+    hh_det = _file['all_histograms']['hh_det'][:] 
+    hh_det_noise = _file['all_histograms']['hh_det_noise'][:]
+    hh_det_noise_chi2_short = _file['all_histograms']['hh_det_noise_chi2_short'][:] 
+    _file.close()
 
-    bc, hhs, hh_cut_det, hh_cut_noise, hh_cut_all = hists[0], hists[1], hists[2], hists[3], hists[4]
+    hh_all_sum = np.sum(hh_all, axis=0)
+    hh_det_sum = np.sum(hh_det, axis=0)
+    hh_det_noise_sum = np.sum(hh_det_noise, axis=0)
+    hh_det_noise_chi2_sum = np.sum(hh_det_noise_chi2_short, axis=0)
 
-    hh_all_sum = np.sum(np.sum(hhs, axis=0), axis=0)
-    hh_cut_det_sum = np.sum(hh_cut_det, axis=0)
-    hh_cut_noise_sum = np.sum(hh_cut_noise, axis=0)
-    hh_cut_all_sum = np.sum(hh_cut_all, axis=0)
-
-    n_search_per_win = (5000 - 150) / 25
-    time_per_search = 2e-6 * 25
-    scaling = n_search_per_win * time_per_search * (hists[0][1] - hists[0][0])
-
-    n_window_all = hhs.shape[0] * hhs.shape[1]
-    n_window_cut_det = hh_cut_det.shape[0]
-    n_window_cut_noise = hh_cut_noise.shape[0]
-    n_window_cut_all = hh_cut_all.shape[0]
-
-    with h5py.File(os.path.join(data_dir, outfile_name), 'w') as fout:
-        print(f'Writing file {os.path.join(data_dir, outfile_name)}')
+    with h5py.File(os.path.join(out_dir, outfile_name), 'w') as fout:
+        print(f'Writing file {os.path.join(out_dir, outfile_name)}')
 
         g = fout.create_group('summed_histograms')
-        g.attrs['bin_center_kev'] = bc
-        g.attrs['scaling'] = scaling
+        g.attrs['bc'] = bc
 
         g0 = g.create_dataset('hh_all_sum', data=hh_all_sum, dtype=np.int64)
-        g1 = g.create_dataset('hh_cut_det_sum', data=hh_cut_det_sum, dtype=np.int64)
-        g2 = g.create_dataset('hh_cut_noise_sum', data=hh_cut_noise_sum, dtype=np.int64)
-        g3 = g.create_dataset('hh_cut_all_sum', data=hh_cut_all_sum, dtype=np.int64)
-
-        g0.attrs['n_window'] = n_window_all
-        g1.attrs['n_window'] = n_window_cut_det
-        g2.attrs['n_window'] = n_window_cut_noise
-        g3.attrs['n_window'] = n_window_cut_all
+        g1 = g.create_dataset('hh_det_sum', data=hh_det_sum, dtype=np.int64)
+        g2 = g.create_dataset('hh_det_noise_sum', data=hh_det_noise_sum, dtype=np.int64)
+        g3 = g.create_dataset('hh_det_noise_chi2_sum', data=hh_det_noise_chi2_sum, dtype=np.int64)
 
         fout.close()
 
 if __name__ == '__main__':
-    sphere = 'sphere_20250103'
+    # sphere = 'sphere_20250103'
+    # datasets = ['20250104_4e-8mbar_alignment0_long',
+    #             '20250105_2e-8mbar_alignment0_long',
+    #             '20250106_2e-8mbar_8e_alignment0_long',
+    #             '20250107_1e-8mbar_8e_alignment0_long',
+    #             '20250108_1e-8mbar_8e_alignment0_long',
+    #             '20250109_1e-8mbar_8e_alignment1_long',
+    #             '20250110_1e-8mbar_8e_alignment1_long',
+    #             '20250111_1e-8mbar_8e_alignment1_long',
+    #             '20250112_9e-9mbar_8e_alignment1_long',
+    #             '20250113_5e-8mbar_8e_alignment1_long',
+    #             '20250114_1e-8mbar_1e_alignment1_long',
+    #             '20250115_8e-9mbar_0e_alignment1_long',
+    #             '20250116_8e-9mbar_0e_alignment1_long_wrong_lo',
+    #             '20250117_8e-9mbar_0e_alignment1_long',
+    #             '20250118_8e-9mbar_1e_alignment1_long',
+    #             '20250120_8e-9mbar_1e_alignment1_long_wbackscat',
+    #             '20250121_8e-9mbar_1e_alignment1_long',
+    #             '20250122_8e-9mbar_1e_alignment1_long',
+    #             '20250123_7e-9mbar_1e_alignment1_long',
+    #             '20250124_7e-9mbar_1e_alignment1_long',
+    #             '20250125_7e-9mbar_1e_alignment1_long'    
+    #         ]
 
-    datasets = ['20250123_7e-9mbar_1e_alignment1_long',
-                '20250124_7e-9mbar_1e_alignment1_long',
-                '20250125_7e-9mbar_1e_alignment1_long'    
-            ]
+    sphere = 'sphere_20241221'
+    datasets = ['20241222_5e-8mbar_10e_alignment0_long']
 
-    data_prefixs = ['20250123_d_',
-                    '20250124_d_',
-                    '20250125_d_',
-                    ]
-
-    n_files = [1440, 1440, 1121]
+    # sphere = 'sphere_20241226'
+    # datasets = ['20241227_6e-8mbar_alignment0_long']
 
     for idx, dataset in enumerate(datasets):
-        get_summed_hist(sphere, dataset, data_prefixs[idx], n_files[idx])
+        get_summed_hist(sphere, dataset)
