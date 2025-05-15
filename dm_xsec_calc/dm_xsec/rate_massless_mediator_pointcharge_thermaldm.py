@@ -4,17 +4,17 @@ import numpy as np
 from scipy.special import erf, spherical_jn
 
 # Parameters
-hbarc = 0.2     # eV um
-kb = 8.617e-5      # eV K^-1
+hbarc = 0.2       # eV um
+kb    = 8.617e-5  # eV K^-1
 
 # Sphere parameters
-rho_T = 2.0e3   # Sphere density, kg/m^3
-mAMU = 1.66e-27 # Neutron mass
+rho_T = 2.0e3    # Sphere density, kg/m^3
+mAMU  = 1.66e-27 # Neutron mass
 
 # Thermal DM parameters
 # Modified 20250515: use halo density instead of 1 cm^-3
 # nx         = 1         # DM number density (assumed to be 1 cm^-3)
-rhoDM = 0.3e9        # dark matter mass density, eV/cm^3
+rhoDM      = 0.3e9          # dark matter mass density, eV/cm^3
 t_thermal  = 300       # K
 vesc_earth = 3.729e-5  # Earth escape velocity
 

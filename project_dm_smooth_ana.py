@@ -25,9 +25,12 @@ alpha_list_coarse = np.logspace(-7, -3, 79)
 alpha_list_coarse_extended= np.logspace(-7, 1, 157)
 alpha_list_fine = np.logspace(-7, -3, 157)
 
-mx_list_thermal = np.logspace(1, 8, 80)
-alpha_list_extended = np.logspace(-12, 4, 159)
-alpha_list_thermal = alpha_list_extended[alpha_list_extended<1e-2]
+# mx_list_thermal = np.logspace(1, 8, 80)
+# alpha_list_extended = np.logspace(-12, 4, 159)
+# alpha_list_thermal = alpha_list_extended[alpha_list_extended<1e-2]
+
+mx_list_thermal = np.logspace(2, 8, 60)
+alpha_list_thermal = np.logspace(-8, 0, 40)
 
 if qmax_calc == 100000:
     prefix = '_100mevthr'
@@ -151,7 +154,7 @@ def get_final_drdqz(mphi, mx, alpha, a, b, return_bc=False):
     if not thermalized_dm:
         file = f'{data_dir}/drdq{prefix}_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
     else:
-        file = f'{data_dir}/drdq{prefix}_thermaldm_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
+        file = f'{data_dir}/drdq{prefix}_thermaldm_halodensity_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
 
     drdq_npz = np.load(file)
     qq = drdq_npz['q_kev']
@@ -202,7 +205,7 @@ if __name__ == '__main__':
     if not thermalized_dm:
         data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
     else:
-        data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/thermalized_dm/mphi_{mphi:.0e}'
+        data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/thermalized_dm_halo_density/mphi_{mphi:.0e}'
 
     drdqzn_all = np.empty(shape=(mx_list.size, alpha_list.size, bc.size), dtype=np.float64)
     for i, mx in enumerate(mx_list):
@@ -225,9 +228,9 @@ if __name__ == '__main__':
     if not thermalized_dm:
         outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
     else:
-        outfile_name = f'drdqz{prefix}_thermaldm_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
+        outfile_name = f'drdqz{prefix}_thermaldm_halodensity_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
 
-    out_dir = r'/home/yt388/microspheres/dm_nanospheres/data_processed/dm_rate/thermalized_dm'
+    out_dir = r'/home/yt388/microspheres/dm_nanospheres/data_processed/dm_rate/thermalized_dm_halo_density'
     outfile = os.path.join(out_dir, outfile_name)
 
     print(f'Saving file {outfile}')

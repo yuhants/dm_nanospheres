@@ -11,7 +11,7 @@ mphi_lists  = [[0, 0.1, 1, 10]]
 # datasets = ['coarse_extended_right']
 # mphi_lists  = [[1, 0.1, 0]]
 
-outfile = 'joblist_smooth_thermalized_dm.txt'
+outfile = 'joblist_smooth_thermalized_dm_halo_density.txt'
 
 print(f'Writing file {outfile}')
 job_file = open(outfile, "wt")

@@ -20,7 +20,9 @@ nq    = 20000    # Number of momentum transfer to sample
 qmin  = 1000     # Lowest momenturm transfer considered (eV)
 
 ## Thermal DM parameters
-nx         = 1         # DM number density (assumed to be 1 cm^-3)
+# Modified 20250515: use halo density instead of 1 cm^-3
+# nx         = 1         # DM number density (assumed to be 1 cm^-3)
+rhoDM      = 0.3e9     # dark matter mass density, eV/cm^3
 t_thermal  = 300       # K
 vesc_earth = 3.729e-5  # Earth escape velocity
 
@@ -250,6 +252,9 @@ def dR_dq_thermal(mx, q, dsdq, vlist):
     # in cm/s
     conv_fac = hbarc**2 * 1e3 * 3e10 * 1e-8
 
+    # Modified 20250515: use halo density
+    nx = rhoDM / mx
+
     # Integrate over DM velocities to get dR/dq
     int_vec = nx * vlist * f_thermal(vlist, mx, t_thermal, vesc_earth)
 
@@ -264,7 +269,7 @@ def dR_dq_thermal(mx, q, dsdq, vlist):
     return q/1e3, total_xsec * conv_fac
 
 def run_nugget_calc(R_um, M_X_in, alpha_n_in, m_phi):
-    outdir = f'/home/yt388/palmer_scratch/data/dm_rate/thermalized_dm/mphi_{m_phi:.0e}'
+    outdir = f'/home/yt388/palmer_scratch/data/dm_rate/thermalized_dm_halo_density/mphi_{m_phi:.0e}'
     if(not os.path.isdir(outdir)):
         os.mkdir(outdir)
 
@@ -328,7 +333,7 @@ def run_nugget_calc(R_um, M_X_in, alpha_n_in, m_phi):
     q_kev, drdq = dR_dq_thermal(M_X, q_lin, dsdq, vlist)
 
     if qmax_calc == 100e6:
-        file_name = f'/drdq_100mevthr_thermaldm_{sphere_type}_{R_um:.2e}_{M_X_in:.5e}_{alpha_n:.5e}_{m_phi:.0e}.npz'
+        file_name = f'/drdq_100mevthr_thermaldm_halodensity_{sphere_type}_{R_um:.2e}_{M_X_in:.5e}_{alpha_n:.5e}_{m_phi:.0e}.npz'
     else:
         raise('Check calculation threshold')
     np.savez(outdir+file_name, mx_gev=M_X_in, alpha_n=alpha_n_in, mphi_ev=m_phi, q_kev=q_kev, drdq_hz_kev=drdq)
