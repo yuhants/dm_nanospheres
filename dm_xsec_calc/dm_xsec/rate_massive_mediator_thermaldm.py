@@ -149,8 +149,9 @@ def b_theta(M_X, m_phi, R, alpha, v, point_charge):
     # Make a list of impact parameters
     # Impact factor `b` (eV^-1)
     # Might need to adjust the range for different calculations
+    # Modified 20250515: change massive case to a higher bmax
     if(m_phi > 0):
-        b_um = np.logspace(-5, 3, nb)
+        b_um = np.logspace(-5, 5, nb)
     else:
         b_um = np.logspace(-5, 5, nb)
     b = b_um / hbarc

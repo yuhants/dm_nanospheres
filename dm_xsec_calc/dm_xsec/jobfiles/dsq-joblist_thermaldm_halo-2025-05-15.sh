@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --output dsq-joblist_thermaldm_halo-%A_%1a-%N.out
-#SBATCH --array 0-1
+#SBATCH --output dsq-joblist_thermaldm_halo-%A_%4a-%N.out
+#SBATCH --array 0-7199
 #SBATCH --job-name dsq-joblist_thermaldm_halo
 #SBATCH --mem-per-cpu 1g --cpus-per-task 4 -t 01:00:00 --mail-type=ALL --mail-user=yuhan.tseng@yale.edu --partition=scavenge --requeue
 

@@ -10,7 +10,7 @@ R_um       = 0.083
 alpha_list = np.logspace(-8, 0, 40)
 mx_list = np.logspace(2, 8, 60)
 
-mphi_list  = [0, 0.1, 1, 10]
+mphi_list  = [0.1, 1, 10]
 
 job_file = open("joblist_thermaldm_halo.txt", "wt")
 
