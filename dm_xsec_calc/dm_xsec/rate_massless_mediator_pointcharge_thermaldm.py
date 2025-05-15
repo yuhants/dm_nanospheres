@@ -1,7 +1,6 @@
 import sys, os
 import numpy as np
 
-import matplotlib.pyplot as plt
 from scipy.special import erf, spherical_jn
 
 # Parameters
@@ -13,7 +12,9 @@ rho_T = 2.0e3   # Sphere density, kg/m^3
 mAMU = 1.66e-27 # Neutron mass
 
 # Thermal DM parameters
-nx         = 1         # DM number density (assumed to be 1 cm^-3)
+# Modified 20250515: use halo density instead of 1 cm^-3
+# nx         = 1         # DM number density (assumed to be 1 cm^-3)
+rhoDM = 0.3e9        # dark matter mass density, eV/cm^3
 t_thermal  = 300       # K
 vesc_earth = 3.729e-5  # Earth escape velocity
 
@@ -107,21 +108,24 @@ def calc_event_rate(R_um, mx_gev, alpha_t):
     # vlist = np.linspace(vmin, vesc_earth, nvels)
     v0 = np.sqrt(2 * kb * t_thermal / mx)  # most probably velocity
     vlist = np.linspace(v0/50, v0*50, nvels)
+
+    # Modified 20250515: use halo density
+    nx = rhoDM / mx
     q_kev, drdq = dR_dq_thermal(nx, mx, 0, alpha, q, vlist, R)
 
     # keV; Counts/s/kev
     return q_kev, drdq
 
 if __name__ == "__main__":
-    outdir = r"/home/yt388/palmer_scratch/data/dm_rate/thermalized_dm/massless_mediator_pointcharge"
-    # outdir = r"/Users/yuhan/work/nanospheres/data/dm_rate/thermal_dm/massless_mediator_pointcharge"
+    # outdir = r"/home/yt388/palmer_scratch/data/dm_rate/thermalized_dm/massless_mediator_pointcharge"
+    outdir = r"/Users/yuhan/work/nanospheres/data/dm_rate/thermal_dm/massless_mediator_pointcharge_halo_density"
     if(not os.path.isdir(outdir)):
         os.mkdir(outdir)
     
     R_um = 0.083
 
-    mx_list = np.logspace(1, 8, 80)
-    alpha_list = np.logspace(-12, -4, 80)
+    mx_list = np.logspace(1, 8, 40)
+    alpha_list = np.logspace(-8, 0, 40)
 
     if R_um < 0.5:
         sphere_type = 'nanosphere'
@@ -133,7 +137,7 @@ if __name__ == "__main__":
     for i, mx in enumerate(mx_list):
         for j, alpha in enumerate(alpha_list):
             if qmax_calc == 100e6:
-                outfile = outdir + f'/drdq_100mevthr_thermaldm_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless_pointcharge.npz'
+                outfile = outdir + f'/drdq_100mevthr_thermaldm_halodensity_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless_pointcharge.npz'
             else:
                 raise('Check calculation!')
             
