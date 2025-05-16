@@ -4,7 +4,7 @@ import numpy as np
 R_um       = 0.083
 
 datasets = ['thermalized_dm']
-mphi_lists  = [[0, 0.1, 1, 10]]
+mphi_lists  = [[1e-2, 1e-3, 1e-4, 1e-5]]
 
 # datasets = ['coarse', 'coarse_extended_right']
 # mphi_lists  = [[10, 1, 0.1, 0], [1, 0.1, 0]]
