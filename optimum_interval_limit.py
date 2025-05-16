@@ -237,7 +237,7 @@ if __name__ == '__main__':
     minlim = False
 
     datasets = ['thermalized_dm']
-    mphi_lists = [[0, 0.1, 1, 10]]
+    mphi_lists = [[0.1, 1, 10]]
     # datasets = ['coarse', 'coarse_extended_right']
     # mphi_lists = [[0, 0.1, 1, 10], [1, 0, 0.1]]
 
@@ -279,7 +279,7 @@ if __name__ == '__main__':
             if dataset != 'thermalized_dm':
                 drdqzn_file = rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/drdqz_100mevthr_nanosphere_8.30e-02_{dataset}_ampdepsigma_{mphi_prefix}.npz'
             else:
-                drdqzn_file = rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/thermalized_dm/drdqz_100mevthr_thermaldm_nanosphere_8.30e-02_{dataset}_ampdepsigma_{mphi_prefix}.npz'
+                drdqzn_file = rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/thermalized_dm_halo_density/drdqz_100mevthr_thermaldm_halodensity_nanosphere_8.30e-02_{dataset}_ampdepsigma_{mphi_prefix}.npz'
 
             drdqzn_npz = np.load(drdqzn_file)
 
@@ -318,6 +318,6 @@ if __name__ == '__main__':
             if minlim:
                 outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_minlim_{sphere}_{dataset}_{mphi_prefix}.npz'
             else:
-                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_{mphi_prefix}.npz'
+                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_halodensity_{mphi_prefix}.npz'
             print(f'Saving file {outfile}')
             np.savez(outfile, mx_gev=mx, alpha_lim=alpha_lim)
