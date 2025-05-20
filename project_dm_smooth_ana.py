@@ -13,9 +13,11 @@ qmax_calc = 100000
 qmax_out = 25000
 
 # Now do amplitude-dependent convolution
-# sigma_kev = 150
+sigma_kev_sql = 23.72
 a, b = 1.31662664e+02, 6.33417842e-07
-thermalized_dm = True
+
+thermalized_dm = False
+sql_projection = True
 
 mx_list_coarser_extended = np.logspace(4, 9, 39)
 mx_list_coarse = np.logspace(-1, 4, 77)
@@ -165,8 +167,10 @@ def get_final_drdqz(mphi, mx, alpha, a, b, return_bc=False):
 
     # Modified 20250419: now do smearing with amplitude-dependent sigma
     _qq, _drdqz = get_drdqz(qq, drdq)
-    # _qq, _drdqz_smeared = smear_drdqz_gauss(_qq, _drdqz, sigma_kev)
-    _qq, _drdqz_smeared = smear_drdqz_amp_gauss(_qq, _drdqz, a, b)
+    if sql_projection:
+        _qq, _drdqz_smeared = smear_drdqz_gauss(_qq, _drdqz, sigma_kev_sql)
+    else:
+        _qq, _drdqz_smeared = smear_drdqz_amp_gauss(_qq, _drdqz, a, b)
     drdqz_smeared_resampled = np.interp(bc, _qq, _drdqz_smeared)
 
     if return_bc:
@@ -210,7 +214,7 @@ if __name__ == '__main__':
     drdqzn_all = np.empty(shape=(mx_list.size, alpha_list.size, bc.size), dtype=np.float64)
     for i, mx in enumerate(mx_list):
 
-        pool = Pool(16)
+        pool = Pool(4)
         n_alpha = alpha_list.size
         params = list(np.vstack((np.full(n_alpha, mphi), 
                                  np.full(n_alpha, mx), 
@@ -226,11 +230,17 @@ if __name__ == '__main__':
         #     drdqzn_all[i, j] = get_final_drdqz(mphi, mx, alpha, 180)
 
     if not thermalized_dm:
-        outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
+        if sql_projection:
+            outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_sqlproj_{mphi:.0e}.npz'
+        else:
+            outfile_name = f'drdqz{prefix}_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
     else:
         outfile_name = f'drdqz{prefix}_thermaldm_halodensity_nanosphere_{R_um:.2e}_{dataset}_ampdepsigma_{mphi:.0e}.npz'
 
-    out_dir = r'/home/yt388/microspheres/dm_nanospheres/data_processed/dm_rate/thermalized_dm_halo_density'
+    if thermalized_dm:
+        out_dir = r'/home/yt388/microspheres/dm_nanospheres/data_processed/dm_rate/thermalized_dm_halo_density'
+    else:
+        out_dir = r'/home/yt388/microspheres/dm_nanospheres/data_processed/dm_rate'
     outfile = os.path.join(out_dir, outfile_name)
 
     print(f'Saving file {outfile}')

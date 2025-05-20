@@ -15,12 +15,12 @@ alpha_list_fine = np.logspace(-7, -3, 157)
 alpha_list_veryfine = np.logspace(-7, -3, 625)
 
 ## For coarse overall search
-# mx_list = mx_list_coarse
-# alpha_list = alpha_list_coarse
+mx_list = mx_list_coarse
+alpha_list = alpha_list_coarse
 
 ## Coarser extended search on the right end (1, 0.1, 0 eV)
-mx_list = mx_list_coarser_extended[np.logical_and(mx_list_coarser_extended >1e4, mx_list_coarser_extended < 1e8)]
-alpha_list = alpha_list_coarse
+# mx_list = mx_list_coarser_extended[np.logical_and(mx_list_coarser_extended >1e4, mx_list_coarser_extended < 1e8)]
+# alpha_list = alpha_list_coarse
 
 ## Coarse search on the right end (10 eV)
 # mx_list = mx_list_coarse[np.logical_and(mx_list_coarse > 50, mx_list_coarse < 500)]
@@ -67,9 +67,9 @@ alpha_list = alpha_list_coarse
 # mx_list = mx_list_fine[np.logical_and(mx_list_fine > 1, mx_list_fine < 200)]
 # alpha_list = alpha_list_fine[alpha_list_fine > 1e-6]
 
-mphi_list  = [0]
+mphi_list  = [1]
 
-job_file = open("joblist_coarse_extended_right_0ev_100mevthr.txt", "wt")
+job_file = open("joblist_coarse_1ev_100mevthr_20250520.txt", "wt")
 
 for mphi in mphi_list:
     for mx in mx_list:
