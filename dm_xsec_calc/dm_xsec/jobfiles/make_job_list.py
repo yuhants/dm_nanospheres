@@ -3,6 +3,9 @@ import numpy as np
 
 R_um       = 0.083 
 
+mx_list_proj = np.logspace(-3, 7, 79)
+alpha_list_proj = np.logspace(-11, -4, 79)
+
 mx_list_coarser_extended = np.logspace(4, 9, 39)
 mx_list_coarse = np.logspace(-1, 4, 77)
 mx_list_fine = np.logspace(-1, 4, 153)
@@ -14,9 +17,13 @@ alpha_list_coarse_extended= np.logspace(-7, 1, 157)
 alpha_list_fine = np.logspace(-7, -3, 157)
 alpha_list_veryfine = np.logspace(-7, -3, 625)
 
+## For projection
+mx_list = mx_list_proj
+alpha_list = alpha_list_proj
+
 ## For coarse overall search
-mx_list = mx_list_coarse
-alpha_list = alpha_list_coarse
+# mx_list = mx_list_coarse
+# alpha_list = alpha_list_coarse
 
 ## Coarser extended search on the right end (1, 0.1, 0 eV)
 # mx_list = mx_list_coarser_extended[np.logical_and(mx_list_coarser_extended >1e4, mx_list_coarser_extended < 1e8)]
@@ -69,7 +76,7 @@ alpha_list = alpha_list_coarse
 
 mphi_list  = [1]
 
-job_file = open("joblist_coarse_1ev_100mevthr_20250520.txt", "wt")
+job_file = open("joblist_proj_1ev_100mevthr_20250520.txt", "wt")
 
 for mphi in mphi_list:
     for mx in mx_list:
