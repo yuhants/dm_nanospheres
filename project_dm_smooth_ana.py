@@ -19,6 +19,9 @@ a, b = 1.31662664e+02, 6.33417842e-07
 thermalized_dm = False
 sql_projection = True
 
+mx_list_proj = np.logspace(-3, 7, 79)
+alpha_list_proj = np.logspace(-11, -4, 79)
+
 mx_list_coarser_extended = np.logspace(4, 9, 39)
 mx_list_coarse = np.logspace(-1, 4, 77)
 mx_list_fine = np.logspace(-1, 4, 153)
@@ -205,6 +208,10 @@ if __name__ == '__main__':
     elif dataset == 'thermalized_dm':
         mx_list = mx_list_thermal
         alpha_list = alpha_list_thermal
+    
+    elif dataset == 'projection':
+        mx_list = mx_list_proj
+        alpha_list = alpha_list_proj
 
     if not thermalized_dm:
         data_dir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'

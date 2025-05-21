@@ -3,7 +3,7 @@ import numpy as np
 
 R_um       = 0.083
 
-datasets = ['coarse']
+datasets = ['projection']
 mphi_lists  = [[1]]
 
 # datasets = ['thermalized_dm']
