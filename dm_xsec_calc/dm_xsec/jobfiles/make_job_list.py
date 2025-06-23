@@ -18,12 +18,12 @@ alpha_list_fine = np.logspace(-7, -3, 157)
 alpha_list_veryfine = np.logspace(-7, -3, 625)
 
 ## For projection
-mx_list = mx_list_proj
-alpha_list = alpha_list_proj
+# mx_list = mx_list_proj
+# alpha_list = alpha_list_proj
 
 ## For coarse overall search
-# mx_list = mx_list_coarse
-# alpha_list = alpha_list_coarse
+mx_list = mx_list_coarse
+alpha_list = alpha_list_coarse
 
 ## Coarser extended search on the right end (1, 0.1, 0 eV)
 # mx_list = mx_list_coarser_extended[np.logical_and(mx_list_coarser_extended >1e4, mx_list_coarser_extended < 1e8)]
@@ -76,12 +76,18 @@ alpha_list = alpha_list_proj
 
 mphi_list  = [1]
 
-job_file = open("joblist_proj_1ev_100mevthr_20250520.txt", "wt")
+job_file = open("joblist_1ev_100mevthr_20250623.txt", "wt")
 
 for mphi in mphi_list:
     for mx in mx_list:
         for alpha in alpha_list:
-            outdir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
+            if mx < 1880 or mx > 1900:
+                continue
+            if alpha < 1e-5 or alpha > 1e-4:
+                continue
+            # outdir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{mphi:.0e}'
+            outdir = f'/home/yt388/data/data/dm_rate/mphi_{mphi:.0e}'
+
             outfile = outdir + f'/drdq_100mevthr_nanosphere_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_{mphi:.0e}.npz'
             if( os.path.isfile(outfile) ):
                 print("Skipping: ", outfile)

@@ -275,7 +275,9 @@ def dR_dq(mx, q, dsdq, vlist):
     return q/1e3, total_xsec * conv_fac
 
 def run_nugget_calc(R_um, M_X_in, alpha_n_in, m_phi):
-    outdir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{m_phi:.0e}'
+    # outdir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{m_phi:.0e}'
+    outdir = f'/home/yt388/project/data/dm_rate/mphi_{m_phi:.0e}'
+
     if(not os.path.isdir(outdir)):
         os.mkdir(outdir)
 
