@@ -113,6 +113,7 @@ window_length = 5000
 noise_thr = 200  # keV/c
 a, b = 284.15779400022257, 3.73292700217247e-05
 print(a, b)
+
 # a, b = 150, 1000/(4500**2)
 amp_thr = 750   # Minimum amplitude to analyze (keV)
 
