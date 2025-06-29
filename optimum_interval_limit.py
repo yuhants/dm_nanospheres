@@ -16,8 +16,11 @@ amp2kev_sphere_20241202 = 5945.245097647231
 amp2kev_sphere_20250103 = 5923.2059527417405
 
 # Update 20250505: not doing anti-coincidence cut
-exposure_sphere_20241202 = 947860.623
-exposure_sphere_20250103 = 1476235.3273   # s
+# exposure_sphere_20241202 = 947860.623
+# exposure_sphere_20250103 = 1476235.3273   # s
+# Update 20250625: now add background rate cut
+exposure_sphere_20241202 = 925704.8918000001
+exposure_sphere_20250103 = 1328088.789
 
 chi2_cut_eff = 0.9538018099684543
 
@@ -191,14 +194,16 @@ def optimum_interval(q_events, qq, drdqzn, exposure, cl=0.95):
 
     return uloutput, endpoint0, endpoint1
 
-def upper_combined(fcs, cl=0.95):
+def upper_combined(fcs, cl=0.95, combine_method=2):
     file_path = os.path.dirname(os.path.realpath(__file__))
 
     fc_0, fc_1 = fcs[0], fcs[1]
     if fc_0 is None or fc_1 is None:
         return None
 
-    method = 4
+    # method = 2 is serialization
+    # method = 4 is minimum limit
+    method = combine_method
     nexp = 2
     maxp1 = max(fc_0.size, fc_1.size) + 1
     nevts = np.array([fc_0.size, fc_1.size])
@@ -214,7 +219,7 @@ def upper_combined(fcs, cl=0.95):
     fc_in[1][1 : 1+fc_1.size] = fc_1
 
     fc_in[0][1+fc_0.size] = 1
-    fc_in[0][1+fc_1.size] = 1
+    fc_in[1][1+fc_1.size] = 1
     fc_in = fc_in.T
 
     with _working_directory(f"{file_path}/upper/"):
@@ -234,14 +239,21 @@ if __name__ == '__main__':
     # sphere = 'sphere_20241202'
     # sphere = 'sphere_20250103'
     sphere = 'sphere_combined'
-    minlim = False
+    # combine_method = None
+    combine_method = 2  # serialization
+
+    print(sphere, 'combine method = ', combine_method)
 
     datasets = ['thermalized_dm']
-    mphi_lists = [[1e-2, 1e-3, 1e-4, 1e-5]]
-    # datasets = ['coarse', 'coarse_extended_right']
-    # mphi_lists = [[0, 0.1, 1, 10], [1, 0, 0.1]]
+    # mphi_lists = [[1e-2, 1e-3, 1e-4, 1e-5]]
+    mphi_lists = [[0]]
 
-    qmin, qmax = 1250, 10000
+    # datasets = ['coarse', 'coarse_extended_right']
+    # mphi_lists = [[0, 0.1, 1, 10], [0, 0.1, 1]]
+
+    # qmin, qmax = 1250, 10000
+    # Modified 20250626: now use a higher anlaysis threshold at 1.5 MeV
+    qmin, qmax = 1500, 10000
 
     if sphere == 'sphere_20241202' or sphere == 'sphere_20250103':
         if sphere == 'sphere_20241202':
@@ -251,7 +263,7 @@ if __name__ == '__main__':
             amp2kev = amp2kev_sphere_20250103
             exposure = exposure_sphere_20250103
 
-        file = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/{sphere}_unbinned_amps.h5py')
+        file = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/{sphere}_unbinned_amps_bg.h5py')
         amps = file['unbinned_amps']['amplitude'][:]
         file.close()
         amps_kev = np.abs(amps * amp2kev)
@@ -259,8 +271,8 @@ if __name__ == '__main__':
     elif sphere == 'sphere_combined':
         exposure = exposure_sphere_20241202 + exposure_sphere_20250103
 
-        file0 = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/sphere_20241202_unbinned_amps.h5py')
-        file1 = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/sphere_20250103_unbinned_amps.h5py')
+        file0 = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/sphere_20241202_unbinned_amps_bg.h5py')
+        file1 = h5py.File(rf'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/sphere_20250103_unbinned_amps_bg.h5py')
 
         amps0 = file0['unbinned_amps']['amplitude'][:]
         amps1 = file1['unbinned_amps']['amplitude'][:]
@@ -301,10 +313,10 @@ if __name__ == '__main__':
                     # above the minimum analysis threshold here
                     drdqzn_mx_alpha = drdqzn[i_mx, i_alpha] * chi2_cut_eff
 
-                    if sphere == 'sphere_combined' and minlim is True:
+                    if sphere == 'sphere_combined' and combine_method is not None:
                         fc_0 = get_fc(amps_kev_0[amps_kev_0 > qmin], q_kev, drdqzn_mx_alpha, exposure_sphere_20241202)
                         fc_1 = get_fc(amps_kev_1[amps_kev_1 > qmin], q_kev, drdqzn_mx_alpha, exposure_sphere_20250103)
-                        u = upper_combined(fcs=[fc_0, fc_1], cl=0.95)
+                        u = upper_combined(fcs=[fc_0, fc_1], cl=0.95, combine_method=combine_method)
                     else:
                         u, e0, e1 = optimum_interval(amps_kev[amps_kev > qmin], q_kev, drdqzn_mx_alpha, exposure, cl=0.95)
 
@@ -315,8 +327,9 @@ if __name__ == '__main__':
 
                 alpha_lim[i_mx] = np.interp(0, mu - uu, alpha, left=1e6, right=1e6)
 
-            if minlim:
-                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_minlim_{sphere}_{dataset}_{mphi_prefix}.npz'
+            if combine_method is not None:
+                method_prefix = 'serialization' if combine_method == 2 else 'minlim'
+                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_minlim_{sphere}_{method_prefix}_{dataset}_halodensity_{mphi_prefix}.npz'
             else:
                 outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_halodensity_{mphi_prefix}.npz'
             print(f'Saving file {outfile}')
