@@ -1,7 +1,7 @@
 import numpy as np
 
 from astropy.time import Time
-from astropy.coordinates import EarthLocation,SkyCoord
+from astropy.coordinates import EarthLocation, SkyCoord
 from astropy import units as u
 
 import sys
@@ -346,10 +346,11 @@ if __name__ == '__main__':
     print(f'Working on time {timestamp}')
 
     # Load the calculated differential cross section
-    outdir = '/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/daily_modulation'
-    npz = np.load(f'{outdir}/dsdqdv_nanosphere_5.29278e-01_1.23616e-06_1e+00.npz')
-    # npz = np.load(f'{outdir}/dsdqdv_nanosphere_1.77828e+00_2.09209e-07_1e+00.npz')
-    # npz = np.load(f'{outdir}/dsdqdv_nanosphere_4.68870e+03_1.74604e-05_1e+00.npz')
+    # data_dir = '/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/daily_modulation'
+    data_dir = '/home/yt388/microspheres/dm_nanospheres/data_processed/dm_rate/daily_modulation'
+    npz = np.load(f'{data_dir}/dsdqdv_nanosphere_5.29278e-01_1.23616e-06_1e+00.npz')
+    # npz = np.load(f'{data_dir}/dsdqdv_nanosphere_1.77828e+00_2.09209e-07_1e+00.npz')
+    # npz = np.load(f'{data_dir}/dsdqdv_nanosphere_4.68870e+03_1.74604e-05_1e+00.npz')
     mx = npz['mx_gev'] * 1e9
     alpha_n = npz['alpha_n']
     qq = npz['q']
@@ -361,16 +362,17 @@ if __name__ == '__main__':
     seed = 234837942783
     rng = np.random.default_rng(seed=seed)
 
-    n_mc = 10000       # Number of velocity samples
+    n_mc = 100000       # Number of velocity samples
     v_dm_ga = get_mb_galactic(n_mc, rng)
 
-    n_mc_dsdq = 5000   # Number of q samples for each velocity  
+    n_mc_dsdq = 10000   # Number of q samples for each velocity  
     rr0 = rng.uniform(0, 1, n_mc_dsdq)
     rr1 = rng.uniform(0, 1, n_mc_dsdq)
 
     v_dm_nwz = get_v_boosted_mc_nwz(v_dm_ga, timestamp)
     _qz, _drdqz = get_projected_rate(v_dm_nwz, z_dir_nwz, mx, dsigdq_v, qq, vlist, rr0, rr1)
 
+    outdir = r'/home/yt388/project/data/dm_rate/daily_modulation'
     file_name = f'/drdqz_{mx:.5e}_{alpha_n:.5e}_{m_phi:.0e}_{int(timestamp)}.npz'
     print(f'Saving file {outdir + file_name}')
     np.savez(outdir+file_name, q_kev=_qz, drdqz_hz_kev=_drdqz, time=timestamp, mx_gev=mx, alpha_n=alpha_n, mphi_=m_phi)

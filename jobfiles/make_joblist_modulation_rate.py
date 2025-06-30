@@ -6,7 +6,8 @@ from astropy.time import Time
 
 longitude_newhaven = -72.923611 # deg
 
-data_dir = r'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/final_recon_before_bg_rate_cut'
+# data_dir = r'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/sphere_data/final_recon_before_bg_rate_cut'
+data_dir = r'/home/yt388/microspheres/dm_nanospheres/data_processed/sphere_data/final_recon_before_bg_rate_cut'
 file1 = h5py.File(rf'{data_dir}/sphere_20250103_unbinned_amps.h5py')
 time1 = file1['unbinned_amps']['time'][:]
 file1.close()
@@ -29,8 +30,6 @@ def get_sidereal_bins(t0, lst_hour0, ndays):
 bins_sidereal_1 = get_sidereal_bins(time1[0], Time(time1[0], format='unix', scale='utc').sidereal_time('apparent', longitude=longitude_newhaven).hour, 22)
 bins_siderealdays_1 = np.array([bins_sidereal_1[i] for i in range(bins_sidereal_1.size) if i % 24 == 0])
 
-# print(bins_siderealdays_1.shape)
-# print(bins_siderealdays_1[-1] - bins_siderealdays_1[-2])
 
 outfile = 'joblist_dm_modulation_rate.txt'
 
