@@ -372,7 +372,7 @@ if __name__ == '__main__':
     v_dm_nwz = get_v_boosted_mc_nwz(v_dm_ga, timestamp)
     _qz, _drdqz = get_projected_rate(v_dm_nwz, z_dir_nwz, mx, dsigdq_v, qq, vlist, rr0, rr1)
 
-    outdir = r'/home/yt388/project/data/dm_rate/daily_modulation'
+    outdir = r'/home/yt388/palmer_scratch/data/dm_rate/daily_modulation'
     file_name = f'/drdqz_{mx:.5e}_{alpha_n:.5e}_{m_phi:.0e}_{int(timestamp)}.npz'
     print(f'Saving file {outdir + file_name}')
     np.savez(outdir+file_name, q_kev=_qz, drdqz_hz_kev=_drdqz, time=timestamp, mx_gev=mx, alpha_n=alpha_n, mphi_=m_phi)
