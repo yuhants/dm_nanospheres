@@ -276,7 +276,8 @@ def dR_dq(mx, q, dsdq, vlist):
 
 def run_nugget_calc(R_um, M_X_in, alpha_n_in, m_phi):
     # outdir = f'/home/yt388/palmer_scratch/data/dm_rate/mphi_{m_phi:.0e}'
-    outdir = f'/home/yt388/project/data/dm_rate/mphi_{m_phi:.0e}'
+    # outdir = f'/home/yt388/project/data/dm_rate/mphi_{m_phi:.0e}'
+    outdir = r'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/dm_rate/daily_modulation'
 
     if(not os.path.isdir(outdir)):
         os.mkdir(outdir)
@@ -358,8 +359,11 @@ def run_nugget_calc(R_um, M_X_in, alpha_n_in, m_phi):
     
     ## For debugging purposes
     # np.savez(outdir + "/b_theta_alpha_%.5e_MX_%.5e.npz"%(alpha_n, M_X/1e9), b=np.asarray(bb), theta=np.asarray(tt) , v=vlist)   
-    ## eV; dsigdqdv 
-    # np.savez(outdir + f'/dsdqdv_{sphere_type}_{M_X_in:.5e}_{alpha_n:.5e}_{m_phi:.0e}.npz', mx_gev=M_X_in, alpha_n=alpha_n_in, q=q_lin, dsdqdv=dsdq, v=vlist) 
+
+    # Edit 20250629: for daily modulation calculation
+    # Comment the line below if no need to save cross section
+    # eV; dsigdqdv 
+    np.savez(outdir + f'/dsdqdv_{sphere_type}_{M_X_in:.5e}_{alpha_n:.5e}_{m_phi:.0e}.npz', mx_gev=M_X_in, alpha_n=alpha_n_in, q=q_lin, dsdqdv=dsdq, v=vlist) 
 
     if qmax_calc == 25e6:
         file_name = f'/drdq_25mevthr_{sphere_type}_{R_um:.2e}_{M_X_in:.5e}_{alpha_n:.5e}_{m_phi:.0e}.npz'
