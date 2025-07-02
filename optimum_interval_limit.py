@@ -22,7 +22,12 @@ amp2kev_sphere_20250103 = 5923.2059527417405
 exposure_sphere_20241202 = 925704.8918000001
 exposure_sphere_20250103 = 1328088.789
 
+# Chi2 cut efficiency correction
 chi2_cut_eff = 0.9538018099684543
+
+# Systematic uncertainties
+N_neutron = 1
+N_qscale  = 1.1
 
 ## Functions
 @contextlib.contextmanager
@@ -244,16 +249,17 @@ if __name__ == '__main__':
 
     print(sphere, 'combine method = ', combine_method)
 
-    datasets = ['thermalized_dm']
+    # datasets = ['thermalized_dm']
     # mphi_lists = [[1e-2, 1e-3, 1e-4, 1e-5]]
-    mphi_lists = [[0]]
+    # mphi_lists = [[0]]
 
-    # datasets = ['coarse', 'coarse_extended_right']
+    datasets = ['coarse', 'coarse_extended_right']
+    mphi_lists = [[0], [0]]
     # mphi_lists = [[0, 0.1, 1, 10], [0, 0.1, 1]]
 
     # qmin, qmax = 1250, 10000
     # Modified 20250626: now use a higher anlaysis threshold at 1.5 MeV
-    qmin, qmax = 1500, 10000
+    qmin, qmax = 1500 * N_qscale, 10000
 
     if sphere == 'sphere_20241202' or sphere == 'sphere_20250103':
         if sphere == 'sphere_20241202':
@@ -283,6 +289,11 @@ if __name__ == '__main__':
         amps_kev_1 = np.abs(amps1 * amp2kev_sphere_20250103)
         amps_kev = np.concatenate([amps_kev_0, amps_kev_1])
 
+        if N_qscale != 1:
+            amps_kev_0 *= N_qscale
+            amps_kev_1 *= N_qscale
+            amps_kev *= N_qscale
+
     for i, dataset in enumerate(datasets):
         for mphi in mphi_lists[i]:
             print(f'Working on mphi = {mphi} eV')
@@ -299,6 +310,9 @@ if __name__ == '__main__':
             drdqzn = drdqzn_npz['drdqzn']
             mx = drdqzn_npz['mx_list']
             alpha = drdqzn_npz['alpha_list']
+
+            if N_neutron != 1:
+                drdqzn = drdqzn * N_neutron**2
 
             alpha_lim = np.full_like(mx, fill_value=np.nan)
             i_mx = 0
@@ -329,7 +343,9 @@ if __name__ == '__main__':
 
             if combine_method is not None:
                 method_prefix = 'serialization' if combine_method == 2 else 'minlim'
-                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_minlim_{sphere}_{method_prefix}_{dataset}_halodensity_{mphi_prefix}.npz'
+                neutron_prefix = '_neutron0_7' if N_neutron != 1 else ''
+                qscale_prefix = '_qscale1_1' if N_qscale != 1 else ''
+                outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}{neutron_prefix}{qscale_prefix}_{method_prefix}_{dataset}_halodensity_{mphi_prefix}.npz'
             else:
                 outfile = fr'/Users/yuhan/work/nanospheres/dm_nanospheres/data_processed/alpha_lim_optimum/alpha_lim_{sphere}_{dataset}_halodensity_{mphi_prefix}.npz'
             print(f'Saving file {outfile}')
