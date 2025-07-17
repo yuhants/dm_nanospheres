@@ -5,3 +5,4 @@ recon_amp/*/*
 *.out
 jobfiles/*.txt
 dm_xsec_calc/dm_xsec/jobfiles/*.txt
+data_processed/raw_data/*
