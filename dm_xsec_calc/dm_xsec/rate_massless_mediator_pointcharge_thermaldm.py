@@ -13,8 +13,8 @@ mAMU  = 1.66e-27 # Neutron mass
 
 # Thermal DM parameters
 # Modified 20250515: use halo density instead of 1 cm^-3
-# nx         = 1         # DM number density (assumed to be 1 cm^-3)
-rhoDM      = 0.3e9          # dark matter mass density, eV/cm^3
+# nx         = 1       # DM number density (assumed to be 1 cm^-3)
+rhoDM      = 0.3e9     # dark matter mass density, eV/cm^3
 t_thermal  = 300       # K
 vesc_earth = 3.729e-5  # Earth escape velocity
 
@@ -24,6 +24,8 @@ nq    = 20000      # Number of momentum transfer to sample
 
 qmin  = 1000      # Lowest momenturm transfer considered (eV)
 qmax_calc = 100e6  # The maximum momentum transfer to analyze
+# qmin  = 1e6
+# qmax_calc = 10e9
 
 def f_thermal(v, mx, T, vesc_earth):
     """
@@ -123,6 +125,7 @@ if __name__ == "__main__":
         os.mkdir(outdir)
     
     R_um = 0.083
+    # R_um = 5
 
     mx_list = np.logspace(1, 8, 40)
     alpha_list = np.logspace(-8, 0, 40)
@@ -140,7 +143,7 @@ if __name__ == "__main__":
                 outfile = outdir + f'/drdq_100mevthr_thermaldm_halodensity_{sphere_type}_{R_um:.2e}_{mx:.5e}_{alpha:.5e}_massless_pointcharge.npz'
             else:
                 raise('Check calculation!')
-            
+
             if( os.path.isfile(outfile) ):
                 print("Skipping: ", outfile)
                 continue
